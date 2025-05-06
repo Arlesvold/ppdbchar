@@ -1,0 +1,7 @@
+Sure, here's the contents for the file: /ppdb-web-app/ppdb-web-app/requirements.txt
+
+Flask
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Login
+gunicorn

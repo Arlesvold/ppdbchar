@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>User Dashboard</title>
+</head>
+<body>
+    {% include 'layout/base.html' %}
+    <div class="dashboard">
+        <h1>Welcome to Your Dashboard</h1>
+        <p>Here is the information you submitted:</p>
+        <div class="submitted-info">
+            <!-- Display submitted form information here -->
+            <ul>
+                <li>Name: {{ user.name }}</li>
+                <li>Email: {{ user.email }}</li>
+                <li>Registration Date: {{ user.registration_date }}</li>
+            </ul>
+        </div>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

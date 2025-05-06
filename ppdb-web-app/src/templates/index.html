@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>PPDB - Homepage</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the PPDB Registration</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Registration Instructions</h2>
+            <p>To register for the PPDB, please follow these steps:</p>
+            <ol>
+                <li>Click on the "Register" link to create a new account.</li>
+                <li>Fill in the required information in the registration form.</li>
+                <li>Submit the form and check your email for confirmation.</li>
+                <li>Once confirmed, you can log in using your credentials.</li>
+            </ol>
+        </section>
+        <section>
+            <h2>Login</h2>
+            <p>If you already have an account, please <a href="{{ url_for('auth.login') }}">log in here</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 PPDB Application. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
