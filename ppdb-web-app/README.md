@@ -1,9 +1,24 @@
-# PPDB Web Application
+# 🎓 PROJEK_PMB_SISWA
 
-## Overview
-This project is a simple web application for Penerimaan Peserta Didik Baru (PPDB), which includes functionalities for user registration, login, and a dashboard to display submitted form information.
+## 👨‍💻 Author
+**Charles Adrian**
+- Student at SMK KARYA BANGSA
+- Software Engineering Major
+- Class: XI RPL
 
-## Project Structure
+
+## 📋 Overview
+This project is a web application for Penerimaan Peserta Didik Baru (PPDB), developed as part of the Web Programming course. The system streamlines the student registration process with user-friendly interfaces and secure data management.
+
+## ⭐ Features
+- User registration and login system
+- Interactive homepage with registration guidelines
+- Secure student information forms
+- Personal dashboard for applicants
+- Real-time form validation
+- Responsive design for all devices
+
+## 🔧 Project Structure
 ```
 ppdb-web-app
 ├── src
@@ -27,33 +42,39 @@ ppdb-web-app
 └── README.md
 ```
 
-## Features
-- User registration and login forms
-- Homepage with registration instructions
-- User dashboard displaying submitted form information
-
-## Setup Instructions
+## 🚀 Setup Instructions
 1. Clone the repository:
-   ```
+   ```bash
    git clone <repository-url>
    ```
 2. Navigate to the project directory:
-   ```
+   ```bash
    cd ppdb-web-app
    ```
-3. Install the required dependencies:
+3. Create and activate virtual environment:
+   ```bash
+   python -m venv env
+   .\env\Scripts\activate
    ```
+4. Install the required dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
-4. Run the application:
-   ```
+5. Run the application:
+   ```bash
    python app.py
    ```
 
-## Usage
-- Access the homepage to view registration instructions.
-- Register a new account or log in with existing credentials.
-- After logging in, users can view their dashboard with submitted information.
+## 📝 Usage Guide
+1. Open your browser and go to `http://localhost:5000`
+2. Register a new account or log in with existing credentials
+3. Follow the registration process step by step
+4. Access your dashboard to view and manage your application
 
-## License
+## 🔒 License
 This project is licensed under the MIT License.
+
+---
+<div align="center">
+Created with ❤️ by Charles Adrian | SMK KARYA BANGSA
+</div>

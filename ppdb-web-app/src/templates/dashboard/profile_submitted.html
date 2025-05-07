@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_submitted.css') }}">
+    <title>Application Submitted - PPDB Dashboard</title>
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="nav-content">
+            <a href="{{ url_for('home') }}" class="nav-logo">PPDB Online</a>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Application Submitted Successfully</h1>
+            <span class="status-badge">Status: <span class="status-success">Submitted</span></span>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="submission-details">
+                <h2>Personal Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Full Name</label>
+                        <span>{{ profile.full_name }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Birth Date</label>
+                        <span>{{ profile.birth_date.strftime('%d %B %Y') }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Phone Number</label>
+                        <span>{{ profile.phone }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Address</label>
+                        <span>{{ profile.address }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>School Origin</label>
+                        <span>{{ profile.school_origin }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Graduation Year</label>
+                        <span>{{ profile.graduation_year }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Jenis Kelamin</label>
+                        <span>
+                            {% if profile.gender == 'L' %}
+                                Laki-laki
+                            {% else %}
+                                Perempuan
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="info-item">
+                        <label>Program Studi</label>
+                        <span>
+                            {% if profile.jurusan == 'TI' %}
+                                Teknik Informatika
+                            {% elif profile.jurusan == 'SI' %}
+                                Sistem Informasi
+                            {% elif profile.jurusan == 'RPL' %}
+                                Rekayasa Perangkat Lunak
+                            {% elif profile.jurusan == 'MI' %}
+                                Manajemen Informatika
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="info-item">
+                        <label>Waktu Kuliah</label>
+                        <span>
+                            {% if profile.waktu_kuliah == 'siang' %}
+                                Kelas Siang
+                            {% elif profile.waktu_kuliah == 'malam' %}
+                                Kelas Malam
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <h2>Uploaded Documents</h2>
+                <div class="document-preview">
+                    <div class="document-item">
+                        <label>Pas Foto</label>
+                        <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" alt="Pas Foto">
+                    </div>
+                    <div class="document-item">
+                        <label>Ijazah</label>
+                        <a href="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" target="_blank" class="document-link">View Ijazah</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -4,23 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    <title>Application Submitted - PPDB Dashboard</title>
 </head>
 <body>
-    {% include 'layout/base.html' %}
-    <div class="dashboard">
-        <h1>Welcome to Your Dashboard</h1>
-        <p>Here is the information you submitted:</p>
-        <div class="submitted-info">
-            <!-- Display submitted form information here -->
-            <ul>
-                <li>Name: {{ user.name }}</li>
-                <li>Email: {{ user.email }}</li>
-                <li>Registration Date: {{ user.registration_date }}</li>
-            </ul>
+    <nav class="dashboard-nav">
+        <div class="nav-content">
+            <a href="{{ url_for('home') }}" class="nav-logo">PPDB Online</a>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
         </div>
-        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="notification {{ category }}">
+                    {{ message }}
+                    <span class="close-btn">&times;</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Application Submitted Successfully</h1>
+            <span class="status-badge">Status: <span class="status-success">Submitted</span></span>
+        </div>
+
+        <div class="dashboard-content">
+            <form action="{{ url_for('submit_profile') }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    <div class="form-group">
+                        <label for="full_name">Nama Lengkap*</label>
+                        <input type="text" id="full_name" name="full_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birth_date">Tanggal Lahir*</label>
+                        <input type="date" id="birth_date" name="birth_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Nomor HP*</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Alamat Lengkap*</label>
+                        <textarea id="address" name="address" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Jenis Kelamin*</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Pilih Jenis Kelamin</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Program Studi</h2>
+                    <div class="form-group">
+                        <label for="jurusan">Pilihan Program Studi*</label>
+                        <select id="jurusan" name="jurusan" required>
+                            <option value="">Pilih Program Studi</option>
+                            <option value="TI">Teknik Informatika</option>
+                            <option value="SI">Sistem Informasi</option>
+                            <option value="RPL">Rekayasa Perangkat Lunak</option>
+                            <option value="MI">Manajemen Informatika</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="waktu_kuliah">Waktu Kuliah*</label>
+                        <select id="waktu_kuliah" name="waktu_kuliah" required>
+                            <option value="">Pilih Waktu Kuliah</option>
+                            <option value="siang">Kelas Siang</option>
+                            <option value="malam">Kelas Malam</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Informasi Akademik</h2>
+                    <div class="form-group">
+                        <label for="school_origin">Sekolah Asal*</label>
+                        <input type="text" id="school_origin" name="school_origin" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="graduation_year">Tahun Lulus*</label>
+                        <input type="number" id="graduation_year" name="graduation_year" min="2000" max="2024" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Upload Dokumen</h2>
+                    <div class="form-group">
+                        <label for="photo">Pas Foto (3x4)*</label>
+                        <input type="file" id="photo" name="photo" accept="image/*" required>
+                        <small>Format: JPG/PNG, Max: 2MB</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ijazah">Scan Ijazah*</label>
+                        <input type="file" id="ijazah" name="ijazah" accept=".pdf" required>
+                        <small>Format: PDF, Max: 5MB</small>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                    <button type="reset" class="btn btn-secondary">Reset Form</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+        // Add notification handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-hide notifications after 5 seconds
+            const notifications = document.querySelectorAll('.notification');
+            notifications.forEach(notification => {
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.5s ease-out forwards';
+                    setTimeout(() => notification.remove(), 500);
+                }, 5000);
+            });
+
+            // Close button functionality
+            const closeButtons = document.querySelectorAll('.notification .close-btn');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const notification = button.parentElement;
+                    notification.style.animation = 'slideOut 0.5s ease-out forwards';
+                    setTimeout(() => notification.remove(), 500);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
