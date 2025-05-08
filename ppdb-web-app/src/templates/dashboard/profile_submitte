@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Application Submitted - PPDB Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Status Pendaftaran PPDB Online</h1>
+
+        <div class="info-section">
+            <div class="status-header">
+                <h2>Status: <span class="status-success">Submitted</span></h2>
+                <p class="submission-date">Submitted on: {{ profile.created_at.strftime('%d %B %Y') }}</p>
+            </div>
+
+            <div class="profile-section">
+                <h2>Data Pribadi</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Nama Lengkap:</label>
+                        <span>{{ profile.full_name }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Tanggal Lahir:</label>
+                        <span>{{ profile.birth_date.strftime('%d %B %Y') }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Jenis Kelamin:</label>
+                        <span>{% if profile.gender == 'L' %}Laki-laki{% else %}Perempuan{% endif %}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Nomor HP:</label>
+                        <span>{{ profile.phone }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Alamat:</label>
+                        <span>{{ profile.address }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h2>Data Akademik</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Asal Sekolah:</label>
+                        <span>{{ profile.school_origin }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Tahun Lulus:</label>
+                        <span>{{ profile.graduation_year }}</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Program Studi:</label>
+                        <span>
+                            {% if profile.jurusan == 'TI' %}Teknik Informatika
+                            {% elif profile.jurusan == 'SI' %}Sistem Informasi
+                            {% elif profile.jurusan == 'RPL' %}Rekayasa Perangkat Lunak
+                            {% elif profile.jurusan == 'MI' %}Manajemen Informatika{% endif %}
+                        </span>
+                    </div>
+                    <div class="info-item">
+                        <label>Waktu Kuliah:</label>
+                        <span>{% if profile.waktu_kuliah == 'siang' %}Kelas Siang{% else %}Kelas Malam{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h2>Dokumen</h2>
+                <div class="document-grid">
+                    <div class="document-item">
+                        <label>Pas Foto</label>
+                        <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" alt="Pas Foto">
+                    </div>
+                    <div class="document-item">
+                        <label>Ijazah</label>
+                        <a href="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" target="_blank" class="btn">Lihat Ijazah</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="{{ url_for('home') }}" class="btn">Kembali ke Beranda</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
