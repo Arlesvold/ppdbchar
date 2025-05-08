@@ -28,16 +28,18 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # Redirect if already logged in
     if 'username' in session:
+        # Check if user has profile and redirect accordingly
+        user = User.query.filter_by(username=session['username']).first()
+        if user:
+            profile = StudentProfile.query.filter_by(user_id=user.id).first()
+            if profile:
+                return redirect(url_for('profile_submitted'))
         return redirect(url_for('dashboard'))
     
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        
-        # Debug print
-        print(f"Login attempt - Username: {username}")
         
         user = User.query.filter_by(username=username).first()
         
@@ -45,12 +47,17 @@ def login():
             session['username'] = username
             session['user_id'] = user.id
             session['email'] = user.email
-            flash('Welcome back!', 'success')
-            print("Login successful, redirecting to dashboard")  # Debug print
+            
+            # Check if user has already submitted profile
+            profile = StudentProfile.query.filter_by(user_id=user.id).first()
+            if profile:
+                flash('Welcome back! Here is your submitted application.', 'success')
+                return redirect(url_for('profile_submitted'))
+            
+            flash('Welcome! Please complete your profile.', 'info')
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid credentials. Please try again.', 'error')
-            print("Login failed")  # Debug print
     
     return render_template('auth/login.html')
 
@@ -64,23 +71,38 @@ def register():
         password = request.form['password']
         email = request.form['email']
         
-        if User.query.filter_by(username=username).first():
-            flash('Username already exists.', 'error')
-            return render_template('auth/register.html')
+        # Check for existing username
+        existing_username = User.query.filter_by(username=username).first()
+        if existing_username:
+            flash('Username already exists. Please choose a different username.', 'error')
+            return render_template('auth/register.html', 
+                                email=email,  # Preserve the email input
+                                username_error=True)
             
-        if User.query.filter_by(email=email).first():
-            flash('Email already registered.', 'error')
-            return render_template('auth/register.html')
+        # Check for existing email
+        existing_email = User.query.filter_by(email=email).first()
+        if existing_email:
+            flash('Email already registered. Please use a different email or login.', 'error')
+            return render_template('auth/register.html', 
+                                username=username,  # Preserve the username input
+                                email_error=True)
 
-        user = User(username=username, email=email)
-        user.set_password(password)
-        
-        db.session.add(user)
-        db.session.commit()
-        
-        flash('Registration successful! Please login with your credentials.', 'success')
-        return redirect(url_for('login'))
-        
+        # If both checks pass, create new user
+        try:
+            user = User(username=username, email=email)
+            user.set_password(password)
+            
+            db.session.add(user)
+            db.session.commit()
+            
+            flash('Registration successful! Please login with your credentials.', 'success')
+            return redirect(url_for('login'))
+            
+        except Exception as e:
+            db.session.rollback()
+            flash('An error occurred during registration. Please try again.', 'error')
+            print(f"Registration error: {str(e)}")
+            
     return render_template('auth/register.html')
 
 @app.route('/dashboard')
@@ -92,15 +114,21 @@ def dashboard():
     user = User.query.filter_by(username=session['username']).first()
     
     if user:
-        # Check if user has submitted profile
+        # Check if user has already submitted profile
         profile = StudentProfile.query.filter_by(user_id=user.id).first()
         
+        if profile:
+            # If profile exists, redirect to profile_submitted page
+            flash('Welcome back! Here is your submitted application.', 'info')
+            return redirect(url_for('profile_submitted'))
+        
+        # If no profile exists, show the form to submit profile
         user_data = {
             'name': user.username,
             'email': user.email,
             'registration_date': user.registration_date.strftime('%Y-%m-%d')
         }
-        return render_template('dashboard/index.html', user=user_data, profile=profile)
+        return render_template('dashboard/index.html', user=user_data)
     
     session.clear()
     return redirect(url_for('home'))
@@ -203,6 +231,7 @@ def profile_submitted():
     
     profile = StudentProfile.query.filter_by(user_id=user.id).first()
     if not profile:
+        flash('Please complete your profile first.', 'warning')
         return redirect(url_for('dashboard'))
     
     return render_template('dashboard/profile_submitted.html', profile=profile, user=user)
