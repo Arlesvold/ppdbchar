@@ -29,20 +29,23 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'username' in session:
-        # Check if user has profile and redirect accordingly
-        user = User.query.filter_by(username=session['username']).first()
-        if user:
-            profile = StudentProfile.query.filter_by(user_id=user.id).first()
-            if profile:
-                return redirect(url_for('profile_submitted'))
+        if session.get('is_admin'):
+            return redirect(url_for('admin_dashboard'))
         return redirect(url_for('dashboard'))
     
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
         
-        user = User.query.filter_by(username=username).first()
+        # Check if it's admin login
+        if username == 'admin' and password == '22':
+            session['username'] = username
+            session['is_admin'] = True
+            flash('Welcome Admin!', 'success')
+            return redirect(url_for('admin_dashboard'))
         
+        # If not admin, check regular user login
+        user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             session['username'] = username
             session['user_id'] = user.id
@@ -51,13 +54,12 @@ def login():
             # Check if user has already submitted profile
             profile = StudentProfile.query.filter_by(user_id=user.id).first()
             if profile:
-                flash('Welcome back! Here is your submitted application.', 'success')
                 return redirect(url_for('profile_submitted'))
             
-            flash('Welcome! Please complete your profile.', 'info')
+            flash('Login successful!', 'success')
             return redirect(url_for('dashboard'))
         else:
-            flash('Invalid credentials. Please try again.', 'error')
+            flash('Invalid username or password.', 'error')
     
     return render_template('auth/login.html')
 
@@ -235,6 +237,16 @@ def profile_submitted():
         return redirect(url_for('dashboard'))
     
     return render_template('dashboard/profile_submitted.html', profile=profile, user=user)
+
+@app.route('/admin-dashboard')
+def admin_dashboard():
+    if not session.get('is_admin'):
+        flash('Access denied. Admin privileges required.', 'error')
+        return redirect(url_for('login'))
+    
+    # Fetch all student profiles
+    profiles = StudentProfile.query.all()
+    return render_template('dashboard/dashadmin.html', profiles=profiles)
 
 if __name__ == '__main__':
     app.run(debug=True)

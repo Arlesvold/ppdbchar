@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashad.css') }}">
+    <title>Admin Dashboard - PPDB Online</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="notification {{ category }}">
+                        {{ message }}
+                        <span class="close-btn">&times;</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="info-section">
+            <h2>Daftar Pendaftar</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Program Studi</th>
+                            <th>Waktu Kuliah</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profile in profiles %}
+                        <tr>
+                            <td>{{ profile.full_name }}</td>
+                            <td>
+                                {% if profile.jurusan == 'TI' %}Teknik Informatika
+                                {% elif profile.jurusan == 'SI' %}Sistem Informasi
+                                {% elif profile.jurusan == 'RPL' %}Rekayasa Perangkat Lunak
+                                {% elif profile.jurusan == 'MI' %}Manajemen Informatika{% endif %}
+                            </td>
+                            <td>{{ profile.waktu_kuliah }}</td>
+                            <td><span class="status-badge">Submitted</span></td>
+                            <td>
+                                <a href="#" class="btn btn-small">View</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
