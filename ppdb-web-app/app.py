@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect  # Add this line
 from config import Config
-from models import db, User, StudentProfile
+from models import db, User, StudentProfile, Notification
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
@@ -206,8 +206,11 @@ def submit_profile():
         os.makedirs(os.path.join(upload_folder, 'ijazah'), exist_ok=True)
 
         # Save files with secure filenames
-        photo_filename = secure_filename(f"{user.username}_photo.{photo.filename.split('.')[-1]}")
-        ijazah_filename = secure_filename(f"{user.username}_ijazah.pdf")
+        photo_ext = photo.filename.rsplit('.', 1)[1].lower()
+        ijazah_ext = ijazah.filename.rsplit('.', 1)[1].lower()
+        
+        photo_filename = secure_filename(f"{user.username}_photo.{photo_ext}")
+        ijazah_filename = secure_filename(f"{user.username}_ijazah.{ijazah_ext}")
         
         photo.save(os.path.join(upload_folder, 'photos', photo_filename))
         ijazah.save(os.path.join(upload_folder, 'ijazah', ijazah_filename))
@@ -250,7 +253,7 @@ def submit_profile():
 @app.route('/profile-submitted')
 def profile_submitted():
     if 'username' not in session:
-        flash('Please login first.', 'error')
+        flash('Silakan login terlebih dahulu.', 'error')
         return redirect(url_for('login'))
     
     user = User.query.filter_by(username=session['username']).first()
@@ -259,8 +262,22 @@ def profile_submitted():
     
     profile = StudentProfile.query.filter_by(user_id=user.id).first()
     if not profile:
-        flash('Please complete your profile first.', 'warning')
+        flash('Silakan lengkapi profil Anda terlebih dahulu.', 'warning')
         return redirect(url_for('dashboard'))
+    
+    # Check for unread notifications
+    notifications = Notification.query.filter_by(user_id=user.id, is_read=False).all()
+    for notification in notifications:
+        message = notification.message
+        if notification.reason:
+            message += f'\nAlasan: {notification.reason}'
+        flash(message, notification.type)
+        notification.is_read = True
+    
+    db.session.commit()
+    
+    if profile.status == 'pending':
+        flash('Pendaftaran Anda sedang dalam proses verifikasi admin.', 'info') 
     
     return render_template('dashboard/profile_submitted.html', profile=profile, user=user)
 
@@ -286,20 +303,70 @@ def admin_detail(profile_id):
 @app.route('/admin/action/<int:profile_id>/<action>')
 def admin_action(profile_id, action):
     if not session.get('is_admin'):
-        flash('Access denied. Admin privileges required.', 'error')
+        flash('Akses ditolak. Diperlukan hak akses admin.', 'error')
         return redirect(url_for('login'))
     
     profile = StudentProfile.query.get_or_404(profile_id)
+    user = User.query.get(profile.user_id)
     
     if action == 'accept':
         profile.status = 'accepted'
-        flash(f'Application for {profile.full_name} has been accepted.', 'success')
+        # Store notification for user
+        flash_message = f'Selamat! Pendaftaran untuk {profile.full_name} telah diterima.'
+        db.session.add(Notification(
+            user_id=profile.user_id,
+            message=flash_message,
+            type='success'
+        ))
+        flash(f'Pendaftaran {profile.full_name} telah diterima.', 'success')
     elif action == 'reject':
         profile.status = 'rejected'
-        flash(f'Application for {profile.full_name} has been rejected.', 'error')
+        # Store notification for user
+        flash_message = f'Maaf, pendaftaran untuk {profile.full_name} tidak diterima.'
+        db.session.add(Notification(
+            user_id=profile.user_id,
+            message=flash_message,
+            type='error'
+        ))
+        flash(f'Pendaftaran {profile.full_name} telah ditolak.', 'error')
     
     db.session.commit()
     return redirect(url_for('admin_dashboard'))
+
+@app.route('/admin/action/<int:profile_id>/reject', methods=['POST'])
+def admin_reject(profile_id):
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+    
+    try:
+        data = request.get_json()
+        reason = data.get('reason')
+        
+        if not reason:
+            return jsonify({'success': False, 'message': 'Alasan penolakan harus diisi'}), 400
+        
+        profile = StudentProfile.query.get_or_404(profile_id)
+        profile.status = 'rejected'
+        
+        # Store notification with reason
+        flash_message = f'Maaf, pendaftaran untuk {profile.full_name} tidak diterima.'
+        notification = Notification(
+            user_id=profile.user_id,
+            message=flash_message,
+            reason=reason,
+            type='error'
+        )
+        
+        db.session.add(notification)
+        db.session.commit()
+        
+        flash(f'Pendaftaran {profile.full_name} telah ditolak.', 'success')
+        return jsonify({'success': True})
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error in admin_reject: {str(e)}")
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 @app.route('/admin/get-detail/<int:profile_id>')
 def get_profile_detail(profile_id):
@@ -307,6 +374,8 @@ def get_profile_detail(profile_id):
         return jsonify({'error': 'Unauthorized'}), 401
     
     profile = StudentProfile.query.get_or_404(profile_id)
+    file_ext = profile.ijazah_path.rsplit('.', 1)[1].lower() if '.' in profile.ijazah_path else ''
+    
     return jsonify({
         'full_name': profile.full_name,
         'birth_date': profile.birth_date.strftime('%d %B %Y'),
@@ -317,7 +386,7 @@ def get_profile_detail(profile_id):
         'graduation_year': profile.graduation_year,
         'photo_path': profile.photo_path,
         'ijazah_path': profile.ijazah_path,
-        'ijazah_is_image': profile.ijazah_path.lower().endswith(('.png', '.jpg', '.jpeg'))
+        'ijazah_is_image': file_ext in ['jpg', 'jpeg', 'png']
     })
 
 if __name__ == '__main__':

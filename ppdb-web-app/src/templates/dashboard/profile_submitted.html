@@ -34,7 +34,16 @@
     <div class="dashboard-container">
         <div class="dashboard-header">
             <h1>Application Submitted Successfully</h1>
-            <span class="status-badge">Status: <span class="status-success">Submitted</span></span>
+            <span class="status-badge">
+                Status: 
+                {% if profile.status == 'pending' %}
+                    <span class="status-pending">Menunggu Verifikasi Admin</span>
+                {% elif profile.status == 'accepted' %}
+                    <span class="status-success">Pendaftaran Diterima</span>
+                {% elif profile.status == 'rejected' %}
+                    <span class="status-rejected">Pendaftaran Ditolak</span>
+                {% endif %}
+            </span>
         </div>
 
         <div class="dashboard-content">
