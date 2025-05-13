@@ -6,9 +6,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_submitted.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
     <title>Application Submitted - PPDB Dashboard</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="notification {{ category }}">
+                    {{ message }}
+                    <span class="close-btn">&times;</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
     <nav class="dashboard-nav">
         <div class="nav-content">
             <a href="{{ url_for('home') }}" class="nav-logo">PPDB Online</a>
@@ -118,5 +130,7 @@
             </div>
         </div>
     </div>
+    
+    <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
 </body>
 </html>

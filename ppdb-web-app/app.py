@@ -80,20 +80,19 @@ def register():
         # Check for existing username
         existing_username = User.query.filter_by(username=username).first()
         if existing_username:
-            flash('Username already exists. Please choose a different username.', 'error')
+            flash('Username sudah digunakan. Silakan pilih username lain.', 'error')
             return render_template('auth/register.html', 
-                                email=email,  # Preserve the email input
+                                email=email,
                                 username_error=True)
             
         # Check for existing email
         existing_email = User.query.filter_by(email=email).first()
         if existing_email:
-            flash('Email already registered. Please use a different email or login.', 'error')
+            flash('Email sudah terdaftar. Silakan gunakan email lain.', 'error')
             return render_template('auth/register.html', 
-                                username=username,  # Preserve the username input
+                                username=username,
                                 email_error=True)
 
-        # If both checks pass, create new user
         try:
             user = User(username=username, email=email)
             user.set_password(password)
@@ -101,12 +100,12 @@ def register():
             db.session.add(user)
             db.session.commit()
             
-            flash('Registration successful! Please login with your credentials.', 'success')
+            flash('Registrasi berhasil! Silakan login dengan akun Anda.', 'success')
             return redirect(url_for('login'))
             
         except Exception as e:
             db.session.rollback()
-            flash('An error occurred during registration. Please try again.', 'error')
+            flash('Terjadi kesalahan saat registrasi. Silakan coba lagi.', 'error')
             print(f"Registration error: {str(e)}")
             
     return render_template('auth/register.html')
@@ -141,20 +140,21 @@ def dashboard():
 
 @app.route('/logout')
 def logout():
+    username = session.get('username', '')
     session.clear()
-    flash('You have been logged out successfully.', 'success')
-    return redirect(url_for('home'))  # Changed from 'index' to 'home'
+    flash(f'Terima kasih, {username}! Anda telah berhasil logout.', 'success')
+    return redirect(url_for('home'))
 
 @app.route('/submit-profile', methods=['POST'])
 def submit_profile():
     if 'username' not in session:
-        flash('Please login first.', 'error')
+        flash('Silakan login terlebih dahulu.', 'error')
         return redirect(url_for('login'))
     
     try:
         user = User.query.filter_by(username=session['username']).first()
         if not user:
-            flash('User not found.', 'error')
+            flash('User tidak ditemukan.', 'error')
             return redirect(url_for('login'))
 
         # Validate required fields
@@ -163,30 +163,41 @@ def submit_profile():
         
         for field in required_fields:
             if not request.form.get(field):
-                flash(f'{field.replace("_", " ").title()} is required.', 'error')
+                field_names = {
+                    'full_name': 'Nama Lengkap',
+                    'birth_date': 'Tanggal Lahir',
+                    'gender': 'Jenis Kelamin',
+                    'phone': 'Nomor Telepon',
+                    'address': 'Alamat',
+                    'school_origin': 'Asal Sekolah',
+                    'graduation_year': 'Tahun Lulus',
+                    'jurusan': 'Program Studi',
+                    'waktu_kuliah': 'Waktu Kuliah'
+                }
+                flash(f'{field_names.get(field, field)} harus diisi.', 'error')
                 return redirect(url_for('dashboard'))
 
         # Validate file uploads
         if 'photo' not in request.files or 'ijazah' not in request.files:
-            flash('Both photo and ijazah files are required.', 'error')
+            flash('Foto dan ijazah harus diunggah.', 'error')
             return redirect(url_for('dashboard'))
 
         photo = request.files['photo']
         ijazah = request.files['ijazah']
 
         if photo.filename == '' or ijazah.filename == '':
-            flash('Both photo and ijazah files are required.', 'error')
+            flash('Foto dan ijazah harus diunggah.', 'error')
             return redirect(url_for('dashboard'))
 
         ALLOWED_PHOTO_EXTENSIONS = {'png', 'jpg', 'jpeg'}
         ALLOWED_IJAZAH_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
 
         if not allowed_file(photo.filename, ALLOWED_PHOTO_EXTENSIONS):
-            flash('Photo must be in PNG/JPG format.', 'error')
+            flash('Foto harus dalam format PNG/JPG.', 'error')
             return redirect(url_for('dashboard'))
 
         if not allowed_file(ijazah.filename, ALLOWED_IJAZAH_EXTENSIONS):
-            flash('Ijazah must be in PDF/PNG/JPG format.', 'error')
+            flash('Ijazah harus dalam format PDF/PNG/JPG.', 'error')
             return redirect(url_for('dashboard'))
 
         # Create upload directories
@@ -196,7 +207,7 @@ def submit_profile():
 
         # Save files with secure filenames
         photo_filename = secure_filename(f"{user.username}_photo.{photo.filename.split('.')[-1]}")
-        ijazah_filename = secure_filename(f"{user.username}_ijazah.{ijazah.filename.split('.')[-1]}")
+        ijazah_filename = secure_filename(f"{user.username}_ijazah.pdf")
         
         photo.save(os.path.join(upload_folder, 'photos', photo_filename))
         ijazah.save(os.path.join(upload_folder, 'ijazah', ijazah_filename))
@@ -227,12 +238,12 @@ def submit_profile():
         db.session.add(profile)
         db.session.commit()
         
-        flash('Application submitted successfully! Your data has been saved.', 'success')
+        flash('Pendaftaran berhasil! Data Anda telah tersimpan.', 'success')
         return redirect(url_for('profile_submitted'))
         
     except Exception as e:
         db.session.rollback()
-        flash(f'Error submitting profile: {str(e)}', 'error')
+        flash('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.', 'error')
         print(f"Error: {str(e)}")
         return redirect(url_for('dashboard'))
 

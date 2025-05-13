@@ -5,20 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-    <title>Application Submitted - PPDB Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+    <title>PPDB Dashboard</title>
 </head>
 <body>
-    <nav class="dashboard-nav">
-        <div class="nav-content">
-            <a href="{{ url_for('home') }}" class="nav-logo">PPDB Online</a>
-            <div class="nav-links">
-                <a href="{{ url_for('dashboard') }}">Dashboard</a>
-                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-            </div>
-        </div>
-    </nav>
-
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -29,6 +19,15 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
+    <nav class="dashboard-nav">
+        <div class="nav-content">
+            <a href="{{ url_for('home') }}" class="nav-logo">PPDB Online</a>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
 
     <div class="dashboard-container">
         <div class="dashboard-header">
@@ -130,28 +129,6 @@
         </div>
     </div>
 
-    <script>
-        // Add notification handling
-        document.addEventListener('DOMContentLoaded', function() {
-            // Auto-hide notifications after 5 seconds
-            const notifications = document.querySelectorAll('.notification');
-            notifications.forEach(notification => {
-                setTimeout(() => {
-                    notification.style.animation = 'slideOut 0.5s ease-out forwards';
-                    setTimeout(() => notification.remove(), 500);
-                }, 5000);
-            });
-
-            // Close button functionality
-            const closeButtons = document.querySelectorAll('.notification .close-btn');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const notification = button.parentElement;
-                    notification.style.animation = 'slideOut 0.5s ease-out forwards';
-                    setTimeout(() => notification.remove(), 500);
-                });
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
 </body>
 </html>
