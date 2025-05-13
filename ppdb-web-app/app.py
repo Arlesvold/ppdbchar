@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect  # Add this line
 from config import Config
@@ -21,6 +21,10 @@ with app.app_context():
         print("Database tables created successfully")
     except Exception as e:
         print(f"Error creating database tables: {e}")
+
+def allowed_file(filename, allowed_extensions):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
 @app.route('/')
 def home():
@@ -174,6 +178,17 @@ def submit_profile():
             flash('Both photo and ijazah files are required.', 'error')
             return redirect(url_for('dashboard'))
 
+        ALLOWED_PHOTO_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+        ALLOWED_IJAZAH_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
+
+        if not allowed_file(photo.filename, ALLOWED_PHOTO_EXTENSIONS):
+            flash('Photo must be in PNG/JPG format.', 'error')
+            return redirect(url_for('dashboard'))
+
+        if not allowed_file(ijazah.filename, ALLOWED_IJAZAH_EXTENSIONS):
+            flash('Ijazah must be in PDF/PNG/JPG format.', 'error')
+            return redirect(url_for('dashboard'))
+
         # Create upload directories
         upload_folder = app.config['UPLOAD_FOLDER']
         os.makedirs(os.path.join(upload_folder, 'photos'), exist_ok=True)
@@ -181,7 +196,7 @@ def submit_profile():
 
         # Save files with secure filenames
         photo_filename = secure_filename(f"{user.username}_photo.{photo.filename.split('.')[-1]}")
-        ijazah_filename = secure_filename(f"{user.username}_ijazah.pdf")
+        ijazah_filename = secure_filename(f"{user.username}_ijazah.{ijazah.filename.split('.')[-1]}")
         
         photo.save(os.path.join(upload_folder, 'photos', photo_filename))
         ijazah.save(os.path.join(upload_folder, 'ijazah', ijazah_filename))
@@ -247,6 +262,52 @@ def admin_dashboard():
     # Fetch all student profiles
     profiles = StudentProfile.query.all()
     return render_template('dashboard/dashadmin.html', profiles=profiles)
+
+@app.route('/admin/detail/<int:profile_id>')
+def admin_detail(profile_id):
+    if not session.get('is_admin'):
+        flash('Access denied. Admin privileges required.', 'error')
+        return redirect(url_for('login'))
+    
+    profile = StudentProfile.query.get_or_404(profile_id)
+    return render_template('dashboard/admin_detail.html', profile=profile)
+
+@app.route('/admin/action/<int:profile_id>/<action>')
+def admin_action(profile_id, action):
+    if not session.get('is_admin'):
+        flash('Access denied. Admin privileges required.', 'error')
+        return redirect(url_for('login'))
+    
+    profile = StudentProfile.query.get_or_404(profile_id)
+    
+    if action == 'accept':
+        profile.status = 'accepted'
+        flash(f'Application for {profile.full_name} has been accepted.', 'success')
+    elif action == 'reject':
+        profile.status = 'rejected'
+        flash(f'Application for {profile.full_name} has been rejected.', 'error')
+    
+    db.session.commit()
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/admin/get-detail/<int:profile_id>')
+def get_profile_detail(profile_id):
+    if not session.get('is_admin'):
+        return jsonify({'error': 'Unauthorized'}), 401
+    
+    profile = StudentProfile.query.get_or_404(profile_id)
+    return jsonify({
+        'full_name': profile.full_name,
+        'birth_date': profile.birth_date.strftime('%d %B %Y'),
+        'gender': profile.gender,
+        'phone': profile.phone,
+        'address': profile.address,
+        'school_origin': profile.school_origin,
+        'graduation_year': profile.graduation_year,
+        'photo_path': profile.photo_path,
+        'ijazah_path': profile.ijazah_path,
+        'ijazah_is_image': profile.ijazah_path.lower().endswith(('.png', '.jpg', '.jpeg'))
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)

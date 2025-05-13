@@ -60,7 +60,14 @@
 }
 
 .document-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: calc(50% - 1rem);
     text-align: center;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .document-item label {
@@ -68,12 +75,46 @@
     margin-bottom: 1rem;
     color: #2c3e50;
     font-weight: 500;
+    font-size: 1.1rem;
 }
 
-.document-item img {
-    max-width: 200px;
+.document-item img,
+.document-item embed {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto 1rem;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: block;
+}
+
+.document-image {
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.btn-download {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-download:hover {
+    background-color: #2980b9;
+}
+
+.document-preview {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
 }
 
 .button-group {

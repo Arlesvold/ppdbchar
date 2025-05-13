@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,11 +93,26 @@
                 <div class="document-preview">
                     <div class="document-item">
                         <label>Pas Foto</label>
-                        <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" alt="Pas Foto">
+                        <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" 
+                             alt="Pas Foto" 
+                             class="document-image">
+                        <a href="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" 
+                           download class="btn btn-download">Download Pas Foto</a>
                     </div>
                     <div class="document-item">
                         <label>Ijazah</label>
-                        <a href="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" target="_blank" class="document-link">View Ijazah</a>
+                        {% if profile.ijazah_path.lower().endswith(('.jpg', '.jpeg', '.png')) %}
+                            <img src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                                 alt="Ijazah" 
+                                 class="document-image">
+                        {% else %}
+                            <embed src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                                   type="application/pdf" 
+                                   width="100%" 
+                                   height="400px">
+                        {% endif %}
+                        <a href="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                           download class="btn btn-download">Download Ijazah</a>
                     </div>
                 </div>
             </div>
