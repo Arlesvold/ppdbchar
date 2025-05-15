@@ -59,8 +59,8 @@
                         <tr>
                             <th>Nama</th>
                             <th>Program Studi</th>
-                            <th>Waktu Kuliah</th>
-                            <th>Status</th>
+                            <th>Status Pendaftaran</th>
+                            <th>Status Pembayaran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -74,11 +74,19 @@
                                 {% elif profile.jurusan == 'RPL' %}Rekayasa Perangkat Lunak
                                 {% elif profile.jurusan == 'MI' %}Manajemen Informatika{% endif %}
                             </td>
-                            <td>{{ profile.waktu_kuliah }}</td>
                             <td>
                                 <span class="status-badge {{ profile.status }}">
                                     {{ profile.status|title }}
                                 </span>
+                            </td>
+                            <td>
+                                {% if profile.payment_status == 'pending' %}
+                                    <span class="status-badge warning">Menunggu Verifikasi</span>
+                                {% elif profile.payment_status == 'verified' %}
+                                    <span class="status-badge success">Terverifikasi</span>
+                                {% else %}
+                                    <span class="status-badge">Belum Bayar</span>
+                                {% endif %}
                             </td>
                             <td class="action-buttons">
                                 <button onclick="showDetail('{{ profile.id }}')" 
@@ -89,10 +97,12 @@
                                        onclick="return confirm('Terima pendaftaran ini?')">Terima</a>
                                     <button onclick="showRejectModal('{{ profile.id }}')" 
                                             class="btn btn-small btn-danger">Tolak</button>
-                                {% else %}
-                                    <span class="status-badge {{ profile.status }}">
-                                        {{ 'Diterima' if profile.status == 'accepted' else 'Ditolak' }}
-                                    </span>
+                                {% endif %}
+                                {% if profile.payment_status == 'pending' %}
+                                    <button onclick="verifyPayment('{{ profile.id }}')" 
+                                            class="btn btn-small btn-success">
+                                        Verifikasi Pembayaran
+                                    </button>
                                 {% endif %}
                             </td>
                         </tr>
@@ -289,6 +299,27 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        function verifyPayment(profileId) {
+            if (confirm('Verifikasi pembayaran ini?')) {
+                fetch(`/admin/verify-payment/${profileId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Pembayaran berhasil diverifikasi');
+                            window.location.reload();
+                        } else {
+                            alert('Terjadi kesalahan saat verifikasi pembayaran');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat verifikasi pembayaran');
+                    });
+            }
+        }
     </script>
 </body>
 </html>

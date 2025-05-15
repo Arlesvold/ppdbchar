@@ -389,5 +389,93 @@ def get_profile_detail(profile_id):
         'ijazah_is_image': file_ext in ['jpg', 'jpeg', 'png']
     })
 
+@app.route('/upload-payment-proof', methods=['POST'])
+def upload_payment_proof():
+    if 'username' not in session:
+        flash('Silakan login terlebih dahulu.', 'error')
+        return redirect(url_for('login'))
+    
+    user = User.query.filter_by(username=session['username']).first()
+    profile = StudentProfile.query.filter_by(user_id=user.id).first()
+    
+    if not profile:
+        flash('Profile tidak ditemukan.', 'error')
+        return redirect(url_for('dashboard'))
+        
+    if profile.status != 'accepted':
+        flash('Pendaftaran Anda belum diverifikasi admin.', 'error')
+        return redirect(url_for('profile_submitted'))
+
+    if 'payment_proof' not in request.files:
+        flash('Tidak ada file yang dipilih.', 'error')
+        return redirect(url_for('profile_submitted'))
+        
+    payment_proof = request.files['payment_proof']
+    
+    if payment_proof.filename == '':
+        flash('Tidak ada file yang dipilih.', 'error')
+        return redirect(url_for('profile_submitted'))
+        
+    if not allowed_file(payment_proof.filename, {'png', 'jpg', 'jpeg'}):
+        flash('File harus berupa gambar (PNG/JPG).', 'error')
+        return redirect(url_for('profile_submitted'))
+        
+    try:
+        # Create payments directory if it doesn't exist
+        payments_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'payments')
+        os.makedirs(payments_dir, exist_ok=True)
+        
+        # Save payment proof
+        filename = secure_filename(f"payment_{user.username}_{int(datetime.now().timestamp())}.{payment_proof.filename.rsplit('.', 1)[1].lower()}")
+        payment_proof.save(os.path.join(payments_dir, filename))
+        
+        # Update profile
+        profile.payment_proof = filename
+        profile.payment_status = 'pending'
+        profile.payment_date = datetime.now()
+        
+        db.session.commit()
+        
+        flash('Bukti pembayaran berhasil diunggah dan sedang menunggu verifikasi admin.', 'success')
+        
+    except Exception as e:
+        db.session.rollback()
+        flash('Terjadi kesalahan saat mengunggah bukti pembayaran.', 'error')
+        print(f"Error: {str(e)}")
+        
+    return redirect(url_for('profile_submitted'))
+
+@app.route('/admin/verify-payment/<int:profile_id>')
+def verify_payment(profile_id):
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+    
+    try:
+        profile = StudentProfile.query.get_or_404(profile_id)
+        profile.payment_status = 'verified'
+        
+        # Create notification for user
+        notification = Notification(
+            user_id=profile.user_id,
+            message=f'Pembayaran pendaftaran atas nama {profile.full_name} telah diverifikasi.',
+            type='success'
+        )
+        
+        db.session.add(notification)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': f'Pembayaran untuk {profile.full_name} telah diverifikasi.'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error in verify_payment: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': 'Terjadi kesalahan saat memverifikasi pembayaran.'
+        }), 500
+
 if __name__ == '__main__':
     app.run(debug=True)

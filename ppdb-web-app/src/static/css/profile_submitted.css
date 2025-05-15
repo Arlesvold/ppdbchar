@@ -180,34 +180,46 @@
 }
 
 .payment-section {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-top: 2rem;
-}
-
-.payment-amount {
-    font-size: 2rem;
-    color: #2c3e50;
-    margin: 1rem 0;
-}
-
-.bank-info {
-    background: #f8f9fa;
     padding: 1.5rem;
-    border-radius: 8px;
-    margin: 1.5rem 0;
-}
-
-.payment-proof-image {
-    max-width: 300px;
-    height: auto;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.payment-info {
+    margin-top: 1rem;
+}
+
+.payment-details {
     margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.payment-upload {
+    margin-top: 1.5rem;
 }
 
 .payment-status {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.payment-status.pending {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+}
+
+.payment-status.verified {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.payment-proof-img {
+    max-width: 300px;
+    margin-top: 1rem;
+    border-radius: 4px;
 }

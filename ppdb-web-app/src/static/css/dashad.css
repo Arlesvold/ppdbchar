@@ -70,24 +70,28 @@ h1::after {
 
 /* Status Badges */
 .status-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
     font-weight: 500;
-    display: inline-block;
-    text-align: center;
-    min-width: 100px;
+}
+
+.status-badge.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.status-badge.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
 }
 
 .status-pending {
     background-color: #fff3cd;
     color: #856404;
     border: 1px solid #ffeeba;
-}
-
-.status-success {
-    background-color: #d4edda;
-    color: #155724;
 }
 
 .status-accepted {

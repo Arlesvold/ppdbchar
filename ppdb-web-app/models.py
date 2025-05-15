@@ -41,6 +41,10 @@ class StudentProfile(db.Model):
     photo_path = db.Column(db.String(255), nullable=False)
     ijazah_path = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(20), nullable=False, default='pending')
+    payment_status = db.Column(db.String(20), default='unpaid')  # unpaid, pending, verified
+    payment_amount = db.Column(db.Float, default=150000.00)  # Set default registration fee
+    payment_proof = db.Column(db.String(255))
+    payment_date = db.Column(db.DateTime)
 
 class Notification(db.Model):
     __tablename__ = 'notifications'

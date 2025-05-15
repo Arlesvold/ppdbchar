@@ -131,6 +131,45 @@
             </div>
         </div>
 
+        <div class="payment-section">
+            <h3>Informasi Pembayaran</h3>
+            {% if profile.status == 'accepted' %}
+                <div class="payment-info">
+                    <p>Biaya Pendaftaran: Rp {{ "{:,.2f}".format(profile.payment_amount) }}</p>
+                    <div class="payment-details">
+                        <h4>Rekening Pembayaran:</h4>
+                        <p>Bank BCA: 1234567890</p>
+                        <p>A/N: PPDB Online</p>
+                    </div>
+
+                    {% if profile.payment_status == 'unpaid' %}
+                        <div class="payment-upload">
+                            <form action="{{ url_for('upload_payment_proof') }}" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <label for="payment_proof">Upload Bukti Pembayaran:</label>
+                                    <input type="file" id="payment_proof" name="payment_proof" accept="image/*" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload Bukti Pembayaran</button>
+                            </form>
+                        </div>
+                    {% elif profile.payment_status == 'pending' %}
+                        <div class="payment-status pending">
+                            <p>Status: Menunggu Verifikasi Pembayaran</p>
+                            <img src="{{ url_for('static', filename='uploads/payments/' + profile.payment_proof) }}" 
+                                 alt="Bukti Pembayaran" class="payment-proof-img">
+                        </div>
+                    {% elif profile.payment_status == 'verified' %}
+                        <div class="payment-status verified">
+                            <p>Status: Pembayaran Terverifikasi</p>
+                            <img src="{{ url_for('static', filename='uploads/payments/' + profile.payment_proof) }}" 
+                                 alt="Bukti Pembayaran" class="payment-proof-img">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
         <div class="button-group">
             <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Kembali ke Dashboard</a>
             <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
