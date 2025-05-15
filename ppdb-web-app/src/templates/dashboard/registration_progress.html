@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Progress Pendaftaran - PPDB Online{% endblock %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/registration_progress.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="progress-container">
+    <h1>Progress Pendaftaran</h1>
+    
+    <div class="progress-circle-container">
+        <div class="progress-circle">
+            <div class="progress-inner">
+                <div class="progress-value">{{ progress.percentage }}%</div>
+                <div class="progress-status">{{ progress.status }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-timeline">
+        {% for step in progress.steps %}
+        <div class="timeline-item {{ 'completed' if step.completed else '' }}">
+            <div class="timeline-icon">
+                <i class="{{ step.icon }}"></i>
+            </div>
+            <div class="timeline-content">
+                <h3>{{ step.name }}</h3>
+                <div class="timeline-status">
+                    {% if step.completed %}
+                        <span class="status-complete">
+                            <i class="fas fa-check-circle"></i> Selesai
+                        </span>
+                    {% else %}
+                        <span class="status-pending">
+                            <i class="fas fa-clock"></i> Belum Selesai
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="timeline-details">
+                    {% if step.name == 'Registrasi Akun' %}
+                        <p>Akun telah terdaftar dan terverifikasi</p>
+                    {% elif step.name == 'Pengisian Formulir' %}
+                        {% if profile %}
+                            <p>Formulir telah diisi{% if profile.created_at %} pada {{ profile.created_at.strftime('%d %B %Y') }}{% endif %}</p>
+                        {% else %}
+                            <p>Silakan lengkapi formulir pendaftaran</p>
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                                Isi Formulir
+                            </a>
+                        {% endif %}
+                    {% elif step.name == 'Verifikasi Admin' %}
+                        {% if profile and profile.status == 'accepted' %}
+                            <p>Pendaftaran telah diverifikasi admin</p>
+                        {% elif profile and profile.status == 'rejected' %}
+                            <p>Pendaftaran ditolak oleh admin</p>
+                        {% elif profile %}
+                            <p>Menunggu verifikasi dari admin</p>
+                        {% endif %}
+                    {% elif step.name == 'Pembayaran' %}
+                        {% if profile and profile.payment_status == 'verified' %}
+                            <p>Pembayaran telah diverifikasi</p>
+                        {% elif profile and profile.payment_status == 'pending' %}
+                            <p>Menunggu verifikasi pembayaran</p>
+                        {% elif profile and profile.status == 'accepted' %}
+                            <p>Silakan lakukan pembayaran</p>
+                            <a href="{{ url_for('profile_submitted') }}#payment" class="btn btn-primary">
+                                Lakukan Pembayaran
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const progressValue = "{{ progress.percentage | tojson | safe }}";
+    const progressCircle = document.querySelector('.progress-circle');
+    
+    progressCircle.style.background = `conic-gradient(
+        var(--primary-500) ${progressValue}%, 
+        var(--neutral-200) ${progressValue}% 100%
+    )`;
+});
+</script>
+{% endblock %}

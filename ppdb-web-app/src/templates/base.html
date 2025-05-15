@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block additional_css %}{% endblock %}
+    <title>{% block title %}PPDB Online{% endblock %}</title>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+                <h2>PPDB Online</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                {% if session.get('is_admin') %}
+                    <!-- Admin Navigation -->
+                    <div class="nav-section">
+                        <h3>Admin Panel</h3>
+                        <ul>
+                            <li {% if request.endpoint == 'admin_dashboard' %}class="active"{% endif %}>
+                                <a href="{{ url_for('admin_dashboard') }}">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboard Admin</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'admin_verifikasi' %}class="active"{% endif %}>
+                                <a href="{{ url_for('admin_dashboard') }}">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Verifikasi Pendaftaran</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'admin_payments' %}class="active"{% endif %}>
+                                <a href="{{ url_for('admin_dashboard') }}">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Verifikasi Pembayaran</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% elif 'username' in session %}
+                    <!-- User Navigation -->
+                    <div class="nav-section">
+                        <h3>Menu Utama</h3>
+                        <ul>
+                            <li {% if request.endpoint == 'home' %}class="active"{% endif %}>
+                                <a href="{{ url_for('home') }}">
+                                    <i class="fas fa-home"></i>
+                                    <span>Beranda</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'dashboard' %}class="active"{% endif %}>
+                                <a href="{{ url_for('dashboard') }}">
+                                    <i class="fas fa-th-large"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'profile_submitted' %}class="active"{% endif %}>
+                                <a href="{{ url_for('profile_submitted') }}">
+                                    <i class="fas fa-user"></i>
+                                    <span>Profil Saya</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <h3>Informasi</h3>
+                        <ul>
+                            <li {% if request.endpoint == 'profile_status' %}class="active"{% endif %}>
+                                <a href="{{ url_for('profile_submitted') }}">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    <span>Status Pendaftaran</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'payments' %}class="active"{% endif %}>
+                                <a href="{{ url_for('profile_submitted') }}">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Pembayaran</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'notifications' %}class="active"{% endif %}>
+                                <a href="{{ url_for('profile_submitted') }}">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Notifikasi</span>
+                                </a>
+                            </li>
+                            <!-- Replace the progress section with this link in the sidebar -->
+                            <li {% if request.endpoint == 'registration_progress' %}class="active"{% endif %}>
+                                <a href="{{ url_for('registration_progress') }}">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>Progress Pendaftaran</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                {% else %}
+                    <!-- Guest Navigation -->
+                    <div class="nav-section">
+                        <h3>Menu</h3>
+                        <ul>
+                            <li {% if request.endpoint == 'home' %}class="active"{% endif %}>
+                                <a href="{{ url_for('home') }}">
+                                    <i class="fas fa-home"></i>
+                                    <span>Beranda</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'login' %}class="active"{% endif %}>
+                                <a href="{{ url_for('login') }}">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                            </li>
+                            <li {% if request.endpoint == 'register' %}class="active"{% endif %}>
+                                <a href="{{ url_for('register') }}">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Daftar</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+
+                {% if 'username' in session %}
+                    <!-- Account Section -->
+                    <div class="nav-section account-section">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-details">
+                                <span class="username">{{ session.username }}</span>
+                                <span class="role">{{ 'Admin' if session.is_admin else 'Pendaftar' }}</span>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>
+                                <a href="{{ url_for('logout') }}" class="logout-link">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.querySelector('.progress');
+            const progressValue = progressBar.getAttribute('data-progress');
+            progressBar.style.width = `${progressValue}%`;
+        });
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -14,6 +14,13 @@ app.config.from_object(Config)
 db.init_app(app)
 csrf = CSRFProtect(app)  # Add this line
 
+# Add this near the start of app.py, after app initialization
+# Create required upload folders
+upload_dirs = ['photos', 'ijazah', 'payments']
+for dir_name in upload_dirs:
+    dir_path = os.path.join(app.config['UPLOAD_FOLDER'], dir_name)
+    os.makedirs(dir_path, exist_ok=True)
+
 # Add database connection check here
 with app.app_context():
     try:
@@ -119,21 +126,17 @@ def dashboard():
     user = User.query.filter_by(username=session['username']).first()
     
     if user:
-        # Check if user has already submitted profile
         profile = StudentProfile.query.filter_by(user_id=user.id).first()
+        progress = get_registration_progress(session['username'])
         
-        if profile:
-            # If profile exists, redirect to profile_submitted page
-            flash('Welcome back! Here is your submitted application.', 'info')
-            return redirect(url_for('profile_submitted'))
-        
-        # If no profile exists, show the form to submit profile
         user_data = {
             'name': user.username,
             'email': user.email,
             'registration_date': user.registration_date.strftime('%Y-%m-%d')
         }
-        return render_template('dashboard/index.html', user=user_data)
+        return render_template('dashboard/index.html', 
+                             user=user_data, 
+                             progress=progress)
     
     session.clear()
     return redirect(url_for('home'))
@@ -157,10 +160,19 @@ def submit_profile():
             flash('User tidak ditemukan.', 'error')
             return redirect(url_for('login'))
 
+        # Check if profile already exists
+        existing_profile = StudentProfile.query.filter_by(user_id=user.id).first()
+        if existing_profile:
+            flash('Anda sudah memiliki profil pendaftaran.', 'error')
+            return redirect(url_for('profile_submitted'))
+
         # Validate required fields
-        required_fields = ['full_name', 'birth_date', 'gender', 'phone', 'address', 
-                         'school_origin', 'graduation_year', 'jurusan', 'waktu_kuliah']
-        
+        required_fields = [
+        'full_name', 'birth_date', 'gender', 'phone', 'address',
+        'school_origin', 'graduation_year', 'jurusan', 'waktu_kuliah',
+        'parent_name', 'parent_occupation', 'parent_phone', 'religion', 'age'
+    ]
+
         for field in required_fields:
             if not request.form.get(field):
                 field_names = {
@@ -172,7 +184,12 @@ def submit_profile():
                     'school_origin': 'Asal Sekolah',
                     'graduation_year': 'Tahun Lulus',
                     'jurusan': 'Program Studi',
-                    'waktu_kuliah': 'Waktu Kuliah'
+                    'waktu_kuliah': 'Waktu Kuliah',
+                    'parent_name': 'Nama Orang Tua',
+                    'parent_occupation': 'Pekerjaan Orang Tua',
+                    'parent_phone': 'Nomor HP Orang Tua',
+                    'religion': 'Agama',
+                    'age': 'Umur'
                 }
                 flash(f'{field_names.get(field, field)} harus diisi.', 'error')
                 return redirect(url_for('dashboard'))
@@ -227,16 +244,25 @@ def submit_profile():
             user_id=user.id,
             full_name=request.form['full_name'],
             birth_date=birth_date,
-            gender=request.form['gender'],  # Add this line
+            gender=request.form['gender'],
             phone=request.form['phone'],
             address=request.form['address'],
             school_origin=request.form['school_origin'],
             graduation_year=int(request.form['graduation_year']),
             jurusan=request.form['jurusan'],
             waktu_kuliah=request.form['waktu_kuliah'],
+            parent_name=request.form['parent_name'],
+            parent_occupation=request.form['parent_occupation'],
+            parent_phone=request.form['parent_phone'],
+            religion=request.form['religion'],
+            age=int(request.form['age']),
             photo_path=photo_filename,
-            ijazah_path=ijazah_filename
+            ijazah_path=ijazah_filename,
+            status='pending',  # Add this
+            payment_status='unpaid',  # Add this
+            created_at=datetime.utcnow()  # Add this
         )
+    
         
         db.session.add(profile)
         db.session.commit()
@@ -244,10 +270,20 @@ def submit_profile():
         flash('Pendaftaran berhasil! Data Anda telah tersimpan.', 'success')
         return redirect(url_for('profile_submitted'))
         
+    except ValueError as ve:
+        db.session.rollback()
+        flash(f'Format data tidak valid: {str(ve)}', 'error')
+        print(f"Value Error: {str(ve)}")
+        return redirect(url_for('dashboard'))
+    except IOError as ie:
+        db.session.rollback()
+        flash('Terjadi kesalahan saat menyimpan file.', 'error')
+        print(f"IO Error: {str(ie)}")
+        return redirect(url_for('dashboard'))
     except Exception as e:
         db.session.rollback()
         flash('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.', 'error')
-        print(f"Error: {str(e)}")
+        print(f"General Error: {str(e)}")
         return redirect(url_for('dashboard'))
 
 @app.route('/profile-submitted')
@@ -386,7 +422,11 @@ def get_profile_detail(profile_id):
         'graduation_year': profile.graduation_year,
         'photo_path': profile.photo_path,
         'ijazah_path': profile.ijazah_path,
-        'ijazah_is_image': file_ext in ['jpg', 'jpeg', 'png']
+        'ijazah_is_image': file_ext in ['jpg', 'jpeg', 'png'],
+        'payment_status': profile.payment_status,
+        'payment_date': profile.payment_date.strftime('%d %B %Y %H:%M') if profile.payment_date else None,
+        'payment_proof': profile.payment_proof,
+        'payment_amount': "{:,.2f}".format(profile.payment_amount)
     })
 
 @app.route('/upload-payment-proof', methods=['POST'])
@@ -476,6 +516,77 @@ def verify_payment(profile_id):
             'success': False,
             'message': 'Terjadi kesalahan saat memverifikasi pembayaran.'
         }), 500
+
+# Add this function in app.py
+def get_registration_progress(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return {
+            'percentage': 0,
+            'status': 'Belum Terdaftar',
+            'steps': []
+        }
+
+    profile = StudentProfile.query.filter_by(user_id=user.id).first()
+    steps = [
+        {
+            'name': 'Registrasi Akun',
+            'completed': True,
+            'icon': 'fas fa-user-plus'
+        },
+        {
+            'name': 'Pengisian Formulir',
+            'completed': profile is not None,
+            'icon': 'fas fa-file-alt'
+        },
+        {
+            'name': 'Verifikasi Admin',
+            'completed': profile and profile.status == 'accepted',
+            'icon': 'fas fa-check-circle'
+        },
+        {
+            'name': 'Pembayaran',
+            'completed': profile and profile.payment_status == 'verified',
+            'icon': 'fas fa-money-bill-wave'
+        }
+    ]
+    
+    completed_steps = sum(1 for step in steps if step['completed'])
+    percentage = int((completed_steps / len(steps)) * 100)
+    
+    status_messages = {
+        0: 'Mulai Pendaftaran',
+        25: 'Lengkapi Formulir',
+        50: 'Menunggu Verifikasi',
+        75: 'Lakukan Pembayaran',
+        100: 'Pendaftaran Selesai'
+    }
+    
+    return {
+        'percentage': percentage,
+        'status': status_messages[round(percentage / 25) * 25],
+        'steps': steps
+    }
+
+# Add this to make the function available in templates
+app.jinja_env.globals.update(get_registration_progress=get_registration_progress)
+
+@app.route('/registration-progress')
+def registration_progress():
+    if 'username' not in session:
+        flash('Silakan login terlebih dahulu.', 'error')
+        return redirect(url_for('login'))
+    
+    user = User.query.filter_by(username=session['username']).first()
+    if not user:
+        return redirect(url_for('login'))
+    
+    progress = get_registration_progress(session['username'])
+    profile = StudentProfile.query.filter_by(user_id=user.id).first()
+    
+    return render_template('dashboard/registration_progress.html', 
+                         progress=progress,
+                         profile=profile)
 
 if __name__ == '__main__':
     app.run(debug=True)

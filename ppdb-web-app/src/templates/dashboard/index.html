@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
-    <title>PPDB Dashboard</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+{% endblock %}
+
+{% block title %}PPDB Dashboard{% endblock %}
+
+{% block content %}
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -19,15 +18,6 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <nav class="dashboard-nav">
-        <div class="nav-content">
-            <a href="{{ url_for('home') }}" class="nav-logo">PPDB Online</a>
-            <div class="nav-links">
-                <a href="{{ url_for('dashboard') }}">Dashboard</a>
-                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-            </div>
-        </div>
-    </nav>
 
     <div class="dashboard-container">
         <div class="dashboard-header">
@@ -67,6 +57,46 @@
                             <option value="L">Laki-laki</option>
                             <option value="P">Perempuan</option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Data Pribadi</h2>
+                    <div class="form-group">
+                        <label for="religion">Agama*</label>
+                        <select id="religion" name="religion" required>
+                            <option value="">Pilih Agama</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Umur*</label>
+                        <input type="number" id="age" name="age" min="15" max="50" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Data Orang Tua</h2>
+                    <div class="form-group">
+                        <label for="parent_name">Nama Orang Tua/Wali*</label>
+                        <input type="text" id="parent_name" name="parent_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parent_occupation">Pekerjaan Orang Tua*</label>
+                        <input type="text" id="parent_occupation" name="parent_occupation" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parent_phone">Nomor HP Orang Tua*</label>
+                        <input type="tel" id="parent_phone" name="parent_phone" required>
+                        <small>Format: 08xxxxxxxxxx</small>
                     </div>
                 </div>
 
@@ -127,8 +157,27 @@
                 </div>
             </form>
         </div>
-    </div>
 
-    <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
-</body>
-</html>
+        <div class="registration-progress">
+            <h2>Progress Pendaftaran</h2>
+            <div class="progress-detail">
+                {% for step in progress.steps %}
+                <div class="progress-item {{ 'completed' if step.completed else '' }}">
+                    <div class="progress-icon">
+                        <i class="{{ step.icon }}"></i>
+                    </div>
+                    <div class="progress-content">
+                        <h3>{{ step.name }}</h3>
+                        <p>{{ 'Selesai' if step.completed else 'Belum Selesai' }}</p>
+                    </div>
+                    {% if step.completed %}
+                    <div class="progress-check">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

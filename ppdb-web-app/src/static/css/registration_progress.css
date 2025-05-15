@@ -1,0 +1,230 @@
+/* Variables for consistent styling */
+:root {
+    --primary-500: #3b5bdb;
+    --primary-600: #364fc7;
+    --neutral-200: #e9ecef;
+    --neutral-300: #dee2e6;
+    --neutral-600: #6c757d;
+    --neutral-800: #343a40;
+    --success: #2b8a3e;
+    --warning: #e67700;
+}
+
+/* Main container */
+.progress-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-container h1 {
+    color: var(--primary-600);
+    font-size: 2rem;
+    margin: 0 0 2rem 0;
+    text-align: center;
+}
+
+/* Header styling - now without the title */
+.progress-header {
+    text-align: center;
+}
+
+/* Progress circle styling */
+.progress-circle-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.progress-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* The background will be set via JavaScript */
+}
+
+.progress-inner {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-value {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary-600);
+    margin-bottom: 0.5rem;
+}
+
+.progress-status {
+    font-size: 1rem;
+    color: var(--neutral-600);
+}
+
+/* Timeline styling */
+.progress-timeline {
+    margin-top: 4rem;
+    position: relative;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    padding-bottom: 3rem;
+}
+
+.timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 50px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--neutral-300);
+    z-index: 0;
+}
+
+.timeline-item.completed:not(:last-child)::before {
+    background-color: var(--primary-500);
+}
+
+.timeline-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px; /* Ensure fixed width */
+    background-color: var(--neutral-200);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: var(--neutral-600);
+}
+
+.timeline-item.completed .timeline-icon {
+    background-color: var(--primary-500);
+    color: white;
+}
+
+.timeline-content {
+    flex: 1;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.timeline-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--neutral-800);
+    font-size: 1.25rem;
+}
+
+.timeline-status {
+    margin: 0.5rem 0;
+}
+
+.status-complete {
+    color: var(--success);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-pending {
+    color: var(--warning);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--neutral-200);
+}
+
+.timeline-details p {
+    margin: 0 0 0.5rem 0;
+    color: var(--neutral-600);
+}
+
+/* Button styling */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--primary-500);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-600);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .progress-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .progress-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .progress-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .progress-inner {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .progress-value {
+        font-size: 2rem;
+    }
+    
+    .timeline-item {
+        gap: 1rem;
+    }
+    
+    .timeline-content {
+        padding: 1rem;
+    }
+}

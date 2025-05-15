@@ -38,13 +38,19 @@ class StudentProfile(db.Model):
     graduation_year = db.Column(db.Integer, nullable=False)
     jurusan = db.Column(db.String(50), nullable=False)
     waktu_kuliah = db.Column(db.String(50), nullable=False)
+    parent_name = db.Column(db.String(100), nullable=False)
+    parent_occupation = db.Column(db.String(100), nullable=False)
+    parent_phone = db.Column(db.String(15), nullable=False)
+    religion = db.Column(db.String(20), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
     photo_path = db.Column(db.String(255), nullable=False)
     ijazah_path = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(20), nullable=False, default='pending')
-    payment_status = db.Column(db.String(20), default='unpaid')  # unpaid, pending, verified
-    payment_amount = db.Column(db.Float, default=150000.00)  # Set default registration fee
+    payment_status = db.Column(db.String(20), default='unpaid')
+    payment_amount = db.Column(db.Float, default=150000.00)
     payment_proof = db.Column(db.String(255))
     payment_date = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class Notification(db.Model):
     __tablename__ = 'notifications'

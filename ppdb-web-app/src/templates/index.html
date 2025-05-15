@@ -1,38 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPDB Online</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <div class="container">
+{% extends "base.html" %}
+
+{% block title %}PPDB Online - Home{% endblock %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="welcome-section">
         <h1>Selamat Datang di PPDB Online</h1>
         
         <div class="info-section">
             <h2>Langkah-langkah Pendaftaran:</h2>
-            <ol>
-                <li>Register akun baru jika belum memiliki akun</li>
-                <li>Login menggunakan akun yang sudah terdaftar</li>
-                <li>Isi formulir pendaftaran dengan lengkap</li>
-                <li>Submit formulir dan tunggu konfirmasi</li>
-            </ol>
+            <div class="steps-container">
+                <ol>
+                    <li>Register akun baru jika belum memiliki akun</li>
+                    <li>Login menggunakan akun yang sudah terdaftar</li>
+                    <li>Isi formulir pendaftaran dengan lengkap</li>
+                    <li>Submit formulir dan tunggu konfirmasi</li>
+                </ol>
+            </div>
         </div>
 
         <div class="button-group">
             {% if 'username' in session or 'admin_id' in session %}
                 {% if 'admin_id' in session %}
-                    <a href="{{ url_for('admin_dashboard') }}" class="btn">Admin Dashboard</a>
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Admin Dashboard
+                    </a>
                 {% else %}
-                    <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                        <i class="fas fa-user"></i>
+                        Dashboard
+                    </a>
                 {% endif %}
-                <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
             {% else %}
-                <a href="{{ url_for('register') }}" class="btn">Register</a>
-                <a href="{{ url_for('login') }}" class="btn">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Register
+                </a>
+                <a href="{{ url_for('login') }}" class="btn btn-outline">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
             {% endif %}
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

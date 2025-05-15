@@ -1,94 +1,181 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Application Submitted - PPDB Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_submitted.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+    <title>Profile Submitted - PPDB Online</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="notification {{ category }}">
+                    {{ message }}
+                    <span class="close-btn">&times;</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <nav class="dashboard-nav">
+        <div class="nav-content">
+            <a href="{{ url_for('home') }}" class="nav-logo">PPDB Online</a>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>Status Pendaftaran PPDB Online</h1>
+        <div class="header">
+            <h1>Status Pendaftaran</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
 
-        <div class="info-section">
-            <div class="status-header">
-                <h2>Status: <span class="status-success">Submitted</span></h2>
-                <p class="submission-date">Submitted on: {{ profile.created_at.strftime('%d %B %Y') }}</p>
-            </div>
-
-            <div class="profile-section">
-                <h2>Data Pribadi</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <label>Nama Lengkap:</label>
-                        <span>{{ profile.full_name }}</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Tanggal Lahir:</label>
-                        <span>{{ profile.birth_date.strftime('%d %B %Y') }}</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Jenis Kelamin:</label>
-                        <span>{% if profile.gender == 'L' %}Laki-laki{% else %}Perempuan{% endif %}</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Nomor HP:</label>
-                        <span>{{ profile.phone }}</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Alamat:</label>
-                        <span>{{ profile.address }}</span>
-                    </div>
+        <div class="profile-section">
+            <h2>Data Pendaftaran</h2>
+            <div class="profile-info">
+                <div class="info-item">
+                    <label>Nama Lengkap:</label>
+                    <span>{{ profile.full_name }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Tanggal Lahir:</label>
+                    <span>{{ profile.birth_date.strftime('%d %B %Y') }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Jenis Kelamin:</label>
+                    <span>
+                        {% if profile.gender == 'L' %}
+                            Laki-laki
+                        {% else %}
+                            Perempuan
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <label>Nomor Telepon:</label>
+                    <span>{{ profile.phone }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Alamat:</label>
+                    <span>{{ profile.address }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Asal Sekolah:</label>
+                    <span>{{ profile.school_origin }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Tahun Lulus:</label>
+                    <span>{{ profile.graduation_year }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Program Studi:</label>
+                    <span>
+                        {% if profile.jurusan == 'TI' %}Teknik Informatika
+                        {% elif profile.jurusan == 'SI' %}Sistem Informasi
+                        {% elif profile.jurusan == 'RPL' %}Rekayasa Perangkat Lunak
+                        {% elif profile.jurusan == 'MI' %}Manajemen Informatika
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <label>Waktu Kuliah:</label>
+                    <span>
+                        {% if profile.waktu_kuliah == 'siang' %}
+                            Kelas Siang
+                        {% elif profile.waktu_kuliah == 'malam' %}
+                            Kelas Malam
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <label>Status:</label>
+                    <span class="status-badge {{ profile.status }}">
+                        {% if profile.status == 'pending' %}Menunggu Verifikasi
+                        {% elif profile.status == 'accepted' %}Diterima
+                        {% elif profile.status == 'rejected' %}Ditolak
+                        {% endif %}
+                    </span>
                 </div>
             </div>
 
-            <div class="profile-section">
-                <h2>Data Akademik</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <label>Asal Sekolah:</label>
-                        <span>{{ profile.school_origin }}</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Tahun Lulus:</label>
-                        <span>{{ profile.graduation_year }}</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Program Studi:</label>
-                        <span>
-                            {% if profile.jurusan == 'TI' %}Teknik Informatika
-                            {% elif profile.jurusan == 'SI' %}Sistem Informasi
-                            {% elif profile.jurusan == 'RPL' %}Rekayasa Perangkat Lunak
-                            {% elif profile.jurusan == 'MI' %}Manajemen Informatika{% endif %}
-                        </span>
-                    </div>
-                    <div class="info-item">
-                        <label>Waktu Kuliah:</label>
-                        <span>{% if profile.waktu_kuliah == 'siang' %}Kelas Siang{% else %}Kelas Malam{% endif %}</span>
-                    </div>
+            <div class="document-section">
+                <h3>Dokumen</h3>
+                <div class="document-item">
+                    <label>Pas Foto:</label>
+                    <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" 
+                         alt="Pas Foto" class="profile-photo">
+                </div>
+                <div class="document-item">
+                    <label>Ijazah:</label>
+                    {% if profile.ijazah_path.lower().endswith(('.jpg', '.jpeg', '.png')) %}
+                        <img src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                             alt="Ijazah" class="document-preview">
+                    {% else %}
+                        <embed src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                               type="application/pdf" width="100%" height="500px">
+                    {% endif %}
                 </div>
             </div>
+        </div>
 
-            <div class="profile-section">
-                <h2>Dokumen</h2>
-                <div class="document-grid">
-                    <div class="document-item">
-                        <label>Pas Foto</label>
-                        <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" alt="Pas Foto">
+        <div class="payment-section">
+            <h3>Informasi Pembayaran</h3>
+            {% if profile.status == 'accepted' %}
+                <div class="payment-info">
+                    <p>Biaya Pendaftaran: Rp {{ "{:,.2f}".format(profile.payment_amount) }}</p>
+                    <div class="payment-details">
+                        <h4>Rekening Pembayaran:</h4>
+                        <p>Bank BCA: 1234567890</p>
+                        <p>A/N: PPDB Online</p>
                     </div>
-                    <div class="document-item">
-                        <label>Ijazah</label>
-                        <a href="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" target="_blank" class="btn">Lihat Ijazah</a>
-                    </div>
+
+                    {% if profile.payment_status == 'unpaid' %}
+                        <div class="payment-upload">
+                            <form action="{{ url_for('upload_payment_proof') }}" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <label for="payment_proof">Upload Bukti Pembayaran:</label>
+                                    <input type="file" id="payment_proof" name="payment_proof" accept="image/*" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload Bukti Pembayaran</button>
+                            </form>
+                        </div>
+                    {% elif profile.payment_status == 'pending' %}
+                        <div class="payment-status pending">
+                            <p>Status: Menunggu Verifikasi Pembayaran</p>
+                            <img src="{{ url_for('static', filename='uploads/payments/' + profile.payment_proof) }}" 
+                                 alt="Bukti Pembayaran" class="payment-proof-img">
+                        </div>
+                    {% elif profile.payment_status == 'verified' %}
+                        <div class="payment-status verified">
+                            <p>Status: Pembayaran Terverifikasi</p>
+                            <img src="{{ url_for('static', filename='uploads/payments/' + profile.payment_proof) }}" 
+                                 alt="Bukti Pembayaran" class="payment-proof-img">
+                        </div>
+                    {% endif %}
                 </div>
-            </div>
+            {% endif %}
         </div>
 
         <div class="button-group">
-            <a href="{{ url_for('home') }}" class="btn">Kembali ke Beranda</a>
-            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Kembali ke Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
         </div>
     </div>
+    
+    <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
 </body>
 </html>
