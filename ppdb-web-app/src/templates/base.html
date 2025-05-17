@@ -19,6 +19,9 @@
             <div class="sidebar-header">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
                 <h2>PPDB Online</h2>
+                <button class="toggle-sidebar" aria-label="Toggle Sidebar">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
             </div>
             
             <nav class="sidebar-nav">
@@ -43,6 +46,7 @@
                                 <a href="{{ url_for('admin_dashboard') }}">
                                     <i class="fas fa-money-bill-wave"></i>
                                     <span>Verifikasi Pembayaran</span>
+                              <li><a href="{{ url_for('admin_reports') }}">Laporan Statistik</a></li>
                                 </a>
                             </li>
                         </ul>
@@ -166,6 +170,48 @@
             const progressBar = document.querySelector('.progress');
             const progressValue = progressBar.getAttribute('data-progress');
             progressBar.style.width = `${progressValue}%`;
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const toggleBtn = document.querySelector('.toggle-sidebar');
+            
+            // Load sidebar state from localStorage
+            const isSidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            if (isSidebarCollapsed) {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('expanded');
+            }
+
+            // Handle sidebar toggle
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+                
+                // Save sidebar state to localStorage
+                localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+            });
+
+            // Add tooltips to nav items
+            const navLinks = document.querySelectorAll('.nav-section a');
+            navLinks.forEach(link => {
+                const span = link.querySelector('span');
+                if (span) {
+                    link.setAttribute('data-title', span.textContent.trim());
+                }
+            });
+
+            // Handle mobile menu
+            const mobileToggle = document.createElement('button');
+            mobileToggle.className = 'mobile-toggle';
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            document.querySelector('.main-content').prepend(mobileToggle);
+
+            mobileToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
         });
     </script>
     {% block scripts %}{% endblock %}

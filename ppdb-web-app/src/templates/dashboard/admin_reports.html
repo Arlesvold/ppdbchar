@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_reports.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Laporan Statistik Pendaftaran</h1>
+
+    <!-- Summary Stats -->
+    <div class="summary-cards">
+        <div class="card total-card">
+            <h3>Total Pendaftar</h3>
+            <div class="number">{{ stats.total_pendaftar }}</div>
+        </div>
+        <div class="card filter-card">
+            <h3>Filter Data</h3>
+            <div class="filter-options">
+                <!-- Gender Filter -->
+                <div class="filter-group">
+                    <label>Jenis Kelamin:</label>
+                    <select onchange="applyFilter('gender', this.value)">
+                        <option value="">Semua</option>
+                        <option value="L" {% if filter_type == 'gender' and filter_value == 'L' %}selected{% endif %}>
+                            Laki-laki ({{ stats.gender.L }})
+                        </option>
+                        <option value="P" {% if filter_type == 'gender' and filter_value == 'P' %}selected{% endif %}>
+                            Perempuan ({{ stats.gender.P }})
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Agama Filter -->
+                <div class="filter-group">
+                    <label>Agama:</label>
+                    <select onchange="applyFilter('agama', this.value)">
+                        <option value="">Semua Agama</option>
+                        {% for agama, count in stats.agama.items() %}
+                        <option value="{{ agama }}" {% if filter_type == 'agama' and filter_value == agama %}selected{% endif %}>
+                            {{ agama }} ({{ count }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Umur Filter -->
+                <div class="filter-group">
+                    <label>Umur:</label>
+                    <select onchange="applyFilter('umur', this.value)">
+                        <option value="">Semua Umur</option>
+                        {% for umur, count in stats.umur.items()|sort %}
+                        <option value="{{ umur }}" {% if filter_type == 'umur' and filter_value|string == umur|string %}selected{% endif %}>
+                            {{ umur }} tahun ({{ count }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Jurusan Filter -->
+                <div class="filter-group">
+                    <label>Program Studi:</label>
+                    <select onchange="applyFilter('jurusan', this.value)">
+                        <option value="">Semua Program</option>
+                        {% for jurusan, count in stats.jurusan.items() %}
+                        <option value="{{ jurusan }}" {% if filter_type == 'jurusan' and filter_value == jurusan %}selected{% endif %}>
+                            {{ jurusan }} ({{ count }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Waktu Kuliah Filter -->
+                <div class="filter-group">
+                    <label>Waktu Kuliah:</label>
+                    <select onchange="applyFilter('waktu_kuliah', this.value)">
+                        <option value="">Semua Waktu</option>
+                        {% for waktu, count in stats.waktu_kuliah.items() %}
+                        <option value="{{ waktu }}" {% if filter_type == 'waktu_kuliah' and filter_value == waktu %}selected{% endif %}>
+                            {{ waktu }} ({{ count }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Status Pendaftaran Filter -->
+                <div class="filter-group">
+                    <label>Status Pendaftaran:</label>
+                    <select onchange="applyFilter('status', this.value)">
+                        <option value="">Semua Status</option>
+                        {% for status, count in stats.status_pendaftaran.items() %}
+                        <option value="{{ status }}" {% if filter_type == 'status' and filter_value == status %}selected{% endif %}>
+                            {% if status == 'pending' %}Menunggu
+                            {% elif status == 'accepted' %}Diterima
+                            {% elif status == 'rejected' %}Ditolak
+                            {% endif %} ({{ count }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Payment Status Filter -->
+                <div class="filter-group">
+                    <label>Status Pembayaran:</label>
+                    <select onchange="applyFilter('payment_status', this.value)">
+                        <option value="">Semua Status</option>
+                        {% for status, count in stats.payment_status.items() %}
+                        <option value="{{ status }}" {% if filter_type == 'payment_status' and filter_value == status %}selected{% endif %}>
+                            {% if status == 'unpaid' %}Belum Bayar
+                            {% elif status == 'pending' %}Menunggu Verifikasi
+                            {% elif status == 'verified' %}Terverifikasi
+                            {% endif %} ({{ count }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Reset Filter Button -->
+                <div class="filter-group">
+                    <label>&nbsp;</label>
+                    <button onclick="window.location.href='/admin/reports'" class="reset-button">Reset Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtered Results -->
+    {% if filter_type %}
+    <div class="filtered-section">
+        <h2>{{ filter_value }} <span>({{ stats.filtered_total }} pendaftar)</span></h2>
+        <div class="profile-grid">
+            {% for profile in profiles %}
+            <div class="profile-card">
+                <div class="profile-header {{ profile.status }}">
+                    <span class="status-badge">
+                        {% if profile.status == 'pending' %}Menunggu
+                        {% elif profile.status == 'accepted' %}Diterima
+                        {% elif profile.status == 'rejected' %}Ditolak{% endif %}
+                    </span>
+                </div>
+                <div class="profile-body">
+                    <h3>{{ profile.full_name }}</h3>
+                    <div class="profile-info">
+                        <div class="info-group">
+                            <span class="label">Program Studi</span>
+                            <span class="value">
+                                {% if profile.jurusan == 'TI' %}Teknik Informatika
+                                {% elif profile.jurusan == 'SI' %}Sistem Informasi
+                                {% elif profile.jurusan == 'RPL' %}Rekayasa Perangkat Lunak
+                                {% elif profile.jurusan == 'MI' %}Manajemen Informatika{% endif %}
+                            </span>
+                        </div>
+                        <div class="info-group">
+                            <span class="label">Agama</span>
+                            <span class="value">{{ profile.religion }}</span>
+                        </div>
+                        <div class="info-group">
+                            <span class="label">Umur</span>
+                            <span class="value">{{ profile.age }} tahun</span>
+                        </div>
+                        <div class="info-group">
+                            <span class="label">Tahun Lulus</span>
+                            <span class="value">{{ profile.graduation_year }}</span>
+                        </div>
+                        <div class="info-group">
+                            <span class="label">Kota</span>
+                            <span class="value">{{ profile.address.split(',')[-2]|trim if profile.address.count(',') > 1 else profile.address }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <!-- Category Summary Cards -->
+    <div class="category-sections">
+        <!-- Agama Section -->
+        <div class="category-section">
+            <h2>Berdasarkan Agama</h2>
+            <div class="category-grid">
+                {% for agama, count in stats.agama.items() %}
+                <div class="stat-card">
+                    <div class="stat-number">{{ count }}</div>
+                    <div class="stat-label">{{ agama }}</div>
+                    <div class="stat-percentage">{{ (count / stats.total_pendaftar * 100)|round(1) }}%</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Other category sections (Umur, Kota, etc) follow the same pattern -->
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function applyFilter(type, value) {
+    if (value) {
+        window.location.href = `/admin/reports/${type}/${value}`;
+    } else {
+        window.location.href = '/admin/reports';
+    }
+}
+</script>
+{% endblock %}

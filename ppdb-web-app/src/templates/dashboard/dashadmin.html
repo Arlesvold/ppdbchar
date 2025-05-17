@@ -108,9 +108,7 @@
                                 {% endif %}
                                 {% if profile.payment_status == 'pending' %}
                                     <button onclick="verifyPayment('{{ profile.id }}')" 
-                                            class="btn btn-small btn-success">
-                                        Verifikasi Pembayaran
-                                    </button>
+                                            class="btn btn-small btn-success">Verifikasi</button>
                                 {% endif %}
                             </td>
                         </tr>
@@ -118,10 +116,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="button-group">
-            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
         </div>
     </div>
 

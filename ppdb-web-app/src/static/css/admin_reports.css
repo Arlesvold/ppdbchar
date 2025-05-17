@@ -1,0 +1,302 @@
+.container {
+    padding: 2rem;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.total-card {
+    background: linear-gradient(135deg, #1a237e, #3949ab);
+    color: white;
+}
+
+.total-card .number {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.status-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background: #f8f9fa;
+}
+
+.status-item strong {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.chart-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.chart-container h3 {
+    margin-bottom: 1rem;
+    color: #1a237e;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Update admin_reports.css */
+.filter-card {
+    background: white;
+    padding: 1.5rem;
+    grid-column: 1 / -1;  /* Make filter card span full width */
+}
+
+.filter-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: 500;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.filter-group select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.filter-group select:hover {
+    border-color: #2196f3;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #1a237e;
+    box-shadow: 0 0 0 2px rgba(26, 35, 126, 0.1);
+}
+
+.reset-button {
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #e9ecef;
+    border-color: #666;
+    color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filter-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+.data-section {
+    margin-top: 2rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.data-section h2 {
+    margin-bottom: 1.5rem;
+    color: #1a237e;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.data-section h2 small {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Status badge styles */
+.status-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.accepted {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.profile-header {
+    padding: 1rem;
+    color: white;
+    text-align: right;
+}
+
+.profile-header.pending { background: linear-gradient(135deg, #ff9800, #ff5722); }
+.profile-header.accepted { background: linear-gradient(135deg, #4caf50, #2196f3); }
+.profile-header.rejected { background: linear-gradient(135deg, #f44336, #9c27b0); }
+
+.profile-body {
+    padding: 1.5rem;
+}
+
+.profile-body h3 {
+    margin: 0 0 1rem;
+    color: #1a237e;
+    font-size: 1.25rem;
+}
+
+.profile-info {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed #eee;
+}
+
+.info-group .label {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.info-group .value {
+    font-weight: 500;
+    color: #333;
+}
+
+.category-sections {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.category-section {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f5f7ff, #fff);
+    border-radius: 8px;
+    border: 1px solid #e0e6ff;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a237e;
+    line-height: 1;
+}
+
+.stat-label {
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.stat-percentage {
+    font-size: 0.875rem;
+    color: #2196f3;
+    font-weight: 500;
+}

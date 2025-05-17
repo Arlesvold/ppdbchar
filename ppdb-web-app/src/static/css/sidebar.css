@@ -14,6 +14,36 @@
     box-shadow: 4px 0 10px rgba(0,0,0,0.1);
 }
 
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .sidebar-header h2,
+.sidebar.collapsed .nav-section h3,
+.sidebar.collapsed .nav-section a span,
+.sidebar.collapsed .user-details {
+    display: none;
+}
+
+.sidebar.collapsed .nav-section a {
+    justify-content: center;
+    padding: 1rem;
+}
+
+.sidebar.collapsed .nav-section i {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.sidebar.collapsed .user-info {
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.sidebar.collapsed .account-section {
+    padding: 0.5rem;
+}
+
 .sidebar-header {
     padding: 1.5rem;
     display: flex;
@@ -158,6 +188,11 @@
     margin-left: 280px;
     padding: 2rem;
     background: #f0f2f5;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+    margin-left: 70px;
 }
 
 /* Progress Section Styling */
@@ -294,4 +329,32 @@
 
 .sidebar::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+/* Toggle button styles */
+.toggle-sidebar {
+    position: absolute;
+    right: -12px;
+    top: 20px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 101;
+}
+
+.toggle-sidebar i {
+    font-size: 0.875rem;
+    color: #1a237e;
+    transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed .toggle-sidebar i {
+    transform: rotate(180deg);
 }

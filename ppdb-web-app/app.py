@@ -325,7 +325,84 @@ def admin_dashboard():
     
     # Fetch all student profiles
     profiles = StudentProfile.query.all()
-    return render_template('dashboard/dashadmin.html', profiles=profiles)
+    
+    # Initialize statistics
+    stats = {
+        'total_pendaftar': len(profiles),
+        'status_pendaftaran': {
+            'pending': 0,
+            'accepted': 0,
+            'rejected': 0
+        },
+        'agama': {},
+        'umur': {},
+        'kota': {},
+        'tahun_lulus': {},
+        'jurusan': {},
+        'waktu_kuliah': {},
+        'payment_status': {
+            'unpaid': 0,
+            'pending': 0,
+            'verified': 0
+        }
+    }
+    
+    # Calculate statistics
+    for profile in profiles:
+        # Status pendaftaran
+        stats['status_pendaftaran'][profile.status] += 1
+        
+        # Agama
+        stats['agama'][profile.religion] = stats['agama'].get(profile.religion, 0) + 1
+        
+        # Umur
+        stats['umur'][profile.age] = stats['umur'].get(profile.age, 0) + 1
+        
+        # Extract city from address
+        try:
+            city = profile.address.split(',')[-2].strip()
+            stats['kota'][city] = stats['kota'].get(city, 0) + 1
+        except:
+            stats['kota']['Lainnya'] = stats['kota'].get('Lainnya', 0) + 1
+            
+        # Tahun lulus
+        stats['tahun_lulus'][profile.graduation_year] = stats['tahun_lulus'].get(profile.graduation_year, 0) + 1
+        
+        # Program studi
+        jurusan_names = {
+            'TI': 'Teknik Informatika',
+            'SI': 'Sistem Informasi',
+            'RPL': 'Rekayasa Perangkat Lunak',
+            'MI': 'Manajemen Informatika'
+        }
+        jurusan = jurusan_names.get(profile.jurusan, profile.jurusan)
+        stats['jurusan'][jurusan] = stats['jurusan'].get(jurusan, 0) + 1
+        
+        # Waktu kuliah
+        stats['waktu_kuliah'][profile.waktu_kuliah] = stats['waktu_kuliah'].get(profile.waktu_kuliah, 0) + 1
+        
+        # Payment status
+        stats['payment_status'][profile.payment_status] += 1
+    
+    # Sort statistics
+    for key in ['agama', 'umur', 'kota', 'tahun_lulus', 'jurusan']:
+        stats[key] = dict(sorted(stats[key].items(), key=lambda x: x[1], reverse=True))
+    
+    # Calculate percentages
+    stats['percentages'] = {
+        'status': {
+            status: round((count / stats['total_pendaftar']) * 100, 1)
+            for status, count in stats['status_pendaftaran'].items()
+        },
+        'payment': {
+            status: round((count / stats['total_pendaftar']) * 100, 1)
+            for status, count in stats['payment_status'].items()
+        }
+    }
+    
+    return render_template('dashboard/dashadmin.html', 
+                         profiles=profiles,
+                         stats=stats)
 
 @app.route('/admin/detail/<int:profile_id>')
 def admin_detail(profile_id):
@@ -587,6 +664,119 @@ def registration_progress():
     return render_template('dashboard/registration_progress.html', 
                          progress=progress,
                          profile=profile)
+
+@app.route('/admin/reports')
+@app.route('/admin/reports/<filter_type>/<filter_value>')
+def admin_reports(filter_type=None, filter_value=None):
+    if not session.get('is_admin'):
+        flash('Access denied. Admin privileges required.', 'error')
+        return redirect(url_for('login'))
+    
+    # Base query
+    query = StudentProfile.query
+    
+    # Apply filters
+    if filter_type and filter_value:
+        if filter_type == 'agama':
+            query = query.filter_by(religion=filter_value)
+        elif filter_type == 'umur':
+            query = query.filter_by(age=int(filter_value))
+        elif filter_type == 'kota':
+            query = query.filter(StudentProfile.address.like(f'%{filter_value}%'))
+        elif filter_type == 'tahun_lulus':
+            query = query.filter_by(graduation_year=int(filter_value))
+        elif filter_type == 'jurusan':
+            query = query.filter_by(jurusan=filter_value)
+        elif filter_type == 'waktu_kuliah':
+            query = query.filter_by(waktu_kuliah=filter_value)
+        elif filter_type == 'gender':
+            query = query.filter_by(gender=filter_value)
+        elif filter_type == 'status':
+            query = query.filter_by(status=filter_value)
+        elif filter_type == 'payment_status':
+            query = query.filter_by(payment_status=filter_value)
+    
+    profiles = query.all()
+    
+    # Initialize statistics dictionary
+    stats = {
+        'total_pendaftar': len(StudentProfile.query.all()),
+        'filtered_total': len(profiles),
+        'gender': {'L': 0, 'P': 0},
+        'agama': {},
+        'umur': {},
+        'kota': {},
+        'tahun_lulus': {},
+        'jurusan': {},
+        'waktu_kuliah': {'siang': 0, 'malam': 0},
+        'status_pendaftaran': {
+            'pending': 0,
+            'accepted': 0,
+            'rejected': 0
+        },
+        'payment_status': {
+            'unpaid': 0,
+            'pending': 0,
+            'verified': 0
+        }
+    }
+    
+    # Calculate statistics from all profiles
+    all_profiles = StudentProfile.query.all()
+    for profile in all_profiles:
+        # Gender stats
+        stats['gender'][profile.gender] = stats['gender'].get(profile.gender, 0) + 1
+        
+        # Religion stats
+        stats['agama'][profile.religion] = stats['agama'].get(profile.religion, 0) + 1
+        
+        # Age stats
+        stats['umur'][profile.age] = stats['umur'].get(profile.age, 0) + 1
+        
+        # City stats
+        try:
+            city = profile.address.split(',')[-2].strip()
+            stats['kota'][city] = stats['kota'].get(city, 0) + 1
+        except:
+            stats['kota']['Lainnya'] = stats['kota'].get('Lainnya', 0) + 1
+        
+        # Graduation year stats
+        stats['tahun_lulus'][profile.graduation_year] = stats['tahun_lulus'].get(profile.graduation_year, 0) + 1
+        
+        # Major stats
+        jurusan_names = {
+            'TI': 'Teknik Informatika',
+            'SI': 'Sistem Informasi',
+            'RPL': 'Rekayasa Perangkat Lunak',
+            'MI': 'Manajemen Informatika'
+        }
+        jurusan = jurusan_names.get(profile.jurusan, profile.jurusan)
+        stats['jurusan'][jurusan] = stats['jurusan'].get(jurusan, 0) + 1
+        
+        # Study time stats
+        waktu_display = {
+            'siang': 'Kelas Siang',
+            'malam': 'Kelas Malam'
+        }
+        waktu = waktu_display.get(profile.waktu_kuliah, profile.waktu_kuliah)
+        stats['waktu_kuliah'][waktu] = stats['waktu_kuliah'].get(waktu, 0) + 1
+        
+        # Registration status stats
+        stats['status_pendaftaran'][profile.status] = stats['status_pendaftaran'].get(profile.status, 0) + 1
+        
+        # Payment status stats
+        stats['payment_status'][profile.payment_status] = stats['payment_status'].get(profile.payment_status, 0) + 1
+    
+    # Sort all statistics
+    for key in stats.keys():
+        if isinstance(stats[key], dict):
+            stats[key] = dict(sorted(stats[key].items(), key=lambda x: x[1], reverse=True))
+    
+    return render_template('dashboard/admin_reports.html',
+                         stats=stats,
+                         profiles=profiles,
+                         filter_type=filter_type,
+                         filter_value=filter_value)
 
 if __name__ == '__main__':
     app.run(debug=True)
