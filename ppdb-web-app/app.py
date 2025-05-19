@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify
+from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect  # Add this line
 from config import Config
@@ -6,6 +6,7 @@ from models import db, User, StudentProfile, Notification
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
+import re
 
 app = Flask(__name__, 
            template_folder='src/templates',
@@ -148,6 +149,13 @@ def logout():
     flash(f'Terima kasih, {username}! Anda telah berhasil logout.', 'success')
     return redirect(url_for('home'))
 
+def validate_phone_number(phone):
+    # Pattern untuk nomor telepon Indonesia (+62 atau 08)
+    pattern = r'^(\+62|08)\d{9,11}$'
+    if not re.match(pattern, phone):
+        raise ValueError('Nomor telepon tidak valid. Gunakan format +62 atau 08')
+    return phone
+
 @app.route('/submit-profile', methods=['POST'])
 def submit_profile():
     if 'username' not in session:
@@ -237,6 +245,17 @@ def submit_profile():
             birth_date = datetime.strptime(request.form['birth_date'], '%Y-%m-%d')
         except ValueError:
             flash('Invalid date format. Please use YYYY-MM-DD format.', 'error')
+            return redirect(url_for('dashboard'))
+
+        # Validate both phone numbers
+        phone = request.form.get('phone')
+        parent_phone = request.form.get('parent_phone')
+        
+        try:
+            phone = validate_phone_number(phone)
+            parent_phone = validate_phone_number(parent_phone)
+        except ValueError as e:
+            flash(str(e), 'error')
             return redirect(url_for('dashboard'))
 
         # Create student profile
@@ -484,7 +503,7 @@ def admin_reject(profile_id):
 @app.route('/admin/get-detail/<int:profile_id>')
 def get_profile_detail(profile_id):
     if not session.get('is_admin'):
-        return jsonify({'error': 'Unauthorized'}), 401
+        return jsonify({'error': 'Unauthorized'}), 403
     
     profile = StudentProfile.query.get_or_404(profile_id)
     file_ext = profile.ijazah_path.rsplit('.', 1)[1].lower() if '.' in profile.ijazah_path else ''
@@ -493,17 +512,26 @@ def get_profile_detail(profile_id):
         'full_name': profile.full_name,
         'birth_date': profile.birth_date.strftime('%d %B %Y'),
         'gender': profile.gender,
+        'religion': profile.religion,
+        'age': profile.age,
         'phone': profile.phone,
         'address': profile.address,
+        'parent_name': profile.parent_name,
+        'parent_occupation': profile.parent_occupation,
+        'parent_phone': profile.parent_phone,
         'school_origin': profile.school_origin,
         'graduation_year': profile.graduation_year,
+        'jurusan': profile.jurusan,
+        'waktu_kuliah': profile.waktu_kuliah,
         'photo_path': profile.photo_path,
         'ijazah_path': profile.ijazah_path,
         'ijazah_is_image': file_ext in ['jpg', 'jpeg', 'png'],
+        'status': profile.status,
+        'created_at': profile.created_at.strftime('%d %B %Y %H:%M'),
         'payment_status': profile.payment_status,
         'payment_date': profile.payment_date.strftime('%d %B %Y %H:%M') if profile.payment_date else None,
         'payment_proof': profile.payment_proof,
-        'payment_amount': "{:,.2f}".format(profile.payment_amount)
+        'payment_amount': "{:,.2f}".format(profile.payment_amount) if profile.payment_amount else None
     })
 
 @app.route('/upload-payment-proof', methods=['POST'])
@@ -562,19 +590,28 @@ def upload_payment_proof():
         
     return redirect(url_for('profile_submitted'))
 
-@app.route('/admin/verify-payment/<int:profile_id>')
+@app.route('/admin/verify-payment/<int:profile_id>', methods=['POST'])
 def verify_payment(profile_id):
     if not session.get('is_admin'):
-        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 403
     
     try:
         profile = StudentProfile.query.get_or_404(profile_id)
+        
+        if profile.payment_status != 'pending':
+            return jsonify({
+                'success': False, 
+                'message': 'Status pembayaran tidak valid'
+            }), 400
+        
+        # Update payment status
         profile.payment_status = 'verified'
+        profile.payment_date = datetime.utcnow()
         
         # Create notification for user
         notification = Notification(
             user_id=profile.user_id,
-            message=f'Pembayaran pendaftaran atas nama {profile.full_name} telah diverifikasi.',
+            message='Pembayaran Anda telah diverifikasi.',
             type='success'
         )
         
@@ -583,7 +620,7 @@ def verify_payment(profile_id):
         
         return jsonify({
             'success': True,
-            'message': f'Pembayaran untuk {profile.full_name} telah diverifikasi.'
+            'message': 'Pembayaran berhasil diverifikasi'
         })
         
     except Exception as e:
@@ -591,7 +628,7 @@ def verify_payment(profile_id):
         print(f"Error in verify_payment: {str(e)}")
         return jsonify({
             'success': False,
-            'message': 'Terjadi kesalahan saat memverifikasi pembayaran.'
+            'message': f'Terjadi kesalahan: {str(e)}'
         }), 500
 
 # Add this function in app.py
@@ -777,6 +814,42 @@ def admin_reports(filter_type=None, filter_value=None):
                          profiles=profiles,
                          filter_type=filter_type,
                          filter_value=filter_value)
+
+@app.route('/download/<folder>/<filename>')
+def download_file(folder, filename):
+    if 'username' not in session:
+        flash('Silakan login terlebih dahulu.', 'error')
+        return redirect(url_for('login'))
+        
+    # Validate folder name
+    if folder not in ['photos', 'ijazah', 'payments']:
+        abort(404)
+        
+    try:
+        # Construct the file path
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder, filename)
+        
+        # Check if file exists
+        if not os.path.exists(file_path):
+            abort(404)
+            
+        # Get the file extension
+        file_ext = os.path.splitext(filename)[1].lower()
+        
+        # Set correct MIME type
+        mime_type = 'application/pdf' if file_ext == '.pdf' else 'image/jpeg'
+        
+        return send_file(
+            file_path,
+            mimetype=mime_type,
+            as_attachment=True,
+            download_name=filename
+        )
+        
+    except Exception as e:
+        app.logger.error(f"Download error: {str(e)}")
+        flash('Gagal mengunduh file.', 'error')
+        return redirect(url_for('profile_submitted'))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -123,20 +123,40 @@
 
             <div class="document-section">
                 <h3>Dokumen</h3>
-                <div class="document-item">
-                    <label>Pas Foto:</label>
-                    <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" 
-                         alt="Pas Foto" class="profile-photo">
-                </div>
-                <div class="document-item">
-                    <label>Ijazah:</label>
-                    {% if profile.ijazah_path.lower().endswith(('.jpg', '.jpeg', '.png')) %}
-                        <img src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
-                             alt="Ijazah" class="document-preview">
-                    {% else %}
-                        <embed src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
-                               type="application/pdf" width="100%" height="500px">
-                    {% endif %}
+                <div class="document-grid">
+                    <div class="document-item">
+                        <label>Pas Foto</label>
+                        <div class="document-preview">
+                            <img src="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" 
+                                 alt="Pas Foto" class="document-image">
+                        </div>
+                        <div class="document-actions">
+                            <a href="{{ url_for('static', filename='uploads/photos/' + profile.photo_path) }}" 
+                               download="pas_foto_{{ profile.full_name }}" 
+                               class="download-btn">
+                                <i class="fas fa-download"></i> Download Pas Foto
+                            </a>
+                        </div>
+                    </div>
+                    <div class="document-item">
+                        <label>Ijazah</label>
+                        <div class="document-preview">
+                            {% if profile.ijazah_path.lower().endswith(('.jpg', '.jpeg', '.png')) %}
+                                <img src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                                     alt="Ijazah" class="document-image">
+                            {% else %}
+                                <embed src="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                                       type="application/pdf" class="document-pdf">
+                            {% endif %}
+                        </div>
+                        <div class="document-actions">
+                            <a href="{{ url_for('static', filename='uploads/ijazah/' + profile.ijazah_path) }}" 
+                               download="ijazah_{{ profile.full_name }}" 
+                               class="download-btn">
+                                <i class="fas fa-download"></i> Download Ijazah
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,36 +165,44 @@
             <h3>Informasi Pembayaran</h3>
             {% if profile.status == 'accepted' %}
                 <div class="payment-info">
+                    <div class="payment-amount">
+                        <h4>Total Pembayaran</h4>
+                        <div class="amount">Rp {{ "{:,.2f}".format(profile.payment_amount) }}</div>
+                    </div>
+                    
                     <div class="payment-details">
-                        <div class="payment-amount">
-                            <h4>Total Pembayaran</h4>
-                            <div class="amount">Rp {{ "{:,.2f}".format(profile.payment_amount) }}</div>
-                        </div>
-                        <div class="payment-account">
-                            <h4>Metode Pembayaran</h4>
-                            <div class="bank-accounts">
-                                <div class="bank-option">
-                                    <img src="{{ url_for('static', filename='images/bca.png') }}" alt="BCA" class="bank-logo">
-                                    <div class="bank-details">
-                                        <p>Bank BCA</p>
-                                        <p class="account-number">1234567890</p>
-                                        <p class="account-name">A/N: PPDB Online</p>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('1234567890')">
-                                        Salin Nomor
-                                    </button>
+                        <h4>Metode Pembayaran</h4>
+                        <div class="bank-accounts">
+                            <!-- BCA Payment Option -->
+                            <div class="bank-option">
+                                <img src="{{ url_for('static', filename='images/banks/bca.png') }}" 
+                                     alt="BCA" 
+                                     class="bank-logo"
+                                     onclick="openImageModal(this.src, 'Bank BCA')">
+                                <div class="bank-details">
+                                    <div class="bank-name">Bank BCA</div>
+                                    <div class="account-number">1234567890</div>
+                                    <div class="account-name">PPDB Online</div>
                                 </div>
-                                <div class="bank-option">
-                                    <img src="{{ url_for('static', filename='images/mandiri.png') }}" alt="Mandiri" class="bank-logo">
-                                    <div class="bank-details">
-                                        <p>Bank Mandiri</p>
-                                        <p class="account-number">0987654321</p>
-                                        <p class="account-name">A/N: PPDB Online</p>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('0987654321')">
-                                        Salin Nomor
-                                    </button>
+                                <button class="copy-btn" onclick="copyToClipboard('1234567890')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+
+                            <!-- Mandiri Payment Option -->
+                            <div class="bank-option">
+                                <img src="{{ url_for('static', filename='images/banks/mandiri.png') }}" 
+                                     alt="Mandiri" 
+                                     class="bank-logo"
+                                     onclick="openImageModal(this.src, 'Bank Mandiri')">
+                                <div class="bank-details">
+                                    <div class="bank-name">Bank Mandiri</div>
+                                    <div class="account-number">0987654321</div>
+                                    <div class="account-name">PPDB Online</div>
                                 </div>
+                                <button class="copy-btn" onclick="copyToClipboard('0987654321')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -243,6 +271,15 @@
             <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
         </div>
     </div>
+
+    <!-- Modal for image preview -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <img id="modalImage" src="" alt="Bank Logo Large">
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
@@ -271,6 +308,34 @@
         }).catch(function(err) {
             console.error('Failed to copy text: ', err);
         });
+    }
+
+    function openImageModal(imgSrc, title) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        
+        modal.style.display = "block";
+        modalImg.src = imgSrc;
+        modalTitle.textContent = title;
+    }
+
+    // Get the modal
+    const modal = document.getElementById('imageModal');
+
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName('modal-close')[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 </script>
 {% endblock %}

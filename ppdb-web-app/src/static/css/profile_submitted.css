@@ -1,3 +1,4 @@
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -36,10 +37,23 @@
 
 .document-section {
     margin-top: 2rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .document-item {
     margin-bottom: 1.5rem;
+    flex: 1;
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 0; /* Prevents overflow */
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-photo {
@@ -49,10 +63,27 @@
 }
 
 .document-preview {
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ddd;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    background-color: white;
     border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex: 1;
+    margin-bottom: 1rem;
+}
+
+.document-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.document-pdf {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .status-badge {
@@ -116,67 +147,68 @@
 
 .document-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    justify-items: center;
-}
-
-.document-item {
-    flex: 1;
-    min-width: 300px;
-    max-width: calc(50% - 1rem);
-    text-align: center;
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 1.5rem;
 }
 
 .document-item label {
     display: block;
     margin-bottom: 1rem;
     color: #2c3e50;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1.1rem;
 }
 
-.document-item img,
-.document-item embed {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    margin: 0 auto 1rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: block;
+/* Add these new styles */
+.document-actions {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
 }
 
-.document-image {
-    max-height: 400px;
-    object-fit: contain;
-}
-
-.btn-download {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #3498db;
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--primary-600, #1e88e5);
     color: white;
     text-decoration: none;
-    border-radius: 4px;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.btn-download:hover {
-    background-color: #2980b9;
+.download-btn:hover {
+    background: var(--primary-700, #1976d2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.document-preview {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    margin: 2rem 0;
-    flex-wrap: wrap;
+.download-btn i {
+    font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .document-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .document-item {
+        padding: 1rem;
+    }
+
+    .document-preview {
+        aspect-ratio: 2/3;
+    }
+
+    .download-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 .payment-section {
@@ -223,3 +255,172 @@
     margin-top: 1rem;
     border-radius: 4px;
 }
+
+/* Payment Method Styling */
+.bank-accounts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.bank-option {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.bank-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.bank-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 1.25rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.bank-logo:hover {
+    transform: scale(1.1);
+}
+
+.bank-details {
+    flex: 1;
+}
+
+.bank-name {
+    color: #666;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.account-number {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.25rem;
+}
+
+.account-name {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.copy-btn {
+    padding: 0.5rem;
+    background: #1a237e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    background: #3949ab;
+    transform: scale(1.05);
+}
+
+.copy-btn i {
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .bank-accounts {
+        grid-template-columns: 1fr;
+    }
+
+    .bank-option {
+        padding: 1rem;
+    }
+
+    .bank-logo {
+        width: 48px;
+        height: 48px;
+        margin-right: 1rem;
+    }
+
+    .account-number {
+        font-size: 1.125rem;
+    }
+}
+
+/* Add these new styles for the modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    max-width: 80%;
+    width: auto;
+    border-radius: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal img {
+    display: block;
+    max-width: 100%;
+    max-height: 70vh;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #666;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: #000;
+}
+
+/* Responsive adjustments for modal */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .modal img {
+        max-height: 60vh;
+    }
+}	

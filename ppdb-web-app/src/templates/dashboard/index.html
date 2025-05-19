@@ -42,7 +42,18 @@
 
                     <div class="form-group">
                         <label for="phone">Nomor HP*</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <div class="input-group phone-input">
+                            <span class="phone-prefix">+62</span>
+                            <input type="tel" 
+                                   id="phone" 
+                                   name="phone" 
+                                   pattern="^(\+62|08)\d{9,11}$"
+                                   required
+                                   oninput="formatPhoneNumber(this)"
+                                   placeholder="8xx xxxx xxxx">
+                        </div>
+                        <small class="form-text text-muted">Format: +62 atau 08, contoh: +628123456789 atau 08123456789</small>
+                        <div class="invalid-feedback">Nomor telepon tidak valid. Gunakan format +62 atau 08</div>
                     </div>
 
                     <div class="form-group">
@@ -95,8 +106,18 @@
 
                     <div class="form-group">
                         <label for="parent_phone">Nomor HP Orang Tua*</label>
-                        <input type="tel" id="parent_phone" name="parent_phone" required>
-                        <small>Format: 08xxxxxxxxxx</small>
+                        <div class="input-group phone-input">
+                            <span class="phone-prefix">+62</span>
+                            <input type="tel" 
+                                   id="parent_phone" 
+                                   name="parent_phone" 
+                                   pattern="^(\+62|08)\d{9,11}$"
+                                   required
+                                   oninput="formatPhoneNumber(this)"
+                                   placeholder="8xx xxxx xxxx">
+                        </div>
+                        <small class="form-text text-muted">Format: +62 atau 08, contoh: +628123456789 atau 08123456789</small>
+                        <div class="invalid-feedback">Nomor telepon tidak valid. Gunakan format +62 atau 08</div>
                     </div>
                 </div>
 
@@ -181,3 +202,51 @@
         </div>
     </div>
 {% endblock %}
+
+<script>
+function formatPhoneNumber(input) {
+    // Remove any non-digit characters except +
+    let number = input.value.replace(/[^\d+]/g, '');
+    
+    // Check if number starts with 08
+    if (number.startsWith('08')) {
+        // Keep it as is
+        input.value = number;
+    }
+    // Check if number starts with +62
+    else if (number.startsWith('+62')) {
+        // Keep it as is
+        input.value = number;
+    }
+    // If number starts with 8
+    else if (number.startsWith('8')) {
+        // Add 0 prefix
+        input.value = '0' + number;
+    }
+    // If it's a different number
+    else if (number && !number.startsWith('+')) {
+        // Add +62 prefix
+        input.value = '+62' + number;
+    }
+
+    // Validate length
+    if (number.length > 14) {
+        input.value = number.slice(0, 14);
+    }
+
+    // Check validity
+    const isValid = /^(\+62|08)\d{9,11}$/.test(input.value);
+    input.classList.toggle('is-invalid', !isValid);
+    input.classList.toggle('is-valid', isValid);
+}
+
+// Apply formatPhoneNumber to both phone inputs
+document.addEventListener('DOMContentLoaded', function() {
+    const phoneInputs = document.querySelectorAll('input[type="tel"]');
+    phoneInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+    });
+});
+</script>

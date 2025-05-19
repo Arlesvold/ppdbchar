@@ -108,7 +108,10 @@
                                 {% endif %}
                                 {% if profile.payment_status == 'pending' %}
                                     <button onclick="verifyPayment('{{ profile.id }}')" 
-                                            class="btn btn-small btn-success">Verifikasi</button>
+                                            class="btn btn-small btn-success">
+                                        <i class="fas fa-check"></i> 
+                                        Verifikasi
+                                    </button>
                                 {% endif %}
                             </td>
                         </tr>
@@ -128,20 +131,6 @@
             fetch(`/admin/get-detail/${profileId}`)
                 .then(response => response.json())
                 .then(data => {
-                    let ijazahContent = '';
-                    if (data.ijazah_is_image) {
-                        ijazahContent = `
-                            <img src="/static/uploads/ijazah/${data.ijazah_path}" 
-                                 alt="Ijazah" 
-                                 class="document-image">`;
-                    } else {
-                        ijazahContent = `
-                            <embed src="/static/uploads/ijazah/${data.ijazah_path}" 
-                                   type="application/pdf" 
-                                   width="100%" 
-                                   height="400px">`;
-                    }
-
                     detailContent.innerHTML = `
                         <div class="detail-grid">
                             <div class="detail-section">
@@ -160,6 +149,14 @@
                                         <span>${data.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
                                     </div>
                                     <div class="info-item">
+                                        <label>Agama</label>
+                                        <span>${data.religion}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Umur</label>
+                                        <span>${data.age} tahun</span>
+                                    </div>
+                                    <div class="info-item">
                                         <label>No. HP</label>
                                         <span>${data.phone}</span>
                                     </div>
@@ -169,6 +166,25 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="detail-section">
+                                <h3>Data Orang Tua</h3>
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <label>Nama Orang Tua/Wali</label>
+                                        <span>${data.parent_name}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Pekerjaan Orang Tua</label>
+                                        <span>${data.parent_occupation}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>No. HP Orang Tua</label>
+                                        <span>${data.parent_phone}</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="detail-section">
                                 <h3>Data Akademik</h3>
                                 <div class="info-grid">
@@ -180,8 +196,20 @@
                                         <label>Tahun Lulus</label>
                                         <span>${data.graduation_year}</span>
                                     </div>
+                                    <div class="info-item">
+                                        <label>Program Studi</label>
+                                        <span>${data.jurusan === 'TI' ? 'Teknik Informatika' :
+                                               data.jurusan === 'SI' ? 'Sistem Informasi' :
+                                               data.jurusan === 'RPL' ? 'Rekayasa Perangkat Lunak' :
+                                               'Manajemen Informatika'}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Waktu Kuliah</label>
+                                        <span>${data.waktu_kuliah === 'siang' ? 'Kelas Siang' : 'Kelas Malam'}</span>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="detail-section">
                                 <h3>Dokumen</h3>
                                 <div class="document-grid">
@@ -189,56 +217,67 @@
                                         <label>Pas Foto</label>
                                         <div class="document-preview">
                                             <img src="/static/uploads/photos/${data.photo_path}" 
-                                                 alt="Pas Foto" 
                                                  class="document-image">
-                                            <a href="/static/uploads/photos/${data.photo_path}" 
-                                               download class="btn btn-download">
-                                               Download Pas Foto
-                                            </a>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <label>Ijazah</label>
                                         <div class="document-preview">
-                                            ${ijazahContent}
-                                            <a href="/static/uploads/ijazah/${data.ijazah_path}" 
-                                               download class="btn btn-download">
-                                               Download Ijazah
-                                            </a>
+                                            ${data.ijazah_is_image ? 
+                                                `<img src="/static/uploads/ijazah/${data.ijazah_path}" class="document-image">` :
+                                                `<embed src="/static/uploads/ijazah/${data.ijazah_path}" 
+                                                        type="application/pdf" 
+                                                        width="100%" 
+                                                        height="400px">`
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="detail-section">
+                                <h3>Status Pendaftaran</h3>
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <label>Status</label>
+                                        <span class="status-badge ${data.status}">
+                                            ${data.status === 'pending' ? 'Menunggu' :
+                                              data.status === 'accepted' ? 'Diterima' :
+                                              'Ditolak'}
+                                        </span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Tanggal Daftar</label>
+                                        <span>${data.created_at}</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="detail-section">
                                 <h3>Informasi Pembayaran</h3>
                                 <div class="info-grid">
                                     <div class="info-item">
                                         <label>Status Pembayaran</label>
-                                        <span class="payment-status ${data.payment_status}">
-                                            ${data.payment_status === 'verified' ? 'Terverifikasi' :
+                                        <span class="status-badge ${data.payment_status}">
+                                            ${data.payment_status === 'unpaid' ? 'Belum Bayar' :
                                               data.payment_status === 'pending' ? 'Menunggu Verifikasi' :
-                                              'Belum Bayar'}
+                                              'Terverifikasi'}
                                         </span>
                                     </div>
-                                    <div class="info-item">
-                                        <label>Tanggal Pembayaran</label>
-                                        <span>${data.payment_date || '-'}</span>
-                                    </div>
-                                </div>
-                                ${data.payment_proof ? `
-                                    <div class="payment-proof-section">
-                                        <h4>Bukti Pembayaran</h4>
-                                        <div class="document-preview">
-                                            <img src="/static/uploads/payments/${data.payment_proof}" 
-                                                 alt="Bukti Pembayaran" 
-                                                 class="payment-proof-img">
-                                            <a href="/static/uploads/payments/${data.payment_proof}" 
-                                               download class="btn btn-download">
-                                               Download Bukti Pembayaran
-                                            </a>
+                                    ${data.payment_status !== 'unpaid' ? `
+                                        <div class="info-item">
+                                            <label>Tanggal Pembayaran</label>
+                                            <span>${data.payment_date || '-'}</span>
                                         </div>
-                                    </div>
-                                ` : ''}
+                                        <div class="info-item">
+                                            <label>Bukti Pembayaran</label>
+                                            <div class="document-preview">
+                                                <img src="/static/uploads/payments/${data.payment_proof}" 
+                                                     class="document-image">
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
                             </div>
                         </div>
                     `;
@@ -337,20 +376,26 @@
     <script>
         function verifyPayment(profileId) {
             if (confirm('Verifikasi pembayaran ini?')) {
-                fetch(`/admin/verify-payment/${profileId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Pembayaran berhasil diverifikasi');
-                            window.location.reload();
-                        } else {
-                            alert('Terjadi kesalahan saat verifikasi pembayaran');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
+                fetch(`/admin/verify-payment/${profileId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Pembayaran berhasil diverifikasi');
+                        window.location.reload();
+                    } else {
                         alert('Terjadi kesalahan saat verifikasi pembayaran');
-                    });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat verifikasi pembayaran');
+                });
             }
         }
     </script>

@@ -203,15 +203,6 @@
                 }
             });
 
-            // Handle mobile menu
-            const mobileToggle = document.createElement('button');
-            mobileToggle.className = 'mobile-toggle';
-            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            document.querySelector('.main-content').prepend(mobileToggle);
-
-            mobileToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('show');
-            });
         });
     </script>
     {% block scripts %}{% endblock %}
