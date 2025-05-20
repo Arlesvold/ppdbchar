@@ -4,7 +4,6 @@
 
 {% block additional_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -15,12 +14,58 @@
         <div class="info-section">
             <h2>Langkah-langkah Pendaftaran:</h2>
             <div class="steps-container">
-                <ol>
-                    <li>Register akun baru jika belum memiliki akun</li>
-                    <li>Login menggunakan akun yang sudah terdaftar</li>
-                    <li>Isi formulir pendaftaran dengan lengkap</li>
-                    <li>Submit formulir dan tunggu konfirmasi</li>
-                </ol>
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Registrasi Akun</h3>
+                        <p>Buat akun baru dengan mengisi data berikut:</p>
+                        <ul>
+                            <li><i class="fas fa-user"></i> Username</li>
+                            <li><i class="fas fa-envelope"></i> Email aktif</li>
+                            <li><i class="fas fa-lock"></i> Password</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Login & Isi Formulir</h3>
+                        <p>Lengkapi data pendaftaran berikut:</p>
+                        <ul>
+                            <li><i class="fas fa-address-card"></i> Data pribadi</li>
+                            <li><i class="fas fa-users"></i> Data orang tua</li>
+                            <li><i class="fas fa-school"></i> Data akademik</li>
+                            <li><i class="fas fa-file-upload"></i> Upload dokumen (Pas foto & Ijazah)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Verifikasi Admin</h3>
+                        <p>Tunggu proses verifikasi dari admin:</p>
+                        <ul>
+                            <li><i class="fas fa-clock"></i> Proses verifikasi 1-3 hari kerja</li>
+                            <li><i class="fas fa-bell"></i> Notifikasi hasil verifikasi via email</li>
+                            <li><i class="fas fa-check-circle"></i> Status pendaftaran dapat dicek di dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Pembayaran Pendaftaran</h3>
+                        <p>Setelah diterima, lakukan pembayaran:</p>
+                        <ul>
+                            <li><i class="fas fa-money-bill-wave"></i> Transfer biaya pendaftaran</li>
+                            <li><i class="fas fa-upload"></i> Upload bukti pembayaran</li>
+                            <li><i class="fas fa-check-double"></i> Tunggu verifikasi pembayaran</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 

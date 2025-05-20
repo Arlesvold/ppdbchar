@@ -45,6 +45,7 @@
                         {% endif %}
                     </div>
                     
+                    <!-- Update the email input group -->
                     <div class="form-group {% if email_error %}error{% endif %}">
                         <label for="email">Email</label>
                         <div class="input-group">
@@ -53,7 +54,10 @@
                                    id="email" 
                                    name="email" 
                                    value="{{ email or '' }}"
+                                   autocomplete="off"
+                                   list="emailSuggestions"
                                    required>
+                            <datalist id="emailSuggestions"></datalist>
                         </div>
                         {% if email_error %}
                             <span class="error-message">{{ email_error }}</span>
@@ -114,6 +118,46 @@
                 this.parentElement.remove();
             });
         });
+
+        // Email autocomplete functionality
+        const emailInput = document.getElementById('email');
+        const emailSuggestions = document.getElementById('emailSuggestions');
+        const emailDomains = ['@gmail.com', '@yahoo.com', '@hotmail.com', '@outlook.com'];
+
+        emailInput.addEventListener('input', function(e) {
+            const value = e.target.value.trim();
+            
+            // Clear existing suggestions
+            emailSuggestions.innerHTML = '';
+            
+            // Only show suggestions if there's text and no @ symbol yet
+            if (value && !value.includes('@')) {
+                emailDomains.forEach(domain => {
+                    const option = document.createElement('option');
+                    option.value = value + domain;
+                    emailSuggestions.appendChild(option);
+                });
+            }
+        });
+
+        // Prevent spacebar in email input
+        emailInput.addEventListener('keypress', function(e) {
+            if (e.key === ' ') {
+                e.preventDefault();
+            }
+        });
+
+        // Add custom styling for the datalist dropdown
+        const style = document.createElement('style');
+        style.textContent = `
+            input::-webkit-calendar-picker-indicator {
+                display: none !important;
+            }
+            datalist {
+                display: none;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

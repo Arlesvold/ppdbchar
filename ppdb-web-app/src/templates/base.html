@@ -92,12 +92,7 @@
                                     <span>Pembayaran</span>
                                 </a>
                             </li>
-                            <li {% if request.endpoint == 'notifications' %}class="active"{% endif %}>
-                                <a href="{{ url_for('profile_submitted') }}">
-                                    <i class="fas fa-bell"></i>
-                                    <span>Notifikasi</span>
-                                </a>
-                            </li>
+
                             <!-- Replace the progress section with this link in the sidebar -->
                             <li {% if request.endpoint == 'registration_progress' %}class="active"{% endif %}>
                                 <a href="{{ url_for('registration_progress') }}">
