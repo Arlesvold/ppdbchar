@@ -100,17 +100,19 @@
                                 <button onclick="showDetail('{{ profile.id }}')" 
                                         class="btn btn-small btn-info">Detail</button>
                                 {% if profile.status == 'pending' %}
-                                    <a href="{{ url_for('admin_action', profile_id=profile.id, action='accept') }}" 
-                                       class="btn btn-small btn-success"
-                                       onclick="return confirm('Terima pendaftaran ini?')">Terima</a>
+                                    <button onclick="acceptProfile('{{ profile.id }}')" 
+                                            class="btn btn-small btn-success">
+                                        <i class="fas fa-check"></i> Terima
+                                    </button>
                                     <button onclick="showRejectModal('{{ profile.id }}')" 
-                                            class="btn btn-small btn-danger">Tolak</button>
+                                            class="btn btn-small btn-danger">
+                                        <i class="fas fa-times"></i> Tolak
+                                    </button>
                                 {% endif %}
                                 {% if profile.payment_status == 'pending' %}
                                     <button onclick="verifyPayment('{{ profile.id }}')" 
                                             class="btn btn-small btn-success">
-                                        <i class="fas fa-check"></i> 
-                                        Verifikasi
+                                        <i class="fas fa-check"></i> Verifikasi
                                     </button>
                                 {% endif %}
                             </td>
@@ -395,6 +397,58 @@
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Terjadi kesalahan saat verifikasi pembayaran');
+                });
+            }
+        }
+
+        function acceptProfile(profileId) {
+            if (confirm('Terima pendaftaran ini?')) {
+                fetch(`/admin/action/${profileId}/accept`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Pendaftaran berhasil diterima');
+                        window.location.reload();
+                    } else {
+                        alert(data.message || 'Terjadi kesalahan');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat memproses pendaftaran');
+                });
+            }
+        }
+
+        function rejectProfile(profileId) {
+            const reason = prompt('Masukkan alasan penolakan:');
+            if (reason) {
+                fetch(`/admin/action/${profileId}/reject`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ reason: reason })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Pendaftaran ditolak');
+                        window.location.reload();
+                    } else {
+                        alert(data.message || 'Terjadi kesalahan');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat memproses pendaftaran');
                 });
             }
         }

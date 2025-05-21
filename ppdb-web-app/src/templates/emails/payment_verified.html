@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* ...same styles as above... */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pembayaran Terverifikasi</h1>
+        </div>
+        <div class="content">
+            <h2>Selamat {{ name }}!</h2>
+            <p>Pembayaran Anda telah berhasil diverifikasi. Proses pendaftaran Anda telah selesai.</p>
+            
+            <p>Langkah selanjutnya:</p>
+            <ol>
+                <li>Login ke akun PPDB Online Anda</li>
+                <li>Cetak bukti pendaftaran</li>
+                <li>Tunggu informasi selanjutnya melalui email</li>
+            </ol>
+
+            <a href="{{ url_for('login', _external=True) }}" class="button">
+                Login Sekarang
+            </a>
+
+            <p>Jika Anda memiliki pertanyaan, silakan hubungi kami.</p>
+            
+            <p>Terima kasih,<br>Tim PPDB Online</p>
+        </div>
+    </div>
+</body>
+</html>

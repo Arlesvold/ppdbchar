@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: #1a237e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1a237e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pendaftaran Diterima</h1>
+        </div>
+        <div class="content">
+            <h2>Selamat {{ name }}!</h2>
+            <p>Pendaftaran Anda telah diterima. Silakan lakukan pembayaran untuk melanjutkan proses pendaftaran.</p>
+            
+            <p>Langkah selanjutnya:</p>
+            <ol>
+                <li>Login ke akun PPDB Online Anda</li>
+                <li>Lihat detail pembayaran di dashboard</li>
+                <li>Lakukan pembayaran sesuai instruksi</li>
+                <li>Upload bukti pembayaran</li>
+            </ol>
+
+            <a href="{{ url_for('login', _external=True) }}" class="button">
+                Login Sekarang
+            </a>
+
+            <p>Jika Anda memiliki pertanyaan, silakan hubungi kami.</p>
+            
+            <p>Terima kasih,<br>Tim PPDB Online</p>
+        </div>
+    </div>
+</body>
+</html>
