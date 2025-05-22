@@ -204,7 +204,7 @@ python run.py
 ![Admin Dashboard](/ppdb-web-app/src/static/readfoto/Admin%20Dashboard.png)
 *Powerful admin dashboard with overview statistics and quick actions*
 
-![Laporan Statistik](/ppdb-web-app/src/static/readfoto/laporan%20statistik.png)
+![Laporan Statistik](/ppdb-web-app/src/static/readfoto/laporan.png)
 *Detailed statistical reports with interactive filters and export options*
 
 ![Detail Pendaftar](/ppdb-web-app/src/static/readfoto/Detail.png)
