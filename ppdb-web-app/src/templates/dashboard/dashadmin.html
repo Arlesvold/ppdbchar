@@ -4,485 +4,529 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashad.css') }}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 {% endblock %}
 
 {% block title %}Admin Dashboard - PPDB Online{% endblock %}
 
 {% block content %}
-    <div class="container">
+<div class="dashboard-container">
+    <!-- Header Section -->
+    <div class="dashboard-header">
         <h1>Admin Dashboard</h1>
-        
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="notification {{ category }}">
-                        {{ message }}
-                        <span class="close-btn">&times;</span>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
-        <!-- Detail Modal -->
-        <div id="detailModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Detail Pendaftar</h2>
-                <div id="detailContent" class="detail-content">
-                    <!-- Content will be loaded here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Reject Modal -->
-        <div id="rejectModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeRejectModal()">&times;</span>
-                <h2>Alasan Penolakan</h2>
-                <form id="rejectForm" method="POST">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label for="rejection_reason">Berikan alasan penolakan:</label>
-                        <textarea id="rejection_reason" name="reason" rows="4" required></textarea>
-                    </div>
-                    <div class="button-group">
-                        <button type="submit" class="btn btn-danger">Konfirmasi Penolakan</button>
-                        <button type="button" class="btn btn-secondary" onclick="closeRejectModal()">Batal</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="info-section">
-            <h2>Daftar Pendaftar</h2>
-            <div class="table-container">
-                <table id="adminTable" class="display responsive nowrap" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Program Studi</th>
-                            <th>Status Pendaftaran</th>
-                            <th>Status Pembayaran</th>
-                            <th>Tanggal Daftar</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for profile in profiles %}
-                        <tr>
-                            <td>{{ profile.id }}</td>
-                            <td>{{ profile.full_name }}</td>
-                            <td>
-                                {% if profile.jurusan == 'TI' %}Teknik Informatika
-                                {% elif profile.jurusan == 'SI' %}Sistem Informasi
-                                {% elif profile.jurusan == 'RPL' %}Rekayasa Perangkat Lunak
-                                {% elif profile.jurusan == 'MI' %}Manajemen Informatika{% endif %}
-                            </td>
-                            <td>
-                                <span class="status-badge {{ profile.status }}">
-                                    {% if profile.status == 'pending' %}Menunggu
-                                    {% elif profile.status == 'accepted' %}Diterima
-                                    {% elif profile.status == 'rejected' %}Ditolak
-                                    {% endif %}
-                                </span>
-                            </td>
-                            <td>
-                                <span class="status-badge {{ profile.payment_status }}">
-                                    {% if profile.payment_status == 'pending' %}Menunggu Verifikasi
-                                    {% elif profile.payment_status == 'verified' %}Terverifikasi
-                                    {% else %}Belum Bayar
-                                    {% endif %}
-                                </span>
-                            </td>
-                            <td>{{ profile.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
-                            <td class="action-buttons">
-                                <button onclick="showDetail('{{ profile.id }}')" 
-                                        class="btn btn-small btn-info">Detail</button>
-                                {% if profile.status == 'pending' %}
-                                    <button onclick="acceptProfile('{{ profile.id }}')" 
-                                            class="btn btn-small btn-success">
-                                        <i class="fas fa-check"></i> Terima
-                                    </button>
-                                    <button onclick="showRejectModal('{{ profile.id }}')" 
-                                            class="btn btn-small btn-danger">
-                                        <i class="fas fa-times"></i> Tolak
-                                    </button>
-                                {% endif %}
-                                {% if profile.payment_status == 'pending' %}
-                                    <button onclick="verifyPayment('{{ profile.id }}')" 
-                                            class="btn btn-small btn-success">
-                                        <i class="fas fa-check"></i> Verifikasi
-                                    </button>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <div class="header-actions">
+            <button id="refreshTable" class="btn btn-outline">
+                <i class="fas fa-sync-alt"></i> Refresh Data
+            </button>
         </div>
     </div>
-
-    <script>
-        const modal = document.getElementById("detailModal");
-        const detailContent = document.getElementById("detailContent");
-        const span = document.getElementsByClassName("close")[0];
-
-        function showDetail(profileId) {
-            fetch(`/admin/get-detail/${profileId}`)
-                .then(response => response.json())
-                .then(data => {
-                    detailContent.innerHTML = `
-                        <div class="detail-grid">
-                            <div class="detail-section">
-                                <h3>Data Pribadi</h3>
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <label>Nama Lengkap</label>
-                                        <span>${data.full_name}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Tanggal Lahir</label>
-                                        <span>${data.birth_date}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Jenis Kelamin</label>
-                                        <span>${data.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Agama</label>
-                                        <span>${data.religion}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Umur</label>
-                                        <span>${data.age} tahun</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>No. HP</label>
-                                        <span>${data.phone}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Alamat</label>
-                                        <span>${data.address}</span>
-                                    </div>
-                                </div>
+        <div class="table-container">
+            <table id="adminTable" class="display responsive nowrap">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Program Studi</th>
+                        <th>Status</th>
+                        <th>Pembayaran</th>
+                        <th>Tanggal Daftar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profile in profiles %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ profile.full_name }}</td>
+                        <td>
+                            {% if profile.jurusan == 'TI' %}
+                                <span class="program-badge ti">Teknik Informatika</span>
+                            {% elif profile.jurusan == 'SI' %}
+                                <span class="program-badge si">Sistem Informasi</span>
+                            {% elif profile.jurusan == 'RPL' %}
+                                <span class="program-badge rpl">Rekayasa Perangkat Lunak</span>
+                            {% elif profile.jurusan == 'MI' %}
+                                <span class="program-badge mi">Manajemen Informatika</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="status-badge {{ profile.status }}">
+                                {% if profile.status == 'pending' %}
+                                    <i class="fas fa-clock"></i> Menunggu
+                                {% elif profile.status == 'accepted' %}
+                                    <i class="fas fa-check"></i> Diterima
+                                {% elif profile.status == 'rejected' %}
+                                    <i class="fas fa-times"></i> Ditolak
+                                {% endif %}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="payment-badge {{ profile.payment_status }}">
+                                {% if profile.payment_status == 'unpaid' %}
+                                    <i class="fas fa-times-circle"></i> Belum Bayar
+                                {% elif profile.payment_status == 'pending' %}
+                                    <i class="fas fa-clock"></i> Menunggu Verifikasi
+                                {% elif profile.payment_status == 'verified' %}
+                                    <i class="fas fa-check-circle"></i> Terverifikasi
+                                {% endif %}
+                            </span>
+                        </td>
+                        <td data-order="{{ profile.created_at.strftime('%Y%m%d%H%M%S') }}">
+                            {{ profile.created_at.strftime('%d-%m-%Y %H:%M') }}
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button onclick="showDetail({{ profile.id }})" class="btn btn-info btn-icon">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                {% if profile.status == 'pending' %}
+                                    <button onclick="acceptProfile({{ profile.id }})" class="btn btn-success btn-icon">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button onclick="showRejectModal({{ profile.id }})" class="btn btn-danger btn-icon">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                {% endif %}
                             </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-                            <div class="detail-section">
-                                <h3>Data Orang Tua</h3>
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <label>Nama Orang Tua/Wali</label>
-                                        <span>${data.parent_name}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Pekerjaan Orang Tua</label>
-                                        <span>${data.parent_occupation}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>No. HP Orang Tua</label>
-                                        <span>${data.parent_phone}</span>
-                                    </div>
-                                </div>
-                            </div>
+<!-- Detail Modal -->
+<div id="detailModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Detail Pendaftar</h2>
+        <div id="detailContent" class="detail-content">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+</div>
 
-                            <div class="detail-section">
-                                <h3>Data Akademik</h3>
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <label>Asal Sekolah</label>
-                                        <span>${data.school_origin}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Tahun Lulus</label>
-                                        <span>${data.graduation_year}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Program Studi</label>
-                                        <span>${data.jurusan === 'TI' ? 'Teknik Informatika' :
-                                               data.jurusan === 'SI' ? 'Sistem Informasi' :
-                                               data.jurusan === 'RPL' ? 'Rekayasa Perangkat Lunak' :
-                                               'Manajemen Informatika'}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Waktu Kuliah</label>
-                                        <span>${data.waktu_kuliah === 'siang' ? 'Kelas Siang' : 'Kelas Malam'}</span>
-                                    </div>
-                                </div>
-                            </div>
+<!-- Reject Modal -->
+<div id="rejectModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRejectModal()">&times;</span>
+        <h2>Alasan Penolakan</h2>
+        <form id="rejectForm" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="rejection_reason">Berikan alasan penolakan:</label>
+                <textarea id="rejection_reason" name="reason" rows="4" required></textarea>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn btn-danger">Konfirmasi Penolakan</button>
+                <button type="button" class="btn btn-secondary" onclick="closeRejectModal()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-                            <div class="detail-section">
-                                <h3>Dokumen</h3>
-                                <div class="document-grid">
-                                    <div class="document-item">
-                                        <label>Pas Foto</label>
-                                        <div class="document-preview">
-                                            <img src="/static/uploads/photos/${data.photo_path}" 
-                                                 class="document-image">
-                                        </div>
-                                    </div>
-                                    <div class="document-item">
-                                        <label>Ijazah</label>
-                                        <div class="document-preview">
-                                            ${data.ijazah_is_image ? 
-                                                `<img src="/static/uploads/ijazah/${data.ijazah_path}" class="document-image">` :
-                                                `<embed src="/static/uploads/ijazah/${data.ijazah_path}" 
-                                                        type="application/pdf" 
-                                                        width="100%" 
-                                                        height="400px">`
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<!-- Add export buttons container -->
+<div class="export-buttons">
+    <button id="exportExcel" class="btn btn-success">
+        <i class="fas fa-file-excel"></i> Export to Excel
+    </button>
+</div>
 
-                            <div class="detail-section">
-                                <h3>Status Pendaftaran</h3>
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <label>Status</label>
-                                        <span class="status-badge ${data.status}">
-                                            ${data.status === 'pending' ? 'Menunggu' :
-                                              data.status === 'accepted' ? 'Diterima' :
-                                              'Ditolak'}
-                                        </span>
-                                    </div>
-                                    <div class="info-item">
-                                        <label>Tanggal Daftar</label>
-                                        <span>${data.created_at}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="detail-section">
-                                <h3>Informasi Pembayaran</h3>
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <label>Status Pembayaran</label>
-                                        <span class="status-badge ${data.payment_status}">
-                                            ${data.payment_status === 'unpaid' ? 'Belum Bayar' :
-                                              data.payment_status === 'pending' ? 'Menunggu Verifikasi' :
-                                              'Terverifikasi'}
-                                        </span>
-                                    </div>
-                                    ${data.payment_status !== 'unpaid' ? `
-                                        <div class="info-item">
-                                            <label>Tanggal Pembayaran</label>
-                                            <span>${data.payment_date || '-'}</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <label>Bukti Pembayaran</label>
-                                            <div class="document-preview">
-                                                <img src="/static/uploads/payments/${data.payment_proof}" 
-                                                     class="document-image">
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    modal.style.display = "block";
-                });
-        }
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        let currentProfileId = null;
-        const rejectModal = document.getElementById("rejectModal");
-        const rejectForm = document.getElementById("rejectForm");
-
-        function showRejectModal(profileId) {
-            currentProfileId = profileId;
-            rejectModal.style.display = "block";
-        }
-
-        function closeRejectModal() {
-            rejectModal.style.display = "none";
-            rejectForm.reset();
-        }
-
-        rejectForm.onsubmit = function(e) {
-            e.preventDefault();
-            const reason = document.getElementById("rejection_reason").value;
-            const csrfToken = document.querySelector('input[name="csrf_token"]').value;
-            
-            fetch(`/admin/action/${currentProfileId}/reject`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
-                },
-                body: JSON.stringify({ reason: reason })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    closeRejectModal();
-                    window.location.reload();
-                } else {
-                    alert('Terjadi kesalahan. Silakan coba lagi.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan. Silakan coba lagi.');
-            });
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == rejectModal) {
-                closeRejectModal();
-            }
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        // Handle notifications
-        document.addEventListener('DOMContentLoaded', function() {
-            const notifications = document.querySelectorAll('.notification');
-            
-            notifications.forEach(notification => {
-                // Add animation class
-                notification.style.animation = 'slideIn 0.5s ease-out forwards';
-                
-                // Add click handler to close button
-                const closeBtn = notification.querySelector('.close-btn');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', () => {
-                        notification.style.animation = 'slideOut 0.5s ease-out forwards';
-                        setTimeout(() => {
-                            notification.remove();
-                        }, 500);
-                    });
-                }
-            });
-        });
-    </script>
-
-    <script>
-        function verifyPayment(profileId) {
-            if (confirm('Verifikasi pembayaran ini?')) {
-                fetch(`/admin/verify-payment/${profileId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Pembayaran berhasil diverifikasi');
-                        window.location.reload();
-                    } else {
-                        alert('Terjadi kesalahan saat verifikasi pembayaran');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat verifikasi pembayaran');
-                });
-            }
-        }
-
-        function acceptProfile(profileId) {
-            if (confirm('Terima pendaftaran ini?')) {
-                fetch(`/admin/action/${profileId}/accept`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Pendaftaran berhasil diterima');
-                        window.location.reload();
-                    } else {
-                        alert(data.message || 'Terjadi kesalahan');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat memproses pendaftaran');
-                });
-            }
-        }
-
-        function rejectProfile(profileId) {
-            const reason = prompt('Masukkan alasan penolakan:');
-            if (reason) {
-                fetch(`/admin/action/${profileId}/reject`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ reason: reason })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Pendaftaran ditolak');
-                        window.location.reload();
-                    } else {
-                        alert(data.message || 'Terjadi kesalahan');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat memproses pendaftaran');
-                });
-            }
-        }
-    </script>
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#adminTable').DataTable({
+    var table = $('#adminTable').DataTable({
         responsive: true,
-        order: [[5, 'desc']], // Sort by date column by default
+        order: [[5, 'desc']],
         language: {
             url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/id.json'
         },
-        columnDefs: [
+        dom: 'Bfrtip',
+        buttons: [
             {
-                targets: [6], // Action column
-                orderable: false,
-                searchable: false
-            },
-            {
-                targets: [0], // ID column
-                visible: false
+                extend: 'excel',
+                text: '<i class="fas fa-file-excel"></i> Export Excel',
+                className: 'btn btn-success',
+                title: 'PPDB Online - Data Pendaftar',
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5], // Exclude action column
+                    format: {
+                        body: function ( data, row, column, node ) {
+                            // Clean the data for Excel
+                            return data.replace(/<[^>]*>/g, '');
+                        }
+                    }
+                },
+                customize: function(xlsx) {
+                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                    
+                    // Style header
+                    $('row:first c', sheet).attr('s', '2');
+                }
             }
-        ],
-        pageLength: 10,
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Semua"]]
+        ]
+    });
+
+    // Custom search
+    $('#tableSearch').on('keyup', function() {
+        table.search(this.value).draw();
+    });
+
+    // Status filter
+    $('#statusFilter').on('change', function() {
+        var status = $(this).val();
+        table.column(3).search(status).draw();
+    });
+
+    // Refresh button
+    $('#refreshTable').on('click', function() {
+        location.reload();
+    });
+
+    // Custom export button
+    $('#exportExcel').on('click', function() {
+        table.button('.buttons-excel').trigger();
     });
 });
+</script>
 
-// Keep your existing JavaScript functions here
+<script>
+    const modal = document.getElementById("detailModal");
+    const detailContent = document.getElementById("detailContent");
+    const span = document.getElementsByClassName("close")[0];
+
+    function showDetail(profileId) {
+        fetch(`/admin/get-detail/${profileId}`)
+            .then(response => response.json())
+            .then(data => {
+                detailContent.innerHTML = `
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h3>Data Pribadi</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label>Nama Lengkap</label>
+                                    <span>${data.full_name}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Tanggal Lahir</label>
+                                    <span>${data.birth_date}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Jenis Kelamin</label>
+                                    <span>${data.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Agama</label>
+                                    <span>${data.religion}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Umur</label>
+                                    <span>${data.age} tahun</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>No. HP</label>
+                                    <span>${data.phone}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Alamat</label>
+                                    <span>${data.address}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Data Orang Tua</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label>Nama Orang Tua/Wali</label>
+                                    <span>${data.parent_name}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Pekerjaan Orang Tua</label>
+                                    <span>${data.parent_occupation}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>No. HP Orang Tua</label>
+                                    <span>${data.parent_phone}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Data Akademik</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label>Asal Sekolah</label>
+                                    <span>${data.school_origin}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Tahun Lulus</label>
+                                    <span>${data.graduation_year}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Program Studi</label>
+                                    <span>${data.jurusan === 'TI' ? 'Teknik Informatika' :
+                                           data.jurusan === 'SI' ? 'Sistem Informasi' :
+                                           data.jurusan === 'RPL' ? 'Rekayasa Perangkat Lunak' :
+                                           'Manajemen Informatika'}</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Waktu Kuliah</label>
+                                    <span>${data.waktu_kuliah === 'siang' ? 'Kelas Siang' : 'Kelas Malam'}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Dokumen</h3>
+                            <div class="document-grid">
+                                <div class="document-item">
+                                    <label>Pas Foto</label>
+                                    <div class="document-preview">
+                                        <img src="/static/uploads/photos/${data.photo_path}" 
+                                             class="document-image">
+                                    </div>
+                                </div>
+                                <div class="document-item">
+                                    <label>Ijazah</label>
+                                    <div class="document-preview">
+                                        ${data.ijazah_is_image ? 
+                                            `<img src="/static/uploads/ijazah/${data.ijazah_path}" class="document-image">` :
+                                            `<embed src="/static/uploads/ijazah/${data.ijazah_path}" 
+                                                    type="application/pdf" 
+                                                    width="100%" 
+                                                    height="400px">`
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Status Pendaftaran</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label>Status</label>
+                                    <span class="status-badge ${data.status}">
+                                        ${data.status === 'pending' ? 'Menunggu' :
+                                          data.status === 'accepted' ? 'Diterima' :
+                                          'Ditolak'}
+                                    </span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Tanggal Daftar</label>
+                                    <span>${data.created_at}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Informasi Pembayaran</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label>Status Pembayaran</label>
+                                    <span class="status-badge ${data.payment_status}">
+                                        ${data.payment_status === 'unpaid' ? 'Belum Bayar' :
+                                          data.payment_status === 'pending' ? 'Menunggu Verifikasi' :
+                                          'Terverifikasi'}
+                                    </span>
+                                </div>
+                                ${data.payment_status !== 'unpaid' ? `
+                                    <div class="info-item">
+                                        <label>Tanggal Pembayaran</label>
+                                        <span>${data.payment_date || '-'}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Bukti Pembayaran</label>
+                                        <div class="document-preview">
+                                            <img src="/static/uploads/payments/${data.payment_proof}" 
+                                                 class="document-image">
+                                        </div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = "block";
+            });
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    let currentProfileId = null;
+    const rejectModal = document.getElementById("rejectModal");
+    const rejectForm = document.getElementById("rejectForm");
+
+    function showRejectModal(profileId) {
+        currentProfileId = profileId;
+        rejectModal.style.display = "block";
+    }
+
+    function closeRejectModal() {
+        rejectModal.style.display = "none";
+        rejectForm.reset();
+    }
+
+    rejectForm.onsubmit = function(e) {
+        e.preventDefault();
+        const reason = document.getElementById("rejection_reason").value;
+        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+        
+        fetch(`/admin/action/${currentProfileId}/reject`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({ reason: reason })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                closeRejectModal();
+                window.location.reload();
+            } else {
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan. Silakan coba lagi.');
+        });
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target == rejectModal) {
+            closeRejectModal();
+        }
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    // Handle notifications
+    document.addEventListener('DOMContentLoaded', function() {
+        const notifications = document.querySelectorAll('.notification');
+        
+        notifications.forEach(notification => {
+            // Add animation class
+            notification.style.animation = 'slideIn 0.5s ease-out forwards';
+            
+            // Add click handler to close button
+            const closeBtn = notification.querySelector('.close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    notification.style.animation = 'slideOut 0.5s ease-out forwards';
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 500);
+                });
+            }
+        });
+    });
+</script>
+
+<script>
+    function verifyPayment(profileId) {
+        if (confirm('Verifikasi pembayaran ini?')) {
+            fetch(`/admin/verify-payment/${profileId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Pembayaran berhasil diverifikasi');
+                    window.location.reload();
+                } else {
+                    alert('Terjadi kesalahan saat verifikasi pembayaran');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat verifikasi pembayaran');
+            });
+        }
+    }
+
+    function acceptProfile(profileId) {
+        if (confirm('Terima pendaftaran ini?')) {
+            fetch(`/admin/action/${profileId}/accept`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Pendaftaran berhasil diterima');
+                    window.location.reload();
+                } else {
+                    alert(data.message || 'Terjadi kesalahan');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memproses pendaftaran');
+            });
+        }
+    }
+
+    function rejectProfile(profileId) {
+        const reason = prompt('Masukkan alasan penolakan:');
+        if (reason) {
+            fetch(`/admin/action/${profileId}/reject`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ reason: reason })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Pendaftaran ditolak');
+                    window.location.reload();
+                } else {
+                    alert(data.message || 'Terjadi kesalahan');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memproses pendaftaran');
+            });
+        }
+    }
 </script>
 {% endblock %}

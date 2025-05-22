@@ -229,12 +229,37 @@
     color: white;
 }
 
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .btn:hover {
     opacity: 0.9;
 }
 
 .logout-btn {
     background-color: #e74c3c;
+}
+
+.export-buttons {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
 }
 
 /* Responsive design */
@@ -409,4 +434,13 @@
 
 .is-invalid ~ .invalid-feedback {
     display: block;
+}
+
+.dt-buttons {
+    display: none; /* Hide default DataTables buttons */
+}
+
+/* Excel Button Icon */
+.fa-file-excel {
+    color: white;
 }

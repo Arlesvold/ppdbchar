@@ -175,7 +175,6 @@ python run.py
 ### Registration Process
 #### Form Submission
 ![Form Pengisian](./ppdb-web-app/src/static/readfoto/Mengisi%20Formulir.png)
-![Form Pengisian 2](./ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(2).png)
 ![Form Pengisian 3](./ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(3).png)
 ![Notifikasi Form](/ppdb-web-app/src/static/readfoto/Notifikasi%20jika%20formulir%20tidak%20lengkap%20diisi.png)
 

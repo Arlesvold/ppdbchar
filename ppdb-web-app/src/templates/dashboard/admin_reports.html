@@ -2,6 +2,7 @@
 
 {% block additional_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_reports.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 {% endblock %}
 
 {% block content %}
@@ -124,6 +125,18 @@
         </div>
     </div>
 
+    <!-- Export Actions -->
+    <div class="export-actions">
+        <button class="export-btn excel" onclick="exportData('excel')">
+            <i class="fas fa-file-excel"></i>
+            <span>Export to Excel</span>
+        </button>
+        <a href="/admin/export-pdf" class="export-btn pdf">
+            <i class="fas fa-file-pdf"></i>
+            <span>Export to PDF</span>
+        </a>
+    </div>
+
     <!-- Filtered Results -->
     {% if filter_type %}
     <div class="filtered-section">
@@ -196,13 +209,37 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
 <script>
-function applyFilter(type, value) {
-    if (value) {
-        window.location.href = `/admin/reports/${type}/${value}`;
-    } else {
-        window.location.href = '/admin/reports';
+function exportData(type) {
+    if (type === 'excel') {
+        fetch('/admin/export-data')
+            .then(response => response.json())
+            .then(data => {
+                exportToExcel(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal mengekspor data');
+            });
     }
+}
+
+function exportToExcel(data) {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Pendaftar");
+    
+    // Auto-size columns
+    const max_width = Object.keys(data[0]).reduce((acc, key) => {
+        return Math.max(acc, key.length);
+    }, 0);
+    
+    const col_width = Array(Object.keys(data[0]).length).fill({ wch: max_width });
+    worksheet["!cols"] = col_width;
+    
+    XLSX.writeFile(workbook, "Data_Pendaftar.xlsx");
 }
 </script>
 {% endblock %}

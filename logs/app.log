@@ -1041,3 +1041,773 @@
  * Running on http://192.168.1.108:5000
 2025-05-22 11:21:26,003 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
 2025-05-22 11:21:26,012 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 11:25:36,535 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-22 11:25:36,535 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-22 11:25:36,535 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 11:25:37,197 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 11:25:37,205 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 11:25:39,883 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:39] "GET / HTTP/1.1" 200 -
+2025-05-22 11:25:40,122 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:40] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:25:40,155 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:40] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:25:40,159 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:40] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:25:40,163 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:40] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:25:43,379 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:43] "GET /register HTTP/1.1" 200 -
+2025-05-22 11:25:43,416 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:43] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2025-05-22 11:25:43,422 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:25:43] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:26:11,264 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:11] "[32mPOST /register HTTP/1.1[0m" 302 -
+2025-05-22 11:26:11,282 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:11] "GET /login HTTP/1.1" 200 -
+2025-05-22 11:26:11,324 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:11] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2025-05-22 11:26:11,327 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:11] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:26:25,026 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-22 11:26:25,051 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 11:26:25,088 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:26:25,103 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:26:25,103 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:26:25,116 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "[36mGET /static/css/dashboard.css HTTP/1.1[0m" 304 -
+2025-05-22 11:26:25,122 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "[36mGET /static/css/notifications.css HTTP/1.1[0m" 304 -
+2025-05-22 11:26:25,122 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:26:25] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,209 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[32mPOST /submit-profile HTTP/1.1[0m" 302 -
+2025-05-22 11:27:31,306 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "GET /profile-submitted HTTP/1.1" 200 -
+2025-05-22 11:27:31,331 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,335 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,341 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,343 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[36mGET /static/css/profile_submitted.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,352 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[36mGET /static/css/notifications.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,369 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,385 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "[36mGET /static/js/notifications.js HTTP/1.1[0m" 304 -
+2025-05-22 11:27:31,394 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "GET /static/uploads/photos/aa_photo.jpg HTTP/1.1" 200 -
+2025-05-22 11:27:31,396 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:31] "GET /static/uploads/ijazah/aa_ijazah.jpg HTTP/1.1" 200 -
+2025-05-22 11:27:40,061 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:40] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-22 11:27:40,072 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:40] "GET / HTTP/1.1" 200 -
+2025-05-22 11:27:40,128 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:40] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:40,134 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:40] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:40,143 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:40] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:40,161 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:40] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:27:41,667 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:41] "GET /login HTTP/1.1" 200 -
+2025-05-22 11:27:41,689 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:41] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:41,702 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:41] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:27:46,431 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:46] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-22 11:27:46,472 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:46] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:27:46,496 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:46] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:46,508 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:46] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:46,512 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:46] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:46,516 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:46] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:27:46,518 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:46] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:27:48,228 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:48] "GET /admin/get-detail/2 HTTP/1.1" 200 -
+2025-05-22 11:27:48,251 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:48] "[36mGET /static/uploads/photos/aa_photo.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:27:48,273 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:27:48] "[36mGET /static/uploads/ijazah/aa_ijazah.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:27:55,024 - __main__ - DEBUG - Processing accept for user aa with email chanya2297@gmail.com
+2025-05-22 11:28:00,639 - __main__ - INFO - Email penerimaan terkirim ke chanya2297@gmail.com
+2025-05-22 11:28:00,670 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:00] "POST /admin/action/2/accept HTTP/1.1" 200 -
+2025-05-22 11:28:03,255 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:03] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:28:03,285 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:03] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:28:03,295 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:03] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:28:03,299 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:03] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:28:03,303 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:03] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:28:03,319 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:03] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:28:05,790 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:05] "GET /admin/get-detail/2 HTTP/1.1" 200 -
+2025-05-22 11:28:05,814 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:05] "[36mGET /static/uploads/photos/aa_photo.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:28:05,835 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:28:05] "[36mGET /static/uploads/ijazah/aa_ijazah.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:35:57,708 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:35:57] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:35:57,775 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:35:57] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:35:57,775 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:35:57] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:35:57,780 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:35:57] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:35:57,784 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:35:57] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:35:57,804 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:35:57] "GET /static/css/dashad.css HTTP/1.1" 200 -
+2025-05-22 11:36:19,176 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:19] "GET /admin/get-detail/2 HTTP/1.1" 200 -
+2025-05-22 11:36:19,184 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:19] "[36mGET /static/uploads/photos/aa_photo.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:36:19,187 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:19] "[36mGET /static/uploads/ijazah/aa_ijazah.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:36:29,962 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:29] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:36:29,981 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:29] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:29,981 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:29] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:29,981 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:29] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:29,981 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:29] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:36:29,998 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:29] "GET /static/css/dashad.css HTTP/1.1" 200 -
+2025-05-22 11:36:37,048 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:37] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:36:37,065 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:37] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:37,072 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:37] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:37,077 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:37] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:37,080 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:37] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:36:37,094 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:37] "GET /static/css/dashad.css HTTP/1.1" 200 -
+2025-05-22 11:36:50,382 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:50] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:36:50,401 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:50] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:50,408 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:50] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:50,408 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:50] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:36:50,408 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:50] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:50,408 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:50] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:52,896 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:52] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:36:52,911 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:52] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:52,920 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:52] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:52,920 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:52] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:52,920 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:52] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:52,922 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:52] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:36:53,515 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:53] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:36:53,531 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:53] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:53,542 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:53] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:53,542 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:53] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:53,542 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:53] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:53,543 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:53] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:36:57,523 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:57] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:36:57,539 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:57] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:57,554 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:57] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:57,554 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:57] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:57,558 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:57] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:36:57,558 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:36:57] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:37:07,785 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:37:07] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:37:07,809 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:37:07] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:37:07,818 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:37:07] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:37:07,819 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:37:07] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:37:07,821 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:37:07] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:37:07,827 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:37:07] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:41:34,794 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:41:34] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:41:34,812 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:41:34] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:41:34,818 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:41:34] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:41:34,818 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:41:34] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:41:34,818 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:41:34] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:41:34,823 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:41:34] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:42:02,580 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:02] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:42:02,611 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:02] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:02,619 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:02] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:02,624 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:02] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:02,626 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:02] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:42:02,644 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:02] "GET /static/css/dashad.css HTTP/1.1" 200 -
+2025-05-22 11:42:04,302 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:04] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:42:04,329 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:04] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:04,336 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:04] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:04,338 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:04] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:04,343 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:04] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:04,345 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:04] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:42:19,957 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:19] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:42:19,975 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:19] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,016 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,016 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,031 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,031 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,604 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:42:20,632 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,634 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,634 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,634 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:20,644 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:20] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:42:21,083 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:21] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:42:21,099 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:21] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:21,099 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:21] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:21,110 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:21] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:21,111 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:21] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:42:21,116 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:21] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:42:26,811 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:26] "GET /admin/get-detail/2 HTTP/1.1" 200 -
+2025-05-22 11:42:26,815 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:26] "[36mGET /static/uploads/photos/aa_photo.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:42:26,822 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:42:26] "[36mGET /static/uploads/ijazah/aa_ijazah.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:45:21,414 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:21] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:45:21,457 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:21] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:21,465 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:21] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:21,472 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:21] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:21,474 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:21] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:45:21,490 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:21] "GET /static/css/dashad.css HTTP/1.1" 200 -
+2025-05-22 11:45:22,143 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:22] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:45:22,155 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:22] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:22,163 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:22] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:22,164 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:22] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:22,168 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:22] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:22,169 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:22] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,207 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:45:23,225 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,248 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,249 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,249 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,249 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,595 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:45:23,610 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,618 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,619 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,619 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:45:23,620 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:45:23] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:44,622 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:44] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:48:44,649 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:44] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:44,653 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:44] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:44,653 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:44] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:44,661 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:44] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:48:44,676 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:44] "GET /static/css/dashad.css HTTP/1.1" 200 -
+2025-05-22 11:48:45,192 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:48:45,234 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,241 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,242 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,244 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,247 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,479 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:48:45,499 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,499 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,499 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,509 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:48:45,511 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:48:45] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:49:11,911 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:11] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:49:11,934 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:11] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:11,940 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:11] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:11,948 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:11] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:11,950 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:11] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:11,951 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:11] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:49:12,409 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:12] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:49:12,425 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:12] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:12,439 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:12] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:12,440 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:12] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:12,445 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:12] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:49:12,451 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:49:12] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,000 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:51:45,020 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,029 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,029 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,029 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,032 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,802 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:51:45,820 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,827 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,830 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,830 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:45,831 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:45] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:51:46,569 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:46] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:51:46,583 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:46] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:46,588 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:46] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:46,589 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:46] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:46,591 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:46] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:46,593 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:46] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,069 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:51:47,083 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,091 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,094 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,096 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,097 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,276 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:51:47,288 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,290 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,291 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,296 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:51:47,298 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:51:47] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:53:13,038 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:13] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:53:13,061 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:13] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:13,068 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:13] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:13,075 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:13] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:13,077 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:13] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:13,077 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:13] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:53:34,657 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:34] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:53:34,677 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:34] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:34,687 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:34] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:34,690 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:34] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:34,692 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:34] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:34,694 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:34] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:53:35,295 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:35] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:53:35,306 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:35] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:35,311 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:35] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:35,314 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:35] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:35,316 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:35] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:35,318 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:35] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:53:46,094 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:46] "GET /admin/get-detail/2 HTTP/1.1" 200 -
+2025-05-22 11:53:46,104 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:46] "[36mGET /static/uploads/ijazah/aa_ijazah.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:53:46,105 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:46] "[36mGET /static/uploads/photos/aa_photo.jpg HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,271 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:53:48,293 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,319 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,319 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,325 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,328 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,667 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 11:53:48,698 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,706 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,708 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,712 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 11:53:48,718 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 11:53:48] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:23:11,547 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:11] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:23:11,570 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:11] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:23:11,573 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:11] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:23:11,573 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:11] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:23:11,577 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:11] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:23:11,582 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:11] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:23:15,349 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:15] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:23:15,375 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:15] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:23:15,375 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:15] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:23:15,387 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:15] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:23:15,390 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:15] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:23:15,401 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:23:15] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,262 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:24:03,283 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,293 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,295 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,297 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,299 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,518 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:24:03,550 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,559 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,560 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,563 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:24:03,566 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:24:03] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:27:18,662 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:18] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:27:18,689 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:18] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:18,697 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:18] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:18,700 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:18] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:18,701 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:18] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:18,703 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:18] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:27:19,650 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:19] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:27:19,686 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:19] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:19,703 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:19] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:19,705 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:19] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:19,715 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:19] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:19,716 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:19] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:27:33,607 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:33] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:27:33,638 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:33] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:33,647 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:33] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:33,661 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:33] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:33,683 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:33] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:27:33,699 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:27:33] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:28:18,133 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:28:19,411 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:28:19,415 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:28:20,680 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:28:21,965 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:28:21,968 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:28:22,103 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:28:22,229 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,231 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,232 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,233 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,234 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,757 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:28:22,769 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,776 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,778 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,787 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:22,789 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:22] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:28:24,471 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:24] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:28:24,495 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:24] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:24,503 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:24] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:24,505 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:24] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:24,505 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:24] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:24,510 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:24] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:28:44,960 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:44] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:28:44,991 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:44] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,002 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,002 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,002 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,012 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,620 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:28:45,642 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,651 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,658 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,662 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:28:45,666 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:28:45] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:32:37,974 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:37] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:32:37,999 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:37] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,011 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,017 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,017 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,018 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,622 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:32:38,673 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,673 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,673 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,685 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:38,689 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:38] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:32:40,052 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:40] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:32:40,077 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:40] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:40,086 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:40] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:40,087 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:40] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:32:40,090 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:40] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:32:40,109 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:32:40] "GET /static/css/admin_reports.css HTTP/1.1" 200 -
+2025-05-22 12:33:07,161 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:07] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:33:07,186 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:07] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:07,201 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:07] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:07,210 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:07] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:07,218 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:07] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:07,231 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:07] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:33:08,473 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:08] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:33:08,488 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:08] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:08,497 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:08] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:08,501 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:08] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:08,506 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:08] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:33:08,506 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:33:08] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:35:31,927 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:31] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:35:31,952 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:31] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:31,959 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:31] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:31,959 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:31] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:31,964 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:31] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:31,966 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:31] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:35:33,223 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:33] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:35:33,245 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:33] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:33,254 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:33] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:33,255 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:33] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:33,255 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:33] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:35:33,257 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:35:33] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,131 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:36:34,166 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,178 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,185 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,185 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,187 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,822 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:36:34,836 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,839 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,841 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,844 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:34,845 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:34] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:36:35,139 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:35] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:36:35,163 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:35] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:35,188 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:35] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:35,188 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:35] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:35,191 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:35] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:36:35,191 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:36:35] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:41:09,339 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:09] "[35m[1mGET /admin/reports HTTP/1.1[0m" 500 -
+2025-05-22 12:41:09,371 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:09] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 12:41:09,411 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:09] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 12:41:09,548 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:09] "GET /admin/reports?__debugger__=yes&cmd=resource&f=console.png&s=zXJLGH0EoT3NPfkxz7V4 HTTP/1.1" 200 -
+2025-05-22 12:41:09,723 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:09] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-22 12:41:24,519 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:24] "[35m[1mGET /admin/reports HTTP/1.1[0m" 500 -
+2025-05-22 12:41:24,535 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:24] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 12:41:24,541 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:24] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 12:41:24,567 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:24] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=console.png&s=zXJLGH0EoT3NPfkxz7V4 HTTP/1.1[0m" 304 -
+2025-05-22 12:41:24,743 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:24] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-22 12:41:32,674 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:32] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:41:32,698 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:32] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:41:32,712 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:32] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:41:32,712 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:32] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:41:32,713 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:32] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:41:32,729 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:41:32] "GET /static/css/admin_reports.css HTTP/1.1" 200 -
+2025-05-22 12:42:31,648 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:42:31] "[35m[1mGET /admin/reports HTTP/1.1[0m" 500 -
+2025-05-22 12:42:31,664 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:42:31] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 12:42:31,670 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:42:31] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 12:42:31,705 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:42:31] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=console.png&s=zXJLGH0EoT3NPfkxz7V4 HTTP/1.1[0m" 304 -
+2025-05-22 12:42:31,914 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:42:31] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-22 12:43:54,590 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:43:55,351 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:43:55,362 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:44:08,789 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:44:09,383 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:44:09,386 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:44:10,677 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:10] "[33mGET /admin/reports HTTP/1.1[0m" 404 -
+2025-05-22 12:44:11,750 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:11] "[33mGET /admin/reports HTTP/1.1[0m" 404 -
+2025-05-22 12:44:12,078 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:12] "[33mGET /admin/reports HTTP/1.1[0m" 404 -
+2025-05-22 12:44:12,337 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:12] "[33mGET /admin/reports HTTP/1.1[0m" 404 -
+2025-05-22 12:44:12,551 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:12] "[33mGET /admin/reports HTTP/1.1[0m" 404 -
+2025-05-22 12:44:12,779 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:12] "[33mGET /admin/reports HTTP/1.1[0m" 404 -
+2025-05-22 12:44:12,969 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:12] "[33mGET /admin/reports HTTP/1.1[0m" 404 -
+2025-05-22 12:44:15,897 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:44:16,526 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:44:16,528 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:44:19,188 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[35m[1mGET /admin/reports HTTP/1.1[0m" 500 -
+2025-05-22 12:44:19,251 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:19,257 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 12:44:19,325 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "GET /admin/reports?__debugger__=yes&cmd=resource&f=console.png&s=TsyuidLhbJGJoGfS8ptC HTTP/1.1" 200 -
+2025-05-22 12:44:19,485 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[35m[1mGET /admin/reports HTTP/1.1[0m" 500 -
+2025-05-22 12:44:19,498 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:19,503 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 12:44:19,529 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=console.png&s=TsyuidLhbJGJoGfS8ptC HTTP/1.1[0m" 304 -
+2025-05-22 12:44:19,676 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:19] "[36mGET /admin/reports?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-22 12:44:37,132 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:37] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:44:37,163 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:37] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:37,176 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:37] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:37,176 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:37] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:37,176 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:37] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:37,177 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:37] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:44:42,387 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:42] "GET /admin/reports/payment_status/unpaid HTTP/1.1" 200 -
+2025-05-22 12:44:42,422 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:42] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:42,434 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:42] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:42,435 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:42] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:42,440 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:42] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:42,444 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:42] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:44:48,569 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:48] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:44:48,587 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:48] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:48,595 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:48] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:48,605 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:48] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:48,607 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:48] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:48,609 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:48] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:44:50,908 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:50] "GET /admin/reports/agama/Kristen HTTP/1.1" 200 -
+2025-05-22 12:44:50,926 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:50] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:50,948 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:50] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:50,949 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:50] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:50,951 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:50] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:50,957 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:50] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:44:52,607 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:52] "GET /admin/reports/waktu_kuliah/Kelas%20Malam HTTP/1.1" 200 -
+2025-05-22 12:44:52,636 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:52] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:52,636 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:52] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:52,646 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:52] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:52,648 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:52] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:52,649 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:52] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:44:54,554 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:54] "GET /admin/reports/waktu_kuliah/Kelas%20Siang HTTP/1.1" 200 -
+2025-05-22 12:44:54,584 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:54] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:54,590 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:54] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:54,590 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:54] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:54,594 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:54] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:44:54,598 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:44:54] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:45:03,761 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:03] "GET /admin/reports/waktu_kuliah/Kelas%20Siang HTTP/1.1" 200 -
+2025-05-22 12:45:03,790 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:03] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:03,811 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:03] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:03,811 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:03] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:03,818 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:03] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:45:03,820 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:03] "GET /static/css/admin_reports.css HTTP/1.1" 200 -
+2025-05-22 12:45:04,600 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "GET /admin/reports/waktu_kuliah/Kelas%20Siang HTTP/1.1" 200 -
+2025-05-22 12:45:04,642 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,642 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,642 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,650 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,651 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,844 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "GET /admin/reports/waktu_kuliah/Kelas%20Siang HTTP/1.1" 200 -
+2025-05-22 12:45:04,859 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,867 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,869 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,870 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:04,875 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:04] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:45:06,681 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:06] "GET /admin/reports/agama/Kristen HTTP/1.1" 200 -
+2025-05-22 12:45:06,698 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:06] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:06,704 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:06] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:06,704 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:06] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:45:06,704 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:06] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:45:06,704 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:45:06] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:06,934 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:06] "GET /admin/reports/agama/Kristen HTTP/1.1" 200 -
+2025-05-22 12:49:06,962 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:06] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:06,968 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:06] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:06,973 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:06] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:06,973 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:06] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:49:06,975 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:06] "GET /static/css/admin_reports.css HTTP/1.1" 200 -
+2025-05-22 12:49:07,942 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:07] "GET /admin/reports/agama/Kristen HTTP/1.1" 200 -
+2025-05-22 12:49:07,960 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:07] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:07,963 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:07] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:07,969 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:07] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:07,971 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:07] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:07,972 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:07] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:49:08,413 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:08] "GET /admin/reports/agama/Kristen HTTP/1.1" 200 -
+2025-05-22 12:49:08,431 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:08] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:08,439 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:08] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:08,440 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:08] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:08,440 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:08] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:49:08,440 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:08] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:29,020 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:29] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:49:30,174 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:30] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:49:30,603 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:30] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:49:30,933 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:30] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:49:31,135 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:31] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:49:47,639 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:47] "GET /admin/reports/gender/P HTTP/1.1" 200 -
+2025-05-22 12:49:47,794 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:47] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:47,862 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:47] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:47,954 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:47] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:47,955 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:47] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:48,004 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:48] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:49:50,593 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:50] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:49:50,624 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:50] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:50,672 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:50] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:50,693 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:50] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:50,733 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:50] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:49:50,779 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:49:50] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:50:13,241 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:50:13,913 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:50:13,914 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:50:16,347 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:50:17,015 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:50:17,024 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:50:17,091 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:17] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:50:17,115 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:17] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:50:17,213 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:17] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:50:17,223 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:17] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:50:17,223 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:17] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:50:17,228 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:17] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:50:17,230 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:17] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:50:18,645 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:18] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:19,519 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:19] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:20,846 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:20] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:21,752 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:21] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:22,060 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:22] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:22,252 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:22] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:22,543 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:22] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:23,748 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:23] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:50:23,962 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:50:23] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:52:52,139 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-22 12:52:52,141 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-22 12:52:52,144 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:52:52,883 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:52:52,889 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:52:54,746 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:54] "GET / HTTP/1.1" 200 -
+2025-05-22 12:52:54,850 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:54] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:52:54,851 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:54] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:52:54,853 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:54] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:52:54,853 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:54] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:52:56,610 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:56] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-22 12:52:56,619 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:56] "GET / HTTP/1.1" 200 -
+2025-05-22 12:52:56,640 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:56] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:52:56,652 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:56] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:52:56,652 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:56] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:52:56,653 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:56] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:52:59,097 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:59] "GET /login HTTP/1.1" 200 -
+2025-05-22 12:52:59,125 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:59] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2025-05-22 12:52:59,134 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:52:59] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:53:00,215 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:00] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-22 12:53:00,262 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:00] "GET /admin-dashboard HTTP/1.1" 200 -
+2025-05-22 12:53:00,305 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:00] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:00,315 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:00] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:00,316 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:00] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:00,330 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:00] "[36mGET /static/css/dashad.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:00,336 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:00] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:53:01,767 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:01] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:53:01,790 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:01] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:01,802 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:01] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:01,804 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:01] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:01,807 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:01] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:01,807 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:01] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:53:05,426 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:05] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:06,026 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:06] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:06,732 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:06] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:07,544 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:07] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:07,731 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:07] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:07,892 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:07] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:08,544 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:08] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:08,711 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:08] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:09,311 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:09] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:09,489 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:09] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:09,627 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:09] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:53:30,522 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:30] "GET /admin/reports/agama/Kristen HTTP/1.1" 200 -
+2025-05-22 12:53:30,565 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:30] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:30,580 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:30] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:30,580 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:30] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:30,592 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:30] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:30,597 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:30] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:53:33,485 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:33] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:53:33,511 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:33] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:33,516 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:33] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:33,520 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:33] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:33,536 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:33] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:53:33,536 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:53:33] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:55:32,049 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:55:35,578 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:55:35,580 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:55:37,067 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:37] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:55:37,172 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:37] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:37,195 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:37] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:37,197 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:37] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:37,199 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:37] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:37,199 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:37] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:55:39,737 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:39] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:55:39,756 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:39] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:39,756 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:39] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:39,756 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:39] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:39,756 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:39] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:55:39,756 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:39] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:55:41,604 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:41] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:42,208 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:42] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:42,391 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:42] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:42,549 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:42] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:44,064 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:44] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:44,268 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:44] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:44,567 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:44] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:48,298 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:48] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:49,360 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:49] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:49,513 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:49] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:55:49,992 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:55:49] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:57:44,253 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:57:44] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:58:07,615 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:58:35,685 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-22 12:58:35,685 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-22 12:58:35,690 - werkzeug - INFO -  * Restarting with stat
+2025-05-22 12:58:37,092 - werkzeug - WARNING -  * Debugger is active!
+2025-05-22 12:58:37,095 - werkzeug - INFO -  * Debugger PIN: 115-307-082
+2025-05-22 12:58:38,766 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:38] "GET /admin/reports/gender/L HTTP/1.1" 200 -
+2025-05-22 12:58:38,865 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:38] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:38,867 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:38] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:39,034 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:39] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:39,036 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:39] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:39,037 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:39] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:58:40,291 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:40] "GET / HTTP/1.1" 200 -
+2025-05-22 12:58:40,326 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:40] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:40,327 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:40] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:40,328 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:40] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:40,334 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:40] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:58:43,718 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:43] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:58:43,746 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:43] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:43,768 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:43] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:43,770 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:43] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:43,773 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:43] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:58:43,773 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:43] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:58:45,567 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:45] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:58:46,330 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:46] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:58:47,459 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:47] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:58:48,262 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:48] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:58:48,546 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:58:48] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 12:59:24,296 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:24] "GET /admin/reports/status/pending HTTP/1.1" 200 -
+2025-05-22 12:59:24,324 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:24] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:24,337 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:24] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:24,338 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:24] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:24,340 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:24] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:24,341 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:24] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:59:26,255 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:26] "GET /admin/reports HTTP/1.1" 200 -
+2025-05-22 12:59:26,287 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:26] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:26,306 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:26] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:26,314 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:26] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:26,314 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:26] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:26,314 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:26] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:59:28,602 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:28] "GET /admin/reports/status/rejected HTTP/1.1" 200 -
+2025-05-22 12:59:28,633 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:28] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:28,724 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:28] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:28,775 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:28] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:28,787 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:28] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:28,823 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:28] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 12:59:32,306 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:32] "GET /admin/reports/status/accepted HTTP/1.1" 200 -
+2025-05-22 12:59:32,339 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:32] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:32,360 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:32] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:32,367 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:32] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:32,370 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:32] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 12:59:32,388 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 12:59:32] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 13:00:18,555 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:18] "GET /admin/reports/status/accepted HTTP/1.1" 200 -
+2025-05-22 13:00:18,593 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:18] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 13:00:18,608 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:18] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 13:00:18,613 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:18] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 13:00:18,617 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:18] "GET /static/css/admin_reports.css HTTP/1.1" 200 -
+2025-05-22 13:00:18,618 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:18] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 13:00:20,524 - xhtml2pdf.document - DEBUG - pisaDocument options:
+  src = '\n            <html>\n                <head>\n                    <meta charset="UTF-8">\n                    <style>\n                        @page {\n                            size: landscape;\n                            margin: 1cm;\n                        }\n                        body {\n                            font-family: Arial, sans-serif;\n                            font-size: 12px;\n                        }\n                        h1 {\n                            color: #1a237e;\n                            text-align: center;\n                            font-size: 18px;\n                        }\n                        .header {\n                            text-align: center;\n                            margin-bottom: 20px;\n                        }\n                        table {\n                            width: 100%;\n                            border-collapse: collapse;\n                            margin-top: 10px;\n                        }\n                        th, td {\n                            border: 1px solid #ddd;\n                            padding: 8px;\n                            text-align: left;\n                        }\n                        th {\n                            background-color: #1a237e;\n                            color: white;\n                        }\n                        tr:nth-child(even) {\n                            background-color: #f9f9f9;\n                        }\n                        .footer {\n                            text-align: center;\n                            margin-top: 20px;\n                            font-size: 10px;\n                            color: #666;\n                        }\n                    </style>\n                </head>\n                <body>\n                    <div class="header">\n                        <h1>Data Pendaftar PPDB Online</h1>\n                        <p>Tanggal Export: 22-05-2025 13:00</p>\n                        <p>Total Pendaftar: 2 orang</p>\n                    </div>\n                    \n                    <table>\n                        <thead>\n                            <tr>\n                                <th>No.</th>\n                                <th>Nama Lengkap</th>\n                                <th>Email</th>\n                                <th>Program Studi</th>\n                                <th>Status</th>\n                                <th>Pembayaran</th>\n                                <th>Agama</th>\n                                <th>Umur</th>\n                                <th>Tgl Daftar</th>\n                                <th>No. HP</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n        \n                <tr>\n                    <td>1</td>\n                    <td>Cha</td>\n                    <td>adrianrian7449@gmail.com</td>\n                    <td>Teknik Informatika</td>\n                    <td>Diterima</td>\n                    <td>verified</td>\n                    <td>Kristen</td>\n                    <td>17</td>\n                    <td>22-05-2025</td>\n                    <td>081347053168</td>\n                </tr>\n            \n                <tr>\n                    <td>2</td>\n                    <td>aa</td>\n                    <td>chanya2297@gmail.com</td>\n                    <td>Teknik Informatika</td>\n                    <td>Diterima</td>\n                    <td>unpaid</td>\n                    <td>Kristen</td>\n                    <td>17</td>\n                    <td>22-05-2025</td>\n                    <td>081347053168</td>\n                </tr>\n            \n                        </tbody>\n                    </table>\n                    <div class="footer">\n                        <p>Document generated by PPDB Online System</p>\n                    </div>\n                </body>\n            </html>\n        '
+  dest = <_io.BytesIO object at 0x0000013B6EA37EC0>
+  path = ''
+  link_callback = None
+  xhtml = False
+  context_meta = None
+2025-05-22 13:00:20,544 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,545 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,546 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,547 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,547 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,548 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,548 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,548 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,549 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,549 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,551 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,552 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,552 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,552 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,553 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,553 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,554 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,554 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,554 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,554 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,555 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,556 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,556 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,557 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,557 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,558 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,558 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,559 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,559 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,560 - xhtml2pdf.tables - DEBUG - None
+2025-05-22 13:00:20,560 - xhtml2pdf.tables - DEBUG - Col widths: [None, None, None, None, None, None, None, None, None, None]
+2025-05-22 13:00:20,581 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:20] "GET /admin/export-pdf HTTP/1.1" 200 -
+2025-05-22 13:00:22,405 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:00:22] "GET /admin/export-data HTTP/1.1" 200 -
+2025-05-22 13:03:01,320 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "GET /admin/reports/status/accepted HTTP/1.1" 200 -
+2025-05-22 13:03:01,347 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 13:03:01,350 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 13:03:01,350 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 13:03:01,362 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-22 13:03:01,382 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "GET /static/css/admin_reports.css HTTP/1.1" 200 -
+2025-05-22 13:03:01,970 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "GET /admin/reports/status/accepted HTTP/1.1" 200 -
+2025-05-22 13:03:01,985 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/css/theme.css HTTP/1.1[0m" 304 -
+2025-05-22 13:03:01,993 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-22 13:03:01,993 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2025-05-22 13:03:01,993 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:01] "[36mGET /static/css/admin_reports.css HTTP/1.1[0m" 304 -
+2025-05-22 13:03:02,004 - werkzeug - INFO - 127.0.0.1 - - [22/May/2025 13:03:02] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -

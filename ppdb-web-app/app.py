@@ -9,6 +9,9 @@ from flask_mail import Mail, Message
 import logging
 import os
 import re
+from io import BytesIO
+from flask import make_response
+from xhtml2pdf import pisa
 
 # Konfigurasi logging
 logging.basicConfig(
@@ -934,6 +937,203 @@ def download_file(folder, filename):
         app.logger.error(f"Download error: {str(e)}")
         flash('Gagal mengunduh file.', 'error')
         return redirect(url_for('profile_submitted'))
+
+@app.route('/admin/export-data')
+def export_data():
+    if not session.get('is_admin'):
+        return jsonify({'error': 'Unauthorized'}), 403
+
+    try:
+        profiles = StudentProfile.query.all()
+        data = []
+        
+        jurusan_names = {
+            'TI': 'Teknik Informatika',
+            'SI': 'Sistem Informasi',
+            'RPL': 'Rekayasa Perangkat Lunak',
+            'MI': 'Manajemen Informatika'
+        }
+        
+        for profile in profiles:
+            user = User.query.get(profile.user_id)
+            data.append({
+                'Nama Lengkap': profile.full_name,
+                'Email': user.email,
+                'Program Studi': jurusan_names.get(profile.jurusan, profile.jurusan),
+                'Status': profile.status,
+                'Pembayaran': profile.payment_status,
+                'Agama': profile.religion,
+                'Umur': profile.age,
+                'Tanggal Daftar': profile.created_at.strftime('%d-%m-%Y'),
+                'Tahun Lulus': profile.graduation_year,
+                'No. HP': profile.phone,
+                'Alamat': profile.address
+            })
+            
+        return jsonify(data)
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Export to PDF
+@app.route('/admin/export-pdf')
+def export_pdf():
+    if not session.get('is_admin'):
+        return jsonify({'error': 'Unauthorized'}), 403
+
+    try:
+        profiles = StudentProfile.query.all()
+        data = []
+        
+        for profile in profiles:
+            user = User.query.get(profile.user_id)
+            status_text = {
+                'pending': 'Menunggu',
+                'accepted': 'Diterima',
+                'rejected': 'Ditolak'
+            }.get(profile.status, profile.status)
+            
+            jurusan_names = {
+                'TI': 'Teknik Informatika',
+                'SI': 'Sistem Informasi',
+                'RPL': 'Rekayasa Perangkat Lunak',
+                'MI': 'Manajemen Informatika'
+            }
+
+            data.append({
+                'nama': profile.full_name,
+                'email': user.email,
+                'program_studi': jurusan_names.get(profile.jurusan, profile.jurusan),
+                'status': status_text,
+                'pembayaran': profile.payment_status,
+                'agama': profile.religion,
+                'umur': profile.age,
+                'tgl_daftar': profile.created_at.strftime('%d-%m-%Y'),
+                'no_hp': profile.phone
+            })
+
+        # Create PDF using pisa
+        html = '''
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        @page {
+                            size: landscape;
+                            margin: 1cm;
+                        }
+                        body {
+                            font-family: Arial, sans-serif;
+                            font-size: 12px;
+                        }
+                        h1 {
+                            color: #1a237e;
+                            text-align: center;
+                            font-size: 18px;
+                        }
+                        .header {
+                            text-align: center;
+                            margin-bottom: 20px;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 10px;
+                        }
+                        th, td {
+                            border: 1px solid #ddd;
+                            padding: 8px;
+                            text-align: left;
+                        }
+                        th {
+                            background-color: #1a237e;
+                            color: white;
+                        }
+                        tr:nth-child(even) {
+                            background-color: #f9f9f9;
+                        }
+                        .footer {
+                            text-align: center;
+                            margin-top: 20px;
+                            font-size: 10px;
+                            color: #666;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>Data Pendaftar PPDB Online</h1>
+                        <p>Tanggal Export: ''' + datetime.now().strftime('%d-%m-%Y %H:%M') + '''</p>
+                        <p>Total Pendaftar: ''' + str(len(data)) + ''' orang</p>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nama Lengkap</th>
+                                <th>Email</th>
+                                <th>Program Studi</th>
+                                <th>Status</th>
+                                <th>Pembayaran</th>
+                                <th>Agama</th>
+                                <th>Umur</th>
+                                <th>Tgl Daftar</th>
+                                <th>No. HP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        '''
+
+        for i, item in enumerate(data, 1):
+            html += f'''
+                <tr>
+                    <td>{i}</td>
+                    <td>{item['nama']}</td>
+                    <td>{item['email']}</td>
+                    <td>{item['program_studi']}</td>
+                    <td>{item['status']}</td>
+                    <td>{item['pembayaran']}</td>
+                    <td>{item['agama']}</td>
+                    <td>{item['umur']}</td>
+                    <td>{item['tgl_daftar']}</td>
+                    <td>{item['no_hp']}</td>
+                </tr>
+            '''
+
+        html += '''
+                        </tbody>
+                    </table>
+                    <div class="footer">
+                        <p>Document generated by PPDB Online System</p>
+                    </div>
+                </body>
+            </html>
+        '''
+
+        # Create PDF
+        result = BytesIO()
+        pdf = pisa.CreatePDF(
+            html,
+            dest=result,
+            encoding='utf-8'
+        )
+
+        # Error handling
+        if pdf.err:
+            return jsonify({'error': 'Failed to generate PDF'}), 500
+
+        # Return the PDF file
+        result.seek(0)
+        response = make_response(result.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=data_pendaftar.pdf'
+        
+        return response
+
+    except Exception as e:
+        print(f"Error generating PDF: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,6 +2,12 @@
 
 A modern web-based student registration system built with Flask, featuring real-time notifications, email integration, and secure document handling.
 
+## 📸 Screenshots
+
+### Admin Dashboard
+![Admin Dashboard](docs/images/admin-dashboard.png)
+*Admin dashboard showing accepted applicants filter and export functionality*
+
 ## 📋 Features
 
 ### Student Features
