@@ -165,47 +165,47 @@ python run.py
 ## 📸 Screenshots
 
 ### User Interface
-![Tampilan Awal](src/static/readfoto/Tampilan%20awal.png)
-![Tampilan Awal 2](src/static/readfoto/Tampilan%20awal%20(2).png)
+![Tampilan Awal](/ppdb-web-app/src/static/readfoto/Tampilan%20awal.png)
+![Tampilan Awal 2](/ppdb-web-app/src/static/readfoto/Tampilan%20awal%20(2).png)
 
 ### Authentication
-![Login Page](src/static/readfoto/Login.png)
-![Register Page](src/static/readfoto/Register.png)
+![Login Page](/ppdb-web-app/src/static/readfoto/Login.png)
+![Register Page](/ppdb-web-app/src/static/readfoto/Register.png)
 
 ### Registration Process
 #### Form Submission
-![Form Pengisian](src/static/readfoto/Mengisi%20Formulir.png)
-![Form Pengisian 2](src/static/readfoto/Mengisi%20Formulir%20(2).png)
-![Form Pengisian 3](src/static/readfoto/Mengisi%20Formulir%20(3).png)
-![Notifikasi Form](src/static/readfoto/Notifikasi%20jika%20formulir%20tidak%20lengkap%20diisi.png)
+![Form Pengisian](/ppdb-web-app/src/static/readfoto/Mengisi%20Formulir.png)
+![Form Pengisian 2](/ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(2).png)
+![Form Pengisian 3](/ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(3).png)
+![Notifikasi Form](/ppdb-web-app/src/static/readfoto/Notifikasi%20jika%20formulir%20tidak%20lengkap%20diisi.png)
 
 #### Document Upload
-![Upload Dokumen](src/static/readfoto/Upload%20dokumen.png)
-![Upload Foto dan Ijazah](src/static/readfoto/Upload%20dokumen%20Pas%20foto%20dan%20ijazah.png)
+![Upload Dokumen](/ppdb-web-app/src/static/readfoto/Upload%20dokumen.png)
+![Upload Foto dan Ijazah](/ppdb-web-app/src/static/readfoto/Upload%20dokumen%20Pas%20foto%20dan%20ijazah.png)
 
 #### Status Tracking
-![Progress Pendaftaran](src/static/readfoto/Progress%20pendaftaran.png)
-![Menunggu Verifikasi](src/static/readfoto/Menunggu%20verikasi%20admin%20setelah%20mendaftar.png)
-![Pendaftaran Diterima](src/static/readfoto/Pendaftaran%20diterima.png)
+![Progress Pendaftaran](/ppdb-web-app/src/static/readfoto/Progress%20pendaftaran.png)
+![Menunggu Verifikasi](/ppdb-web-app/src/static/readfoto/Menunggu%20verikasi%20admin%20setelah%20mendaftar.png)
+![Pendaftaran Diterima](/ppdb-web-app/src/static/readfoto/Pendaftaran%20diterima.png)
 
 ### Payment System
-![Kartu Transfer](src/static/readfoto/kartu%20untuk%20transfer.png)
-![Bukti Pembayaran](src/static/readfoto/Bukti%20pembayaran.png)
-![Menunggu Verifikasi Pembayaran](src/static/readfoto/Menunggu%20verifikasi%20pembayaran%20oleh%20admin.png)
-![Pembayaran Diverifikasi](src/static/readfoto/Pembayaran%20diverifikasi.png)
-![Progress Complete](src/static/readfoto/Progress%20100%%20jika%20sudah%20selesai%20pembayaran.png)
+![Kartu Transfer](/ppdb-web-app/src/static/readfoto/kartu%20untuk%20transfer.png)
+![Bukti Pembayaran](/ppdb-web-app/src/static/readfoto/Bukti%20pembayaran.png)
+![Menunggu Verifikasi Pembayaran](/ppdb-web-app/src/static/readfoto/Menunggu%20verifikasi%20pembayaran%20oleh%20admin.png)
+![Pembayaran Diverifikasi](/ppdb-web-app/src/static/readfoto/Pembayaran%20diverifikasi.png)
+![Progress Complete](/ppdb-web-app/src/static/readfoto/Progress%20100%%20jika%20sudah%20selesai%20pembayaran.png)
 
 ### Admin Dashboard
-![Admin Dashboard](src/static/readfoto/Admin%20Dashboard.png)
-![Laporan Statistik](src/static/readfoto/Laporan%20statistik.png)
-![Detail Pendaftar](src/static/readfoto/Detail.png)
-![Detail Pendaftar 2](src/static/readfoto/Detail%20(2).png)
-![Detail Diterima](src/static/readfoto/Detail%20pendaftar%20jika%20sudah%20diterima.png)
-![Alasan Penolakan](src/static/readfoto/Alasan%20jika%20menolak%20pendaftaran.png)
+![Admin Dashboard](/ppdb-web-app/src/static/readfoto/Admin%20Dashboard.png)
+![Laporan Statistik](/ppdb-web-app/src/static/readfoto/Laporan%20statistik.png)
+![Detail Pendaftar](/ppdb-web-app/src/static/readfoto/Detail.png)
+![Detail Pendaftar 2](/ppdb-web-app/src/static/readfoto/Detail%20(2).png)
+![Detail Diterima](/ppdb-web-app/src/static/readfoto/Detail%20pendaftar%20jika%20sudah%20diterima.png)
+![Alasan Penolakan](/ppdb-web-app/src/static/readfoto/Alasan%20jika%20menolak%20pendaftaran.png)
 
 ### Email Notifications
-![Email Notifikasi](src/static/readfoto/Menerika%20pemberitahuan%20di%20email%20user.png)
-![Status Pembayaran](src/static/readfoto/Pembayaran%20ketika%20sudah%20diterima%20oleh%20admin.png)
+![Email Notifikasi](/ppdb-web-app/src/static/readfoto/Menerika%20pemberitahuan%20di%20email%20user.png)
+![Status Pembayaran](/ppdb-web-app/src/static/readfoto/Pembayaran%20ketika%20sudah%20diterima%20oleh%20admin.png)
 
 ## 📝 License
 
