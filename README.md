@@ -196,7 +196,7 @@ python run.py
 
 ### Admin Dashboard
 ![Admin Dashboard](/ppdb-web-app/src/static/readfoto/Admin%20Dashboard.png)
-![laporan Statistik](/ppdb-web-app/src/static/readfoto/laporan%20statistik.png)
+![laporan statistik](/ppdb-web-app/src/static/readfoto/laporan%20statistik.png)
 ![Detail Pendaftar](/ppdb-web-app/src/static/readfoto/Detail.png)
 ![Detail Pendaftar 2](/ppdb-web-app/src/static/readfoto/Detail%20(2).png)
 ![Detail Diterima](/ppdb-web-app/src/static/readfoto/Detail%20pendaftar%20jika%20sudah%20diterima.png)
