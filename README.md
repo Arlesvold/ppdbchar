@@ -2,7 +2,7 @@
 
 ## 👨‍💻 Author
 
-**Charles Adrian**
+**harles Adrian**
 - Software Engineering Student
 - SMK KARYA BANGSA
 - Class: XI RPL
