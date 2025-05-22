@@ -174,9 +174,9 @@ python run.py
 
 ### Registration Process
 #### Form Submission
-![Form Pengisian](/ppdb-web-app/src/static/readfoto/Mengisi%20Formulir.png)
-![Form Pengisian 2](/ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(2).png)
-![Form Pengisian 3](/ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(3).png)
+![Form Pengisian](./ppdb-web-app/src/static/readfoto/Mengisi%20Formulir.png)
+![Form Pengisian 2](./ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(2).png)
+![Form Pengisian 3](./ppdb-web-app/src/static/readfoto/Mengisi%20Formulir%20(3).png)
 ![Notifikasi Form](/ppdb-web-app/src/static/readfoto/Notifikasi%20jika%20formulir%20tidak%20lengkap%20diisi.png)
 
 #### Document Upload
@@ -193,7 +193,7 @@ python run.py
 ![Bukti Pembayaran](/ppdb-web-app/src/static/readfoto/Bukti%20pembayaran.png)
 ![Menunggu Verifikasi Pembayaran](/ppdb-web-app/src/static/readfoto/Menunggu%20verifikasi%20pembayaran%20oleh%20admin.png)
 ![Pembayaran Diverifikasi](/ppdb-web-app/src/static/readfoto/Pembayaran%20diverifikasi.png)
-![Progress Complete](/ppdb-web-app/src/static/readfoto/Progress%20100%%20jika%20sudah%20selesai%20pembayaran.png)
+![Progress Complete](./ppdb-web-app/src/static/readfoto/Progress%20100%25%20jika%20sudah%20selesai%20pembayaran.png)
 
 ### Admin Dashboard
 ![Admin Dashboard](/ppdb-web-app/src/static/readfoto/Admin%20Dashboard.png)
