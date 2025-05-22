@@ -2,10 +2,11 @@
 <html>
 <head>
     <style>
-        body {
+        body { 
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            margin: 0;
+            padding: 0;
         }
         .container {
             max-width: 600px;
@@ -20,9 +21,9 @@
         }
         .content {
             padding: 20px;
-            background: #f9f9f9;
+            background: #f8f9fa;
         }
-        .button {
+        .btn {
             display: inline-block;
             padding: 10px 20px;
             background: #1a237e;
@@ -36,22 +37,37 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Pendaftaran Diterima</h1>
+            <h1>Selamat! Pendaftaran Diterima</h1>
         </div>
         <div class="content">
-            <h2>Selamat {{ name }}!</h2>
-            <p>Pendaftaran Anda telah diterima. Silakan lakukan pembayaran untuk melanjutkan proses pendaftaran.</p>
+            <h2>Halo {{ name }},</h2>
+            <p>Selamat! Pendaftaran Anda telah diterima di PPDB Online.</p>
             
-            <p>Langkah selanjutnya:</p>
+            <h3>Detail Pendaftaran:</h3>
+            <ul>
+                <li>Nama: {{ profile.full_name }}</li>
+                <li>Program Studi: {{ profile.jurusan }}</li>
+                <li>Waktu Kuliah: {{ profile.waktu_kuliah }}</li>
+            </ul>
+
+            <h3>Langkah Selanjutnya:</h3>
             <ol>
                 <li>Login ke akun PPDB Online Anda</li>
-                <li>Lihat detail pembayaran di dashboard</li>
-                <li>Lakukan pembayaran sesuai instruksi</li>
+                <li>Lakukan pembayaran biaya pendaftaran</li>
                 <li>Upload bukti pembayaran</li>
+                <li>Tunggu verifikasi pembayaran</li>
             </ol>
 
-            <a href="{{ url_for('login', _external=True) }}" class="button">
-                Login Sekarang
+            <p>
+                <strong>Informasi Pembayaran:</strong><br>
+                Nominal: Rp {{ "{:,.2f}".format(profile.payment_amount) }}<br>
+                Bank: BCA<br>
+                No. Rekening: 1234567890<br>
+                A/N: PPDB Online
+            </p>
+
+            <a href="{{ url_for('profile_submitted', _external=True) }}" class="btn">
+                Lihat Detail Pendaftaran
             </a>
 
             <p>Jika Anda memiliki pertanyaan, silakan hubungi kami.</p>

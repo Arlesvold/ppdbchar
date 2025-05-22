@@ -1,19 +1,35 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify, send_file, abort
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf.csrf import CSRFProtect  # Add this line
+from flask_wtf.csrf import CSRFProtect
 from config import Config
 from models import db, User, StudentProfile, Notification
 from datetime import datetime
-import os
 from werkzeug.utils import secure_filename
+from flask_mail import Mail, Message
+import logging
+import os
 import re
+
+# Konfigurasi logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('logs/app.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__, 
            template_folder='src/templates',
            static_folder='src/static')
 app.config.from_object(Config)
 db.init_app(app)
-csrf = CSRFProtect(app)  # Add this line
+csrf = CSRFProtect(app)
+
+# Initialize Flask-Mail
+mail = Mail(app)
 
 # Add this near the start of app.py, after app initialization
 # Create required upload folders
@@ -102,10 +118,24 @@ def register():
                                 email_error=True)
 
         try:
-            user = User(username=username, email=email)
+            # Create new user with email
+            user = User(
+                username=username,
+                email=email
+            )
             user.set_password(password)
             
+            # Save user to database
             db.session.add(user)
+            db.session.commit()
+            
+            # Create welcome notification
+            notification = Notification(
+                user_id=user.id,
+                message=f'Selamat datang {username}! Akun Anda telah berhasil dibuat.',
+                type='success'
+            )
+            db.session.add(notification)
             db.session.commit()
             
             flash('Registrasi berhasil! Silakan login dengan akun Anda.', 'success')
@@ -432,38 +462,92 @@ def admin_detail(profile_id):
     profile = StudentProfile.query.get_or_404(profile_id)
     return render_template('dashboard/admin_detail.html', profile=profile)
 
-@app.route('/admin/action/<int:profile_id>/<action>')
+@app.route('/admin/action/<int:profile_id>/<action>', methods=['POST'])
 def admin_action(profile_id, action):
     if not session.get('is_admin'):
-        flash('Akses ditolak. Diperlukan hak akses admin.', 'error')
-        return redirect(url_for('login'))
-    
-    profile = StudentProfile.query.get_or_404(profile_id)
-    user = User.query.get(profile.user_id)
-    
-    if action == 'accept':
-        profile.status = 'accepted'
-        # Store notification for user
-        flash_message = f'Selamat! Pendaftaran untuk {profile.full_name} telah diterima.'
-        db.session.add(Notification(
-            user_id=profile.user_id,
-            message=flash_message,
-            type='success'
-        ))
-        flash(f'Pendaftaran {profile.full_name} telah diterima.', 'success')
-    elif action == 'reject':
-        profile.status = 'rejected'
-        # Store notification for user
-        flash_message = f'Maaf, pendaftaran untuk {profile.full_name} tidak diterima.'
-        db.session.add(Notification(
-            user_id=profile.user_id,
-            message=flash_message,
-            type='error'
-        ))
-        flash(f'Pendaftaran {profile.full_name} telah ditolak.', 'error')
-    
-    db.session.commit()
-    return redirect(url_for('admin_dashboard'))
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 403
+        
+    try:
+        # Dapatkan profil dan data user
+        profile = StudentProfile.query.get_or_404(profile_id)
+        user = User.query.get(profile.user_id)
+
+        logger.debug(f"Processing {action} for user {user.username} with email {user.email}")
+
+        if action == 'accept':
+            profile.status = 'accepted'
+            
+            # Buat notifikasi
+            notification = Notification(
+                user_id=profile.user_id,
+                message='Selamat! Pendaftaran Anda telah diterima.',
+                type='success'
+            )
+
+            try:
+                # Kirim email penerimaan
+                msg = Message(
+                    'Selamat! Pendaftaran Anda Diterima - PPDB Online',
+                    recipients=[user.email],
+                    sender=app.config['MAIL_DEFAULT_SENDER']
+                )
+                msg.html = render_template(
+                    'emails/registration_accepted.html',
+                    name=user.username,
+                    profile=profile
+                )
+                mail.send(msg)
+                logger.info(f"Email penerimaan terkirim ke {user.email}")
+                
+            except Exception as mail_error:
+                logger.error(f"Gagal mengirim email ke {user.email}: {str(mail_error)}")
+                # Lanjutkan proses meski email gagal terkirim
+            
+        elif action == 'reject':
+            profile.status = 'rejected'
+            reason = request.json.get('reason', 'Tidak ada alasan yang diberikan')
+            
+            notification = Notification(
+                user_id=profile.user_id,
+                message=f'Maaf, pendaftaran Anda ditolak. Alasan: {reason}',
+                type='error'
+            )
+
+            try:
+                # Kirim email penolakan
+                msg = Message(
+                    'Status Pendaftaran - PPDB Online',
+                    recipients=[user.email],
+                    sender=app.config['MAIL_DEFAULT_SENDER']
+                )
+                msg.html = render_template(
+                    'emails/registration_rejected.html',
+                    name=user.username,
+                    reason=reason
+                )
+                mail.send(msg)
+                logger.info(f"Email penolakan terkirim ke {user.email}")
+                
+            except Exception as mail_error:
+                logger.error(f"Gagal mengirim email ke {user.email}: {str(mail_error)}")
+                # Lanjutkan proses meski email gagal terkirim
+
+        # Simpan perubahan ke database
+        db.session.add(notification)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': f'Status pendaftaran berhasil di{action} dan email notifikasi telah dikirim ke {user.email}'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Error in admin_action: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': f'Terjadi kesalahan: {str(e)}'
+        }), 500
 
 @app.route('/admin/action/<int:profile_id>/reject', methods=['POST'])
 def admin_reject(profile_id):
