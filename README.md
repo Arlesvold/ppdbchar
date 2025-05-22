@@ -1,4 +1,12 @@
-# 🎓 PPDB Online System
+# 🎓 PMB Online System
+
+## 👨‍💻 Author
+
+**Charles Adrian**
+- Software Engineering Student
+- SMK KARYA BANGSA
+- Class: XI RPL
+
 
 A modern web-based student registration system built with Flask, featuring real-time notifications, email integration, and secure document handling.
 
@@ -153,13 +161,6 @@ python run.py
 - Session management
 - Input validation
 - Email verification
-
-## 👨‍💻 Author
-
-**Charles Adrian**
-- Software Engineering Student
-- SMK KARYA BANGSA
-- Class: XI RPL
 
 ## 📝 License
 
