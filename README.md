@@ -197,7 +197,7 @@ python run.py
 ### Admin Dashboard
 ![Admin Dashboard](/ppdb-web-app/src/static/readfoto/Admin%20Dashboard.png)
 ![Laporan Statistik](/ppdb-web-app/src/static/readfoto/Laporan%20statistik.png)
-![Filter dan Export](/ppdb-web-app/src/static/readfoto/filter-export.png)
+![Laporan Statistik 2](/ppdb-web-app/src/static/readfoto/Laporan%20statistik%20(2).png)
 *Admin panel showing payment status filter and export functionality*
 ![Detail Pendaftar](/ppdb-web-app/src/static/readfoto/Detail.png)
 ![Detail Pendaftar 2](/ppdb-web-app/src/static/readfoto/Detail%20(2).png)
